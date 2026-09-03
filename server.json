@@ -1,13 +1,13 @@
 {
-    "description":  "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades and five-dimension evidence for DeepSeek Harness (dsh) plugins.",
-    "name":  "io.github.perrylink/dsh-cert",
     "$schema":  "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+    "name":  "io.github.perrylink/dsh-cert",
+    "description":  "Read-only MCP server exposing the dsh-plugin-certification registry for DeepSeek Harness plugins.",
+    "version":  "0.1.1",
     "packages":  [
                      {
+                         "registryType":  "npm",
                          "identifier":  "@perrylink/dsh-cert-mcp",
-                         "version":  "0.1.1",
-                         "registry_type":  "npm"
+                         "version":  "0.1.1"
                      }
-                 ],
-    "version":  "0.1.1"
+                 ]
 }
