@@ -1,0 +1,40 @@
+{
+  "name": "@perrylink/dsh-cert-mcp",
+  "version": "0.1.0",
+  "description": "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": {
+    "dsh-cert-mcp": "src/index.js"
+  },
+  "files": [
+    "src",
+    "data",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "deepseek-harness",
+    "dsh-plugin",
+    "dsh",
+    "certification",
+    "supply-chain-security"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PerryLink/dsh-cert-mcp.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/PerryLink"
+  },
+  "scripts": {
+    "test": "node test/smoke.mjs"
+  }
+}

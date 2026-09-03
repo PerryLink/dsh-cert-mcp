@@ -1,0 +1,37 @@
+{
+  "specVersion": "v1",
+  "generatedAt": "2026-09-02",
+  "entries": [
+    {
+      "repo": "PerryLink/dsh-auto-review",
+      "grade": "B",
+      "specVersion": "v1",
+      "snapshot": "2026-09-02",
+      "dimensions": {
+        "manifest": {
+          "result": "pass",
+          "evidence": "dsh.bundle manifest + Apache-2.0 + topics/keywords aligned + five-language READMEs + engines ^22.19.0 || >=24.0.0 (repo scan 2026-09-02)"
+        },
+        "buildHygiene": {
+          "result": "pass",
+          "evidence": "files allowlist + peerDependencies (optional client peers) + typecheck/test/build/verify:self-contained/pack gates; CI green at v0.10.0 (0.1.2-alpha.5 batch), 276 tests"
+        },
+        "supplyChain": {
+          "result": "pass",
+          "score": 5.4,
+          "evidence": "https://api.securityscorecards.dev/projects/github.com/PerryLink/dsh-auto-review (run 2026-08-30; scorecard workflow upgraded to v2.4.4 ghcr.io image on 2026-09-02, refreshed run pending propagation); checks: Binary-Artifacts 10, CI-Tests 10, Dangerous-Workflow 10, Contributors 3, Code-Review 0, CII-Best-Practices 0"
+        },
+        "releaseIntegrity": {
+          "result": "pass",
+          "evidence": "npm publish --provenance via publish workflow with id-token + Trusted Publishing configured; dsh-auto-review@0.10.0 on npm since 2026-09-02"
+        },
+        "installSmoke": {
+          "result": "install-fail",
+          "evidence": "2026-08-31 sandboxed install (`dsh plugin --profile cert add dsh-auto-review` in mkdtemp DSH_HOME) blocked by pnpm approve-builds interactive gate on the esbuild postinstall; profile-level allowBuilds not honored on the npm registry channel in this environment. CI smoke-package job (tarball install + node-face load through package exports) passes. Classified environment-blocked, not a plugin defect."
+        }
+      },
+      "veto": null,
+      "notes": "Registry entry refreshed for the 0.1.2-alpha.5 batch (0.10.0 published 2026-09-02). E remains environment-blocked per the spec amendment (environmental install gates keep grade B and must not be recorded as D)."
+    }
+  ]
+}
