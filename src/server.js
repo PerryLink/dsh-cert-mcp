@@ -5,7 +5,7 @@
 import { readFile } from 'node:fs/promises'
 
 const PROTOCOL_VERSION = '2024-11-05'
-const SERVER_INFO = { name: 'dsh-cert-mcp', version: '0.1.0' }
+const SERVER_INFO = { name: 'dsh-cert-mcp', version: '0.1.2' }
 const REGISTRY_URL = 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/certified.json'
 const REFRESH_MS = 5 * 60 * 1000
 
@@ -33,7 +33,10 @@ async function loadRegistry(force = false) {
   }
   if (force || Date.now() - lastFetch > REFRESH_MS) {
     try {
-      const res = await fetch(REGISTRY_URL, { headers: { 'user-agent': 'dsh-cert-mcp' } })
+      const res = await fetch(REGISTRY_URL, {
+        headers: { 'user-agent': 'dsh-cert-mcp' },
+        signal: AbortSignal.timeout(10_000),
+      })
       if (res.ok) {
         registry = await res.json()
         lastFetch = Date.now()
