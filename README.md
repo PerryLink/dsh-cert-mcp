@@ -20,7 +20,7 @@ cd dsh-cert-mcp
 node src/index.js        # stdio server
 ```
 
-After the npm release you will be able to run it directly: `npx @perrylink/dsh-cert-mcp`.
+Run it directly from the published npm package: `npx @perrylink/dsh-cert-mcp`.
 
 ### Register in an MCP client
 

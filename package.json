@@ -1,6 +1,6 @@
-﻿{
+{
     "name":  "@perrylink/dsh-cert-mcp",
-    "version":  "0.1.1",
+    "version":  "0.1.2",
     "description":  "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
     "type":  "module",
     "license":  "Apache-2.0",
