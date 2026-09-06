@@ -6,6 +6,8 @@
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
 [![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
 [![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
+[![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
 Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
 
