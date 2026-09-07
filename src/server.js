@@ -5,7 +5,7 @@
 import { readFile } from 'node:fs/promises'
 
 const PROTOCOL_VERSION = '2024-11-05'
-const SERVER_INFO = { name: 'dsh-cert-mcp', version: '0.1.2' }
+const SERVER_INFO = { name: 'dsh-cert-mcp', version: '0.1.3' }
 const REGISTRY_URL = 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/certified.json'
 const REFRESH_MS = 5 * 60 * 1000
 
