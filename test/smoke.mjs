@@ -22,7 +22,7 @@ const hit = await handleRequest({
 })
 assert.equal(hit.result.isError, undefined)
 const hitText = hit.result.content[0].text
-assert.match(hitText, /"grade": "B"/)
+assert.match(hitText, /"grade": "A"/)
 assert.match(hitText, /dsh-auto-review/)
 
 const miss = await handleRequest({

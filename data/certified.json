@@ -1,37 +1,37 @@
 {
   "specVersion": "v1",
-  "generatedAt": "2026-09-02",
+  "generatedAt": "2026-09-07",
   "entries": [
     {
       "repo": "PerryLink/dsh-auto-review",
-      "grade": "B",
+      "grade": "A",
       "specVersion": "v1",
-      "snapshot": "2026-09-02",
+      "snapshot": "2026-09-07",
       "dimensions": {
         "manifest": {
           "result": "pass",
-          "evidence": "dsh.bundle manifest + Apache-2.0 + topics/keywords aligned + five-language READMEs + engines ^22.19.0 || >=24.0.0 (repo scan 2026-09-02)"
+          "evidence": "dsh.bundle manifest + Apache-2.0 + keywords/topics aligned + five-language READMEs + engines ^22.19.0 || >=24.0.0 (repo + npm registry scan 2026-09-07, v0.10.4)"
         },
         "buildHygiene": {
           "result": "pass",
-          "evidence": "files allowlist + peerDependencies (optional client peers) + typecheck/test/build/verify:self-contained/pack gates; CI green at v0.10.0 (0.1.2-alpha.5 batch), 276 tests"
+          "evidence": "files allowlist + peerDependencies (optional client peers, range >=0.1.2-rc.1 <0.2.0 since 2026-09-05) + typecheck/test/build/check:readmes/pack gates; 2026-09-06 batch D-stage gate chain green at v0.10.4 (frozen install, typecheck, 276/276 tests, build, verify:self-contained, pack) + main ci success on 3f9cdae (2026-09-06T12:32Z); no malicious postinstall patterns"
         },
         "supplyChain": {
           "result": "pass",
           "score": 5.4,
-          "evidence": "https://api.securityscorecards.dev/projects/github.com/PerryLink/dsh-auto-review (run 2026-08-30; scorecard workflow upgraded to v2.4.4 ghcr.io image on 2026-09-02, refreshed run pending propagation); checks: Binary-Artifacts 10, CI-Tests 10, Dangerous-Workflow 10, Contributors 3, Code-Review 0, CII-Best-Practices 0"
+          "evidence": "https://api.securityscorecards.dev/projects/github.com/PerryLink/dsh-auto-review fresh run 2026-09-06T12:32:32Z on main 3f9cdae (scorecard v5.5.0); Scorecard supply-chain workflow success on the same SHA"
         },
         "releaseIntegrity": {
           "result": "pass",
-          "evidence": "npm publish --provenance via publish workflow with id-token + Trusted Publishing configured; dsh-auto-review@0.10.0 on npm since 2026-09-02"
+          "evidence": "npm publish --provenance via publish workflow with id-token + Trusted Publishing; dsh-auto-review@0.10.4 on npm since 2026-09-05T15:04Z - registry dist.attestations + slsa.dev/provenance/v1 + GitHub Actions trusted publisher verified directly 2026-09-07"
         },
         "installSmoke": {
-          "result": "install-fail",
-          "evidence": "2026-08-31 sandboxed install (`dsh plugin --profile cert add dsh-auto-review` in mkdtemp DSH_HOME) blocked by pnpm approve-builds interactive gate on the esbuild postinstall; profile-level allowBuilds not honored on the npm registry channel in this environment. CI smoke-package job (tarball install + node-face load through package exports) passes. Classified environment-blocked, not a plugin defect."
+          "result": "ok",
+          "evidence": "2026-09-06 batch D-stage (isolated throwaway profile, npx @deepseek-ai/dsh@0.1.2-rc.1): the standard `dsh plugin --profile web add <tarball>` fails with ERR_PNPM_IGNORED_BUILDS (pnpm 11 ignored-builds environmental gate); the documented compat recipe (pnpm-workspace.yaml allowBuilds preset for dsh-subprocess-local/koffi/node-pty/protobufjs) then installs cleanly - add exit 0 (resolved 381, added 271), dump-config shows the plugin row + bundle layer, keyless headless reaches MISSING_CREDENTIAL (tree-load proof). Reproduction: _scratch/batch-2026-09-06/verify/dsh-auto-review.md"
         }
       },
       "veto": null,
-      "notes": "Registry entry refreshed for the 0.1.2-alpha.5 batch (0.10.0 published 2026-09-02). E remains environment-blocked per the spec amendment (environmental install gates keep grade B and must not be recorded as D)."
+      "notes": "Registry entry refreshed for 0.10.4 (published 2026-09-05 with OIDC provenance). E upgraded from environment-blocked to ok via the documented allowBuilds compat recipe (the same method the repo's compat.yml uses); the bare unattended install still hits pnpm's ignored-builds gate, recorded above. Grade B -> A."
     }
   ]
 }
