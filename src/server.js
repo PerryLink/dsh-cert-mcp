@@ -20,7 +20,14 @@ C. supplyChain — OpenSSF Scorecard score with per-check evidence.
 D. releaseIntegrity — npm publish --provenance via Trusted Publishing.
 E. installSmoke — real install of the published package into a sandboxed DSH_HOME.
 
-Grades: A (all five pass), B (E environment-blocked only), C (non-critical dimension failures), D (critical dimension failures), veto overrides everything (severe supply-chain or install defects).`
+Grades (spec v1 — the registry README is the owner of these definitions):
+- A — all five pass (E must be "ok"), no veto hit.
+- B — E passes and at least three of A/B/C/D pass. An E that ends "install-fail" purely because of an unattended-environment gate (e.g. pnpm's interactive approve-builds cannot be confirmed in a sandbox) also keeps B when A–D pass, and records "environment-blocked".
+- C — E passes, the rest incomplete.
+- D — any hard gate fails (dsh.bundle missing, no license, malicious pattern hit).
+- Security veto — obfuscated code, credential exfiltration, or surprising install-time behaviour grades D immediately, with the reason published.
+- Environment gates are never recorded as D.
+- Evidence discipline: every score comes from real, reproducible execution; absent evidence is "no-evidence", never a guess.`
 
 async function loadRegistry(force = false) {
   if (!registry) {
