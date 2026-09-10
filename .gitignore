@@ -1,3 +1,7 @@
 node_modules/
 *.tgz
 *.log
+
+# This repository uses npm, not pnpm. A stray pnpm lockfile appears here
+# whenever someone runs `pnpm install`.
+pnpm-lock.yaml
