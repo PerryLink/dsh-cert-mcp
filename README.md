@@ -54,6 +54,30 @@ Claude Desktop (`claude_desktop_config.json`):
 
 DSH: add it through [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) as a stdio server, or any MCP client that supports `stdio`.
 
+### Install as a DSH bundle
+
+The package declares `dsh.bundle.patch` → `cordis.patch.yml`, so it also installs as a DeepSeek Harness bundle:
+
+```sh
+# git channel (latest main)
+dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
+
+# npm channel (published releases)
+dsh plugin --profile web add @perrylink/dsh-cert-mcp
+```
+
+The inserted row loads the package through the standard Cordis plugin contract: the host half is a plain ESM module exporting `apply(ctx)` (declaring `inject` only when it needs services). This package ships no browser UI, so there is no `dsh.client` declaration.
+
+```js
+// bundle entry (host half) — the contract the patch row loads
+export function apply(ctx) {
+  // registers the read-only certification lookup surface
+  // (get_certification / list_certified / certification_spec)
+}
+```
+
+Remove it with `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
+
 ## Why this exists
 
 The official DeepSeek Harness repository does not run a plugin registry and does not accept external PRs; discovery happens through the `dsh-plugin` GitHub topic and community lists, none of which certify anything. `dsh-plugin-certification` turns "can I install this plugin" into a reproducible five-dimension check (manifest, build hygiene, supply-chain Scorecard, release provenance, sandboxed install smoke test) with a public registry and README badges. This MCP server is the same data with an agent-facing interface: agents can look up a plugin's certification before recommending or installing it.

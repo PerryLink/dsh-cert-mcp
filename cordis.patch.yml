@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# dsh-cert-mcp bundle patch: mount the read-only certification-registry MCP
+# package as a bundle row. `name` is the npm package name, resolved through
+# the profile's node_modules; an id-targeted override replaces the whole
+# config row — restate every key when overriding.
+- insert:
+    - id: cert-mcp
+      name: '@perrylink/dsh-cert-mcp'

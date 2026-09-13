@@ -3,6 +3,11 @@
   "version": "0.1.5",
   "description": "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
   "type": "module",
+  "main": "./src/plugin.js",
+  "exports": {
+    ".": "./src/plugin.js",
+    "./package.json": "./package.json"
+  },
   "license": "Apache-2.0",
   "bin": {
     "dsh-cert-mcp": "src/index.js"
@@ -10,6 +15,7 @@
   "files": [
     "src",
     "data",
+    "cordis.patch.yml",
     "README.md",
     "LICENSE"
   ],
@@ -40,5 +46,10 @@
   "mcpName": "io.github.perrylink/dsh-cert",
   "publishConfig": {
     "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
   }
 }
