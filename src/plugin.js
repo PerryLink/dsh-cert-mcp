@@ -12,6 +12,12 @@ import { handleRequest } from './server.js'
 
 export const name = '@perrylink/dsh-cert-mcp'
 
+// The three tools register on the host tool surface, so `tools` is a hard
+// dependency: declared here, read through `ctx.tools`. Cordis parks the plugin
+// in PENDING until the service exists — a profile without dsh-tools then shows a
+// waiting fiber instead of silently contributing nothing.
+export const inject = ['tools']
+
 const TOOLS = [
   {
     name: 'get_certification',
@@ -48,10 +54,8 @@ async function callTool(tool, args) {
 }
 
 export function apply(ctx) {
-  const tools = ctx.get('tools')
-  if (!tools) return
   for (const tool of TOOLS) {
-    ctx.effect(() => tools.register({
+    ctx.effect(() => ctx.tools.register({
       name: tool.name,
       description: tool.description,
       parameters: tool.parameters,
@@ -67,5 +71,3 @@ export function apply(ctx) {
     }))
   }
 }
-
-export default { name, apply }
