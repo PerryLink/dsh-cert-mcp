@@ -1,0 +1,17 @@
+# Nearest-workspace root for this standalone package. This file makes pnpm treat
+# dsh-cert-mcp as its own workspace when the repository is checked out inside
+# another pnpm workspace (for example a deepseek-harness checkout).
+packages:
+  - .
+
+# pnpm >= 10 defaults autoInstallPeers to false. The gate suites mount the REAL
+# SystemPrompt/ToolRuntime runtimes, and @deepseek-ai/dsh-tools imports three of
+# its own peers at module scope (dsh-scope, dsh-llm, dsh-sandbox); without peer
+# auto-install those imports fail before a single assertion runs.
+autoInstallPeers: true
+
+# pnpm >= 10 also enables a 1440-minute minimum release age. The freshly
+# published 0.1.6-alpha.2 pins sit inside that window, so a frozen install would
+# otherwise stay red for 24h after every harness release.
+minimumReleaseAge: 0
+verifyDepsBeforeRun: false
