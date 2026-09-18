@@ -17,10 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
       - uses: actions/setup-node@v7
         with:
           node-version: 22
-      - run: npm test
+          cache: pnpm
+      # The runtime suite mounts the real DSH runtimes, so the release gate needs
+      # the devDependencies installed before it can run.
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
 
   publish:
     needs: checks

@@ -51,7 +51,7 @@
     "url": "https://github.com/sponsors/PerryLink"
   },
   "scripts": {
-    "test": "node test/smoke.mjs",
+    "test": "node test/smoke.mjs && node --test \"test/*.spec.mjs\"",
     "typecheck": "tsc -p tsconfig.check.json",
     "typecheck:ci": "tsc -p tsconfig.check.ci.json"
   },

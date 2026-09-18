@@ -9,7 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node test/smoke.mjs
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      # Both rulers run here, and the runtime suite mounts the REAL
+      # SystemPrompt/ToolRuntime: a registration shape that only looks right in
+      # TypeScript still fails this job.
+      - name: Gate
+        run: |
+          pnpm run typecheck
+          pnpm run typecheck:ci
+          pnpm test
