@@ -104,12 +104,14 @@ Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/d
 
 ```sh
 pnpm install
-pnpm run typecheck && pnpm run typecheck:ci   # both rulers: the two type faces this repo promises
+pnpm run typecheck                            # the one type ruler: checkJs over the published host face
 pnpm test                                     # JSON-RPC smoke + the real-Cordis runtime suite
 pnpm pack                                     # the published tarball
 ```
 
 The runtime suite mounts the REAL `SystemPrompt`/`ToolRuntime` registries and asserts that mounting this package puts all three certification tools into `ctx.tools.schemas()`, that disposing the fiber removes them again, and that a context without the `tools` service parks the plugin in `PENDING`. `dsh --dump-config` is deliberately not used as acceptance: a mounted row and a pending fiber look the same there.
+
+There is deliberately **one** type ruler. `@deepseek-ai/*` resolves through this repo's own `node_modules` (the pinned devDependencies — the published line) and the package declares no DSH peer, so a second `tsc` configuration would be the same command over the same type universe. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a second face. The independent second piece of evidence is the runtime mount gate above.
 
 ## PerryLink DSH Plugin Family
 

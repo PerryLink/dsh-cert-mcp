@@ -104,12 +104,14 @@ Fuente de datos: [PerryLink/dsh-plugin-certification](https://github.com/PerryLi
 
 ```sh
 pnpm install
-pnpm run typecheck && pnpm run typecheck:ci   # ambas reglas: las dos caras de tipos que promete el repo
+pnpm run typecheck                            # la única regla de tipos: checkJs sobre la cara host publicada
 pnpm test                                     # prueba JSON-RPC + suite de ejecución con Cordis real
 pnpm pack                                     # el tarball publicado
 ```
 
 La suite de ejecución monta los registros REALES `SystemPrompt`/`ToolRuntime` y comprueba que montar este paquete coloca las tres herramientas de certificación en `ctx.tools.schemas()`, que liberar el fiber las elimina y que un contexto sin el servicio `tools` deja el plugin en `PENDING`. Deliberadamente no se usa `dsh --dump-config` como criterio de aceptación: allí una fila montada y un fiber pendiente se ven igual.
+
+Hay deliberadamente **una sola** regla de tipos. `@deepseek-ai/*` se resuelve a través del `node_modules` de este repositorio (las devDependencies fijadas, es decir la línea publicada) y el paquete no declara ningún peer de DSH, así que una segunda configuración de `tsc` sería el mismo comando sobre el mismo universo de tipos. El script `typecheck:ci` se conserva como la copia histórica no-op (su única clave extra es un `paths: {}` vacío) por compatibilidad con referencias existentes, no como una segunda cara de tipos. La segunda evidencia independiente es la puerta de montaje en ejecución de arriba.
 
 ## Familia de plugins DSH de PerryLink
 

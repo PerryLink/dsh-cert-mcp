@@ -18,9 +18,15 @@ jobs:
           cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
-      # Both rulers run here, and the runtime suite mounts the REAL
-      # SystemPrompt/ToolRuntime: a registration shape that only looks right in
-      # TypeScript still fails this job.
+      # ONE type ruler, measured over the published line: tsconfig.check.json
+      # carries no `paths`, so `@deepseek-ai/*` resolves through this repo's own
+      # node_modules (the pinned devDependencies). `typecheck:ci` is the
+      # historical no-op duplicate (its only extra key is an empty `paths: {}`)
+      # and is kept for compatibility with existing references, not as a second
+      # type face. This package declares no DSH peer and has no checkout face to
+      # point at. The independent second piece of evidence is the runtime suite
+      # below, which mounts the REAL SystemPrompt/ToolRuntime: a registration
+      # shape that only looks right in TypeScript still fails this job.
       - name: Gate
         run: |
           pnpm run typecheck

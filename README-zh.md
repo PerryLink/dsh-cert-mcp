@@ -104,12 +104,14 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 
 ```sh
 pnpm install
-pnpm run typecheck && pnpm run typecheck:ci   # 两把尺子：本仓承诺的两个类型面
+pnpm run typecheck                            # 唯一类型尺子：对已发布 host 面做 checkJs
 pnpm test                                     # JSON-RPC 冒烟 + 真 Cordis 运行时套件
 pnpm pack                                     # 发布用 tarball
 ```
 
 运行时套件挂载**真实**的 `SystemPrompt`/`ToolRuntime` 注册表，断言：挂载本包会把三个认证工具放进 `ctx.tools.schemas()`；释放 fiber 后它们消失；缺少 `tools` 服务的上下文会让插件停在 `PENDING`。验收**刻意不用** `dsh --dump-config`：在那里，已挂载的 row 与 pending 的 fiber 看起来一模一样。
+
+本仓**刻意只有一把类型尺子**：`@deepseek-ai/*` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布线）解析，且本包不声明任何 DSH peer，因此第二份 `tsc` 配置只会是量同一类型宇宙的同一条命令。`typecheck:ci` 脚本作为历史 no-op 副本保留（它唯一的额外键是空 `paths: {}`），只为兼容既有引用，不是第二个类型面。独立的第二份证据是上面的运行时挂载门。
 
 ## PerryLink DSH 插件家族
 

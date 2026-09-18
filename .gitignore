@@ -2,6 +2,7 @@ node_modules/
 *.tgz
 *.log
 
-# The gate chain (typecheck / typecheck:ci / tests) installs with pnpm, and
-# pnpm-workspace.yaml keeps this repo its own workspace root; the lockfile is
-# tracked so CI installs the exact reviewed graph.
+# The gate chain (typecheck plus its legacy no-op equivalent typecheck:ci, and
+# the test suites) installs with pnpm, and pnpm-workspace.yaml keeps this repo
+# its own workspace root; the lockfile is tracked so CI installs the exact
+# reviewed graph.
