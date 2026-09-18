@@ -14,7 +14,7 @@
         },
         "buildHygiene": {
           "result": "pass",
-          "evidence": "files allowlist + peerDependencies (optional client peers, range >=0.1.2-rc.1 <0.2.0 since 2026-09-05) + typecheck/test/build/check:readmes/pack gates; 2026-09-06 batch D-stage gate chain green at v0.10.4 (frozen install, typecheck, 276/276 tests, build, verify:self-contained, pack) + main ci success on 3f9cdae (2026-09-06T12:32Z); no malicious postinstall patterns"
+          "evidence": "files allowlist + peerDependencies (optional client peers; historical snapshot 2026-09-07 recorded the single-clause range >=0.1.2-rc.1 <0.2.0 since 2026-09-05, which is superseded by the dsh-plugin-kit data/peer-range.json canonicalRange >=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 - a prerelease only satisfies a comparator set whose own tuple carries a prerelease, so the single clause admits neither 0.1.5-rc.2 nor 0.1.6-alpha.2 while the three-clause form admits both) + typecheck/test/build/check:readmes/pack gates; 2026-09-06 batch D-stage gate chain green at v0.10.4 (frozen install, typecheck, 276/276 tests, build, verify:self-contained, pack) + main ci success on 3f9cdae (2026-09-06T12:32Z); no malicious postinstall patterns"
         },
         "supplyChain": {
           "result": "pass",
@@ -27,7 +27,7 @@
         },
         "installSmoke": {
           "result": "ok",
-          "evidence": "2026-09-06 batch D-stage (isolated throwaway profile, npx @deepseek-ai/dsh@0.1.2-rc.1): the standard `dsh plugin --profile web add <tarball>` fails with ERR_PNPM_IGNORED_BUILDS (pnpm 11 ignored-builds environmental gate); the documented compat recipe (pnpm-workspace.yaml allowBuilds preset for dsh-subprocess-local/koffi/node-pty/protobufjs) then installs cleanly - add exit 0 (resolved 381, added 271), dump-config shows the plugin row + bundle layer, keyless headless reaches MISSING_CREDENTIAL (tree-load proof). Reproduction: _scratch/batch-2026-09-06/verify/dsh-auto-review.md"
+          "evidence": "2026-09-06 batch D-stage (isolated throwaway profile, npx @deepseek-ai/dsh@0.1.2-rc.1 — historical snapshot 2026-09-07: that pin is the host line current at the run; the family's published line at the 2026-09-18 review is 0.1.6-alpha.2, so re-pin before reusing this E evidence): the standard `dsh plugin --profile web add <tarball>` fails with ERR_PNPM_IGNORED_BUILDS (pnpm 11 ignored-builds environmental gate); the documented compat recipe (pnpm-workspace.yaml allowBuilds preset for dsh-subprocess-local/koffi/node-pty/protobufjs) then installs cleanly - add exit 0 (resolved 381, added 271), dump-config shows the plugin row + bundle layer, keyless headless reaches MISSING_CREDENTIAL (tree-load proof). Reproduction: _scratch/batch-2026-09-06/verify/dsh-auto-review.md"
         }
       },
       "veto": null,

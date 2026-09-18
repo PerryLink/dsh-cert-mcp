@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `pnpm test` runs the JSON-RPC smoke suite and the new runtime suite; the CI and release workflows install the devDependencies first, because the runtime suite mounts the real runtimes.
 - **Type-ruler honesty.** This repo has exactly one `tsc` ruler: `pnpm run typecheck` resolves `@deepseek-ai/*` through the repo's own pinned `node_modules` (the published line) because `tsconfig.check.json` declares no `paths`. `typecheck:ci` / `tsconfig.check.ci.json` were added as a second face but differ only by an empty `paths: {}`, so they run the same command over the same type universe; both are kept for compatibility with existing references and are documented as a no-op duplicate rather than a second ruler. The independent second piece of evidence is the runtime mount gate in `test/plugin.spec.mjs` — the REAL `ToolRuntime` with all three tools in `ctx.tools.schemas()` — not a second `tsc` invocation.
+- **Embedded registry resynced.** `data/certified.json` (shipped in the tarball, and served whenever the remote fetch is unavailable) is now byte-identical to `dsh-plugin-certification` at that repository's `57519f5`, which rewrote the auto-review entry's peer-range and npx-pin evidence as dated historical snapshots. The certification repository's `check-freshness` gate asserts this parity, so the two copies can no longer drift apart silently.
 
 ## [0.1.5] - 2026-09-10
 
