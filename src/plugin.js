@@ -10,6 +10,9 @@
 // (bin: src/index.js), which keeps working unchanged for any MCP client.
 import { handleRequest } from './server.js'
 
+/** @typedef {import('@deepseek-ai/cordis').Context} Context */
+/** @typedef {import('@deepseek-ai/dsh-tools').ToolDefinition} ToolDefinition */
+
 export const name = '@perrylink/dsh-cert-mcp'
 
 // The three tools register on the host tool surface, so `tools` is a hard
@@ -43,19 +46,26 @@ const TOOLS = [
   },
 ]
 
-async function callTool(tool, args) {
-  const response = await handleRequest({
-    method: 'tools/call',
-    params: { name: tool, arguments: args ?? {} },
-  })
+async function callTool(tool, args, signal) {
+  const response = await handleRequest(
+    {
+      method: 'tools/call',
+      params: { name: tool, arguments: args ?? {} },
+    },
+    signal,
+  )
   const text = response?.result?.content?.[0]?.text
   if (response?.result?.isError) throw new Error(text ?? 'certification lookup failed')
   return text ?? JSON.stringify(response?.result ?? null)
 }
 
+/**
+ * Register the read-only certification tools on the host tool surface.
+ * @param {Context} ctx - plugin context; `inject` guarantees the `tools` service.
+ */
 export function apply(ctx) {
   for (const tool of TOOLS) {
-    ctx.effect(() => ctx.tools.register({
+    ctx.effect(() => ctx.tools.register(/** @type {ToolDefinition} */ ({
       name: tool.name,
       description: tool.description,
       parameters: tool.parameters,
@@ -65,9 +75,9 @@ export function apply(ctx) {
           return [{ type: 'text', text: String(value) }]
         },
       },
-      async execute(args) {
-        return callTool(tool.name, args)
+      async execute(args, exec) {
+        return callTool(tool.name, args, exec.signal)
       },
-    }))
+    })))
   }
 }
