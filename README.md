@@ -9,6 +9,8 @@
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
 
 ## Tools
@@ -66,17 +68,23 @@ dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 dsh plugin --profile web add @perrylink/dsh-cert-mcp
 ```
 
-The inserted row loads the package through the standard Cordis plugin contract: the host half is a plain ESM module exporting `apply(ctx)` (declaring `inject` only when it needs services). This package ships no browser UI, so there is no `dsh.client` declaration.
+The inserted row loads the package through the standard Cordis plugin contract: the host half is a plain ESM module exporting `name`, `inject` and `apply(ctx)`. This package ships no browser UI, so there is no `dsh.client` declaration.
 
 ```js
 // bundle entry (host half) — the contract the patch row loads
+export const name = '@perrylink/dsh-cert-mcp'
+export const inject = ['tools'] // the host tool surface, provided by dsh-tools
 export function apply(ctx) {
   // registers the read-only certification lookup surface
   // (get_certification / list_certified / certification_spec)
 }
 ```
 
-Remove it with `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
+**The host half needs the `tools` service** (shipped by `@deepseek-ai/dsh-tools`). A profile without it does not lose the tools silently: Cordis holds this row in `PENDING` until `tools` exists, which is visible in the profile's plugin list. Nothing else is required — no config keys, no credentials, and no network access at load time.
+
+**Two halves, one data path.** The bundle row and the stdio server are separate entry points over the same `handleRequest` core. The server half is an independent process any MCP client can spawn (`node src/index.js`), and it is *not* part of the plugin path: installing this bundle never starts it, and removing the bundle never touches it. Conversely `npx @perrylink/dsh-cert-mcp` registers nothing on the DSH tool surface.
+
+Remove the bundle with `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
 
 ## Why this exists
 
@@ -86,11 +94,22 @@ The official DeepSeek Harness repository does not run a plugin registry and does
 
 Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, spec v1.
 
+## Compatibility
+
+- Node `^22.19.0 || >=24.0.0`.
+- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0` (declared in `engines.dsh`, with `dsh.manifestVersion: 1`).
+- Peer: `@deepseek-ai/cordis` `^4.0.2`. The host half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node.
+
 ## Development
 
 ```sh
-node test/smoke.mjs
+pnpm install
+pnpm run typecheck && pnpm run typecheck:ci   # both rulers: the two type faces this repo promises
+pnpm test                                     # JSON-RPC smoke + the real-Cordis runtime suite
+pnpm pack                                     # the published tarball
 ```
+
+The runtime suite mounts the REAL `SystemPrompt`/`ToolRuntime` registries and asserts that mounting this package puts all three certification tools into `ctx.tools.schemas()`, that disposing the fiber removes them again, and that a context without the `tools` service parks the plugin in `PENDING`. `dsh --dump-config` is deliberately not used as acceptance: a mounted row and a pending fiber look the same there.
 
 ## PerryLink DSH Plugin Family
 

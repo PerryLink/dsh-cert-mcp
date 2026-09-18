@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **The DSH tool surface was never registered.** The bundle entry exported a default object (`export default { name, apply }`) while declaring `inject` nowhere, so the Loader's `unwrapExports` (`exports.default ?? exports`) handed the host a plugin without its dependency declaration, and every installation silently contributed zero tools. The entry now exports `name`, `inject` and `apply` as named exports, reads the service through `ctx.tools`, and no longer returns early when the service is absent: a profile without `dsh-tools` parks the row in `PENDING` where it can be seen.
+- `serverInfo.version` was hard-coded (`0.1.5`) and `server.json` still said `0.1.4`, so MCP clients were told a version this package never published. `package.json#version` is now the single source: the server derives `SERVER_INFO` from it and `test/smoke.mjs` asserts `serverInfo` plus both `server.json` version fields against it.
+- An aborted tool call kept its registry refresh alive until the 10 s deadline. `execute` now forwards `exec.signal` into `handleRequest`, which fuses it with the request timeout; an aborted refresh still answers from the embedded snapshot.
+
+### Added
+
+- `dsh.manifestVersion: 1`, `engines.dsh` (the family's three-clause range) and `engines.node` `^22.19.0 || >=24.0.0`; peer `@deepseek-ai/cordis` `^4.0.2`.
+- `test/plugin.spec.mjs` — runtime gate over the REAL Cordis `Context`, `SystemPrompt` and `ToolRuntime`: no default export, the Loader unwrap keeps `inject`, mounting registers `get_certification` / `list_certified` / `certification_spec` with their model-facing schemas, disposing the fiber removes them, a tools-less context stays `PENDING`, and an aborted call still answers from the embedded snapshot.
+- `.github/workflows/compat.yml` — monthly + per-PR compatibility probe: bare tarball import of the plugin half, a stdio `initialize`/`tools/list` round-trip that proves the server half answers on its own, a scratch-profile install with the row-mount assertion and a keyless headless smoke, and a reversible uninstall.
+- `pnpm-workspace.yaml` (own workspace root, `minimumReleaseAge: 0`) and five-language READMEs.
+
+### Changed
+
+- `pnpm test` runs the JSON-RPC smoke suite and the new runtime suite; the CI and release workflows install the devDependencies first, because the runtime suite mounts the real runtimes.
+
 ## [0.1.5] - 2026-09-10
 
 ### Fixed
