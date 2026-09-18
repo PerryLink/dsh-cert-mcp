@@ -41,7 +41,13 @@
     "url": "https://github.com/sponsors/PerryLink"
   },
   "scripts": {
-    "test": "node test/smoke.mjs"
+    "test": "node test/smoke.mjs",
+    "typecheck": "tsc -p tsconfig.check.json",
+    "typecheck:ci": "tsc -p tsconfig.check.ci.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
   },
   "mcpName": "io.github.perrylink/dsh-cert",
   "publishConfig": {
