@@ -1,0 +1,137 @@
+name: Compat
+
+# dshbase-style compatibility verification (weekly + on demand):
+#   1. bare-import: install the packed tarball into an empty project and import
+#      its entry - catches devDependencies mistaken for dependencies. The SERVER
+#      half is asserted in the same job: the stdio process answers an
+#      initialize + tools/list round-trip on its own, with no DSH host involved
+#      (it is an independent MCP server process, not part of the plugin path).
+#   2. profile: install the tarball into a scratch DSH_HOME profile next to
+#      dsh-base + dsh-headless, assert the bundle row mounts (dump-config), and
+#      run one keyless headless task. MISSING_CREDENTIAL proves the plugin tree
+#      loaded; a hang (pending service) hits the 120s timeout and fails, which is
+#      exactly how a missing injected service surfaces. This package injects
+#      `tools`, so a profile without dsh-tools parks the row in PENDING and this
+#      step is what catches it.
+#   3. uninstall: the profile install must be fully reversible.
+# Platform guard: every assertion here is platform-neutral. Platform-specific
+# behavior is never asserted on this Linux runner.
+on:
+  pull_request:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+jobs:
+  bare-import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Pack
+        run: pnpm pack --pack-destination "$RUNNER_TEMP"
+
+      - name: Bare install + import smoke (plugin half and server half)
+        run: |
+          set -euo pipefail
+          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          mkdir -p "$RUNNER_TEMP/bare" && cd "$RUNNER_TEMP/bare"
+          # Peer auto-install stays off on purpose: this project must prove the
+          # tarball works with nothing but Node, so a runtime import that leaked
+          # into the package fails here instead of in a user's profile.
+          cat > pnpm-workspace.yaml <<'YAML'
+          packages:
+            - .
+          autoInstallPeers: false
+          minimumReleaseAge: 0
+          YAML
+          pnpm init >/dev/null
+          pnpm add "$TARBALL" >/dev/null
+          node --input-type=module -e "import('@perrylink/dsh-cert-mcp').then(m=>{if('default' in m)throw new Error('a default export hides inject from Loader.unwrapExports');if(!m.inject.includes('tools'))throw new Error('the entry must declare inject: tools');console.log('plugin half ok')}).catch(e=>{console.error(e);process.exit(1)})"
+          # Server half: an independent stdio process over the same core.
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize"}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            | ./node_modules/.bin/dsh-cert-mcp > frames.jsonl
+          grep -q '"name":"dsh-cert-mcp"' frames.jsonl
+          for tool in get_certification list_certified certification_spec; do
+            grep -q "\"$tool\"" frames.jsonl
+          done
+          echo 'server half ok'
+
+  profile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Pack
+        run: pnpm pack --pack-destination "$RUNNER_TEMP"
+
+      - name: Install dsh CLI
+        run: npm install -g @deepseek-ai/dsh@0.1.6-alpha.2
+
+      - name: Install into a scratch profile (builds allowlisted)
+        run: |
+          set -euo pipefail
+          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          export DSH_HOME="$RUNNER_TEMP/dsh-home"
+          mkdir -p "$DSH_HOME/profiles/compat"
+          cat > "$DSH_HOME/profiles/compat/pnpm-workspace.yaml" <<'YAML'
+          packages:
+            - .
+          nodeLinker: hoisted
+          minimumReleaseAge: 0
+          autoInstallPeers: false
+          allowBuilds:
+            '@deepseek-ai/dsh-subprocess-local': true
+            koffi: true
+            node-pty: true
+            protobufjs: true
+            '@google/genai': true
+          YAML
+          dsh plugin --profile compat add '@deepseek-ai/dsh-base@0.1.6-alpha.2' '@deepseek-ai/dsh-headless@0.1.6-alpha.2' "$TARBALL"
+
+      - name: Row-mount assertion
+        run: |
+          set -euo pipefail
+          export DSH_HOME="$RUNNER_TEMP/dsh-home"
+          dsh --profile compat --dump-config > dump.txt
+          grep -q "dsh-cert-mcp" dump.txt
+
+      - name: Keyless headless smoke
+        run: |
+          set -euo pipefail
+          export DSH_HOME="$RUNNER_TEMP/dsh-home"
+          set +e
+          timeout 120 dsh --profile compat "Reply with exactly: ok" > smoke.log 2>&1
+          code="$?"
+          set -e
+          if grep -q 'MISSING_CREDENTIAL' smoke.log; then
+            echo 'PASS: plugin tree loaded (keyless)'
+          elif [ "$code" -eq 0 ] && grep -qiE '(^|[^a-z])ok([^a-z]|$)' smoke.log; then
+            echo 'PASS: plugin tree loaded (with key)'
+          else
+            echo 'FAIL: headless smoke did not prove tree load'
+            cat smoke.log
+            exit 1
+          fi
+
+      - name: Uninstall
+        run: |
+          set -euo pipefail
+          export DSH_HOME="$RUNNER_TEMP/dsh-home"
+          dsh plugin --profile compat remove '@perrylink/dsh-cert-mcp'
