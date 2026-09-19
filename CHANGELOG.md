@@ -5,8 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.8] - 2026-09-19
+## [0.2.0] - 2026-09-19
 
+### Changed
+
+- The package moved from the scoped `@perrylink/dsh-cert-mcp` to **`dsh-cert-mcp`**. The prepared 0.1.8 release was never published under the old name, so its changes (the npm trusted-publishing switch and the `check:lockfile` gate) ship here as part of 0.2.0. The scoped name stays on the registry as a deprecated pointer; `server.json` keeps the MCP server identifier `io.github.perrylink/dsh-cert` and repoints its npm `identifier` at the new name.
 ### Added
 
 - `pnpm run check:lockfile` (`scripts/check-lockfile-drift.mjs`) fails fast when `package.json` and `pnpm-lock.yaml` disagree; the probe is read-only and the documented checks chain runs it alongside the other gates.

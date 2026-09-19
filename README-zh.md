@@ -4,8 +4,8 @@
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
@@ -31,7 +31,7 @@ cd dsh-cert-mcp
 node src/index.js        # stdio 服务器
 ```
 
-也可以直接从已发布的 npm 包运行：`npx @perrylink/dsh-cert-mcp`。
+也可以直接从已发布的 npm 包运行：`npx dsh-cert-mcp`。
 
 ### 在 MCP 客户端中注册
 
@@ -65,14 +65,14 @@ DSH：通过 [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) 以 std
 dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 
 # npm 通道（已发布版本）
-dsh plugin --profile web add @perrylink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp
 ```
 
 插入的 row 通过标准 Cordis 插件契约加载本包：host 半边是普通 ESM 模块，具名导出 `name`、`inject` 与 `apply(ctx)`。本包不含浏览器 UI，因此没有 `dsh.client` 声明。
 
 ```js
 // bundle 入口（host 半边）—— patch row 加载的契约
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // 宿主工具面，由 dsh-tools 提供
 export function apply(ctx) {
   // 注册只读认证查询面
@@ -82,9 +82,9 @@ export function apply(ctx) {
 
 **host 半边需要 `tools` 服务**（由 `@deepseek-ai/dsh-tools` 提供）。缺少该服务的 profile 不会静默丢失工具：Cordis 会把这个 row 停在 `PENDING`，在 profile 的插件列表里看得见。除此之外不需要任何东西——没有配置键、没有凭据，加载期也不联网。
 
-**两个半边，同一条数据路径。** bundle row 与 stdio 服务器是同一份 `handleRequest` 核心的两个入口。server 半边是独立进程，任何 MCP 客户端都能拉起（`node src/index.js`），它**不在插件路径上**：安装本 bundle 不会启动它，卸载本 bundle 也不会碰它；反过来 `npx @perrylink/dsh-cert-mcp` 不会在 DSH 工具面上注册任何东西。
+**两个半边，同一条数据路径。** bundle row 与 stdio 服务器是同一份 `handleRequest` 核心的两个入口。server 半边是独立进程，任何 MCP 客户端都能拉起（`node src/index.js`），它**不在插件路径上**：安装本 bundle 不会启动它，卸载本 bundle 也不会碰它；反过来 `npx dsh-cert-mcp` 不会在 DSH 工具面上注册任何东西。
 
-卸载：`dsh plugin --profile web remove @perrylink/dsh-cert-mcp`（或从 profile patch 里删掉该 row）。上面的独立 stdio MCP 服务器对任何 MCP 客户端照旧可用。
+卸载：`dsh plugin --profile web remove dsh-cert-mcp`（或从 profile patch 里删掉该 row）。上面的独立 stdio MCP 服务器对任何 MCP 客户端照旧可用。
 
 ## 为什么需要它
 

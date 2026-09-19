@@ -4,8 +4,8 @@
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
@@ -31,7 +31,7 @@ cd dsh-cert-mcp
 node src/index.js        # servidor stdio
 ```
 
-También puedes ejecutarlo directamente desde el paquete npm publicado: `npx @perrylink/dsh-cert-mcp`.
+También puedes ejecutarlo directamente desde el paquete npm publicado: `npx dsh-cert-mcp`.
 
 ### Registrarlo en un cliente MCP
 
@@ -65,14 +65,14 @@ El paquete declara `dsh.bundle.patch` → `cordis.patch.yml`, así que también 
 dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 
 # canal npm (versiones publicadas)
-dsh plugin --profile web add @perrylink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp
 ```
 
 La fila insertada carga el paquete mediante el contrato estándar de plugins de Cordis: la mitad host es un módulo ESM normal que exporta con nombre `name`, `inject` y `apply(ctx)`. Este paquete no incluye interfaz de navegador, por lo que no hay declaración `dsh.client`.
 
 ```js
 // entrada del bundle (mitad host) — el contrato que carga la fila del patch
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // la superficie de herramientas del host, provista por dsh-tools
 export function apply(ctx) {
   // registra la superficie de consulta de certificación de solo lectura
@@ -82,9 +82,9 @@ export function apply(ctx) {
 
 **La mitad host necesita el servicio `tools`** (lo provee `@deepseek-ai/dsh-tools`). Un perfil sin él no pierde las herramientas en silencio: Cordis deja esta fila en `PENDING` hasta que `tools` exista, y eso se ve en la lista de plugins del perfil. No hace falta nada más: ni claves de configuración, ni credenciales, ni red durante la carga.
 
-**Dos mitades, una sola ruta de datos.** La fila del bundle y el servidor stdio son dos entradas sobre el mismo núcleo `handleRequest`. La mitad servidor es un proceso independiente que cualquier cliente MCP puede lanzar (`node src/index.js`), y **no forma parte de la ruta del plugin**: instalar este bundle nunca lo arranca y desinstalarlo nunca lo toca. A la inversa, `npx @perrylink/dsh-cert-mcp` no registra nada en la superficie de herramientas de DSH.
+**Dos mitades, una sola ruta de datos.** La fila del bundle y el servidor stdio son dos entradas sobre el mismo núcleo `handleRequest`. La mitad servidor es un proceso independiente que cualquier cliente MCP puede lanzar (`node src/index.js`), y **no forma parte de la ruta del plugin**: instalar este bundle nunca lo arranca y desinstalarlo nunca lo toca. A la inversa, `npx dsh-cert-mcp` no registra nada en la superficie de herramientas de DSH.
 
-Para quitarlo: `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (o borra la fila del patch del perfil). El servidor MCP stdio independiente sigue funcionando para cualquier cliente MCP.
+Para quitarlo: `dsh plugin --profile web remove dsh-cert-mcp` (o borra la fila del patch del perfil). El servidor MCP stdio independiente sigue funcionando para cualquier cliente MCP.
 
 ## Por qué existe
 

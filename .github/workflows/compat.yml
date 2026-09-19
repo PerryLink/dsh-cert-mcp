@@ -42,7 +42,7 @@ jobs:
       - name: Bare install + import smoke (plugin half and server half)
         run: |
           set -euo pipefail
-          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          TARBALL="$(ls "$RUNNER_TEMP"/dsh-cert-mcp-*.tgz | head -n1)"
           mkdir -p "$RUNNER_TEMP/bare" && cd "$RUNNER_TEMP/bare"
           # Peer auto-install stays off on purpose: this project must prove the
           # tarball works with nothing but Node, so a runtime import that leaked
@@ -55,7 +55,7 @@ jobs:
           YAML
           pnpm init >/dev/null
           pnpm add "$TARBALL" >/dev/null
-          node --input-type=module -e "import('@perrylink/dsh-cert-mcp').then(m=>{if('default' in m)throw new Error('a default export hides inject from Loader.unwrapExports');if(!m.inject.includes('tools'))throw new Error('the entry must declare inject: tools');console.log('plugin half ok')}).catch(e=>{console.error(e);process.exit(1)})"
+          node --input-type=module -e "import('dsh-cert-mcp').then(m=>{if('default' in m)throw new Error('a default export hides inject from Loader.unwrapExports');if(!m.inject.includes('tools'))throw new Error('the entry must declare inject: tools');console.log('plugin half ok')}).catch(e=>{console.error(e);process.exit(1)})"
           # Server half: an independent stdio process over the same core.
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize"}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
             | ./node_modules/.bin/dsh-cert-mcp > frames.jsonl
@@ -88,7 +88,7 @@ jobs:
       - name: Install into a scratch profile (builds allowlisted)
         run: |
           set -euo pipefail
-          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          TARBALL="$(ls "$RUNNER_TEMP"/dsh-cert-mcp-*.tgz | head -n1)"
           export DSH_HOME="$RUNNER_TEMP/dsh-home"
           mkdir -p "$DSH_HOME/profiles/compat"
           cat > "$DSH_HOME/profiles/compat/pnpm-workspace.yaml" <<'YAML'
@@ -135,4 +135,4 @@ jobs:
         run: |
           set -euo pipefail
           export DSH_HOME="$RUNNER_TEMP/dsh-home"
-          dsh plugin --profile compat remove '@perrylink/dsh-cert-mcp'
+          dsh plugin --profile compat remove 'dsh-cert-mcp'

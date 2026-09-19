@@ -4,8 +4,8 @@
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
@@ -31,7 +31,7 @@ cd dsh-cert-mcp
 node src/index.js        # servidor stdio
 ```
 
-Você também pode executá-lo direto do pacote npm publicado: `npx @perrylink/dsh-cert-mcp`.
+Você também pode executá-lo direto do pacote npm publicado: `npx dsh-cert-mcp`.
 
 ### Registrar em um cliente MCP
 
@@ -65,14 +65,14 @@ O pacote declara `dsh.bundle.patch` → `cordis.patch.yml`, então também é in
 dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 
 # canal npm (versões publicadas)
-dsh plugin --profile web add @perrylink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp
 ```
 
 A linha inserida carrega o pacote pelo contrato padrão de plugins do Cordis: a metade host é um módulo ESM comum que exporta com nome `name`, `inject` e `apply(ctx)`. Este pacote não traz interface de navegador, portanto não há declaração `dsh.client`.
 
 ```js
 // entrada do bundle (metade host) — o contrato que a linha do patch carrega
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // a superfície de ferramentas do host, fornecida pelo dsh-tools
 export function apply(ctx) {
   // registra a superfície de consulta de certificação somente leitura
@@ -82,9 +82,9 @@ export function apply(ctx) {
 
 **A metade host precisa do serviço `tools`** (fornecido por `@deepseek-ai/dsh-tools`). Um perfil sem ele não perde as ferramentas em silêncio: o Cordis mantém esta linha em `PENDING` até `tools` existir, e isso aparece na lista de plugins do perfil. Nada mais é exigido: nem chaves de configuração, nem credenciais, nem rede durante o carregamento.
 
-**Duas metades, um único caminho de dados.** A linha do bundle e o servidor stdio são entradas separadas sobre o mesmo núcleo `handleRequest`. A metade servidor é um processo independente que qualquer cliente MCP pode iniciar (`node src/index.js`), e **não faz parte do caminho do plugin**: instalar este bundle nunca o inicia e removê-lo nunca o afeta. Na direção oposta, `npx @perrylink/dsh-cert-mcp` não registra nada na superfície de ferramentas do DSH.
+**Duas metades, um único caminho de dados.** A linha do bundle e o servidor stdio são entradas separadas sobre o mesmo núcleo `handleRequest`. A metade servidor é um processo independente que qualquer cliente MCP pode iniciar (`node src/index.js`), e **não faz parte do caminho do plugin**: instalar este bundle nunca o inicia e removê-lo nunca o afeta. Na direção oposta, `npx dsh-cert-mcp` não registra nada na superfície de ferramentas do DSH.
 
-Para remover: `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (ou apague a linha do patch do perfil). O servidor MCP stdio independente continua funcionando para qualquer cliente MCP.
+Para remover: `dsh plugin --profile web remove dsh-cert-mcp` (ou apague a linha do patch do perfil). O servidor MCP stdio independente continua funcionando para qualquer cliente MCP.
 
 ## Por que isto existe
 

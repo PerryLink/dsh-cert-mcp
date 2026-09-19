@@ -3,7 +3,7 @@
 // Loaded through the `cordis.patch.yml` row (package.json `dsh.bundle.patch`)
 // when the package is installed as a DeepSeek Harness bundle:
 //
-//   dsh plugin --profile web add @perrylink/dsh-cert-mcp
+//   dsh plugin --profile web add dsh-cert-mcp
 //
 // It re-registers the three read-only certification tools on the DSH tool
 // surface, 1:1 backed by the same `handleRequest` used by the stdio server
@@ -13,7 +13,7 @@ import { handleRequest } from './server.js'
 /** @typedef {import('@deepseek-ai/cordis').Context} Context */
 /** @typedef {import('@deepseek-ai/dsh-tools').ToolDefinition} ToolDefinition */
 
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 
 // The three tools register on the host tool surface, so `tools` is a hard
 // dependency: declared here, read through `ctx.tools`. Cordis parks the plugin

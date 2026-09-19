@@ -5,4 +5,4 @@
 # config row — restate every key when overriding.
 - insert:
     - id: cert-mcp
-      name: '@perrylink/dsh-cert-mcp'
+      name: 'dsh-cert-mcp'

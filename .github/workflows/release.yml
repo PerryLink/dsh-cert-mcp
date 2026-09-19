@@ -69,8 +69,8 @@ jobs:
           NPM_CONFIG_LOGLEVEL: verbose
         run: |
           version="$(node -p "require('./package.json').version")"
-          if npm view "@perrylink/dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
-            echo "@perrylink/dsh-cert-mcp@${version} is already published; skipping npm publish"
+          if npm view "dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
+            echo "dsh-cert-mcp@${version} is already published; skipping npm publish"
           else
             npm publish --access public --provenance
           fi
@@ -79,14 +79,14 @@ jobs:
         run: |
           version="$(node -p "require('./package.json').version")"
           for attempt in 1 2 3 4 5 6; do
-            if npm view "@perrylink/dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
-              echo "@perrylink/dsh-cert-mcp@${version} is live on the registry"
+            if npm view "dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
+              echo "dsh-cert-mcp@${version} is live on the registry"
               exit 0
             fi
             echo "attempt ${attempt}: not visible on the registry yet; retrying"
             sleep 5
           done
-          echo "::error::@perrylink/dsh-cert-mcp@${version} is not on the registry after the publish step"
+          echo "::error::dsh-cert-mcp@${version} is not on the registry after the publish step"
           exit 1
 
       - name: Create GitHub Release

@@ -4,8 +4,8 @@
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
@@ -31,7 +31,7 @@ cd dsh-cert-mcp
 node src/index.js        # stdio server
 ```
 
-Run it directly from the published npm package: `npx @perrylink/dsh-cert-mcp`.
+Run it directly from the published npm package: `npx dsh-cert-mcp`.
 
 ### Register in an MCP client
 
@@ -65,14 +65,14 @@ The package declares `dsh.bundle.patch` → `cordis.patch.yml`, so it also insta
 dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 
 # npm channel (published releases)
-dsh plugin --profile web add @perrylink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp
 ```
 
 The inserted row loads the package through the standard Cordis plugin contract: the host half is a plain ESM module exporting `name`, `inject` and `apply(ctx)`. This package ships no browser UI, so there is no `dsh.client` declaration.
 
 ```js
 // bundle entry (host half) — the contract the patch row loads
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // the host tool surface, provided by dsh-tools
 export function apply(ctx) {
   // registers the read-only certification lookup surface
@@ -82,9 +82,9 @@ export function apply(ctx) {
 
 **The host half needs the `tools` service** (shipped by `@deepseek-ai/dsh-tools`). A profile without it does not lose the tools silently: Cordis holds this row in `PENDING` until `tools` exists, which is visible in the profile's plugin list. Nothing else is required — no config keys, no credentials, and no network access at load time.
 
-**Two halves, one data path.** The bundle row and the stdio server are separate entry points over the same `handleRequest` core. The server half is an independent process any MCP client can spawn (`node src/index.js`), and it is *not* part of the plugin path: installing this bundle never starts it, and removing the bundle never touches it. Conversely `npx @perrylink/dsh-cert-mcp` registers nothing on the DSH tool surface.
+**Two halves, one data path.** The bundle row and the stdio server are separate entry points over the same `handleRequest` core. The server half is an independent process any MCP client can spawn (`node src/index.js`), and it is *not* part of the plugin path: installing this bundle never starts it, and removing the bundle never touches it. Conversely `npx dsh-cert-mcp` registers nothing on the DSH tool surface.
 
-Remove the bundle with `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
+Remove the bundle with `dsh plugin --profile web remove dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
 
 ## Why this exists
 
