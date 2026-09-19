@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-09-19
+
+### Changed
+
+- The MCP Registry server name is now **`io.github.PerryLink/dsh-cert`** (it was all lowercase). The registry grants publish permission for the namespace derived from the GitHub Actions OIDC `repository_owner` claim and compares it **case-sensitively** with `server.json`'s `name`; GitHub reports this organization as `PerryLink`, so the first publish attempt was refused (`403 ... You have permission to publish: io.github.PerryLink/*. Attempting to publish: io.github.perrylink/dsh-cert`). `package.json`'s `mcpName` moves with it — the registry verifies npm ownership by comparing that field on the **published** package, which is why the correction needs a release of its own. The server had never been registered, so nothing consumed the old name.
+
+### Added
+
+- `.github/workflows/publish-mcp.yml` publishes `server.json` to the official MCP Registry through GitHub OIDC (no stored secret). It is a reusable workflow that `release.yml` calls **after** the npm package is live, and it can be dispatched by hand to (re)publish the version `server.json` states.
+
 ## [0.2.1] - 2026-09-19
 
 ### Changed
