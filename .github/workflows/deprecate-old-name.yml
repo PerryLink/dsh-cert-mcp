@@ -1,0 +1,29 @@
+name: deprecate old name
+
+# One-off: mark the previous scoped package as deprecated so installers of
+# `@perrylink/dsh-cert-mcp` are told the package moved to `dsh-cert-mcp`.
+#
+# It runs here because `npm deprecate` needs the account's credentials and the
+# repository still holds a valid NPM_TOKEN; the maintainer's local npm token is no
+# longer valid. This file is deleted again right after it runs.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      - name: Deprecate @perrylink/dsh-cert-mcp
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm deprecate "@perrylink/dsh-cert-mcp@*" "Renamed: this package moved to 'dsh-cert-mcp' (unscoped). Install dsh-cert-mcp instead."
+          echo "--- read back ---"
+          npm view "@perrylink/dsh-cert-mcp" deprecated
