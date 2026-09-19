@@ -1,6 +1,6 @@
 {
   "name": "dsh-cert-mcp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
   "type": "module",
   "main": "./src/plugin.js",
@@ -63,7 +63,7 @@
     "@types/node": "^22.19.0",
     "typescript": "^5.9.0"
   },
-  "mcpName": "io.github.perrylink/dsh-cert",
+  "mcpName": "io.github.PerryLink/dsh-cert",
   "publishConfig": {
     "access": "public"
   },
