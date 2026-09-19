@@ -4,8 +4,8 @@
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 [![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/%40perrylink%2Fdsh-cert-mcp)](https://www.npmjs.com/package/@perrylink/dsh-cert-mcp)
+[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
@@ -31,7 +31,7 @@ cd dsh-cert-mcp
 node src/index.js        # stdio सर्वर
 ```
 
-प्रकाशित npm पैकेज से सीधे भी चलाया जा सकता है: `npx @perrylink/dsh-cert-mcp`।
+प्रकाशित npm पैकेज से सीधे भी चलाया जा सकता है: `npx dsh-cert-mcp`।
 
 ### MCP क्लाइंट में रजिस्टर करें
 
@@ -65,14 +65,14 @@ DSH: इसे [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) क�
 dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
 
 # npm चैनल (प्रकाशित रिलीज़)
-dsh plugin --profile web add @perrylink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp
 ```
 
 जोड़ी गई पंक्ति पैकेज को मानक Cordis प्लगइन कॉन्ट्रैक्ट से लोड करती है: host आधा एक सामान्य ESM मॉड्यूल है जो `name`, `inject` और `apply(ctx)` को नामित रूप से निर्यात करता है। इस पैकेज में ब्राउज़र UI नहीं है, इसलिए `dsh.client` घोषणा भी नहीं है।
 
 ```js
 // बंडल प्रवेश (host आधा) — वही कॉन्ट्रैक्ट जो patch पंक्ति लोड करती है
-export const name = '@perrylink/dsh-cert-mcp'
+export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // host टूल सतह, जो dsh-tools देता है
 export function apply(ctx) {
   // केवल-पढ़ने योग्य प्रमाणन लुकअप सतह रजिस्टर करता है
@@ -82,9 +82,9 @@ export function apply(ctx) {
 
 **host आधे को `tools` सेवा चाहिए** (जो `@deepseek-ai/dsh-tools` देता है)। उसके बिना प्रोफ़ाइल चुपचाप टूल्स नहीं खोती: Cordis इस पंक्ति को `PENDING` में रोक देता है, जो प्रोफ़ाइल की प्लगइन सूची में दिखता है। और कुछ ज़रूरी नहीं — न कॉन्फ़िग कुंजियाँ, न क्रेडेंशियल, न लोड के समय नेटवर्क।
 
-**दो आधे, एक ही डेटा पथ।** बंडल पंक्ति और stdio सर्वर एक ही `handleRequest` कोर के दो प्रवेश हैं। सर्वर आधा एक स्वतंत्र प्रक्रिया है जिसे कोई भी MCP क्लाइंट चला सकता है (`node src/index.js`), और वह **प्लगइन पथ का हिस्सा नहीं है**: यह बंडल इंस्टॉल करने से वह कभी शुरू नहीं होता, और हटाने से वह कभी प्रभावित नहीं होता। इसके विपरीत `npx @perrylink/dsh-cert-mcp` DSH टूल सतह पर कुछ भी रजिस्टर नहीं करता।
+**दो आधे, एक ही डेटा पथ।** बंडल पंक्ति और stdio सर्वर एक ही `handleRequest` कोर के दो प्रवेश हैं। सर्वर आधा एक स्वतंत्र प्रक्रिया है जिसे कोई भी MCP क्लाइंट चला सकता है (`node src/index.js`), और वह **प्लगइन पथ का हिस्सा नहीं है**: यह बंडल इंस्टॉल करने से वह कभी शुरू नहीं होता, और हटाने से वह कभी प्रभावित नहीं होता। इसके विपरीत `npx dsh-cert-mcp` DSH टूल सतह पर कुछ भी रजिस्टर नहीं करता।
 
-हटाने के लिए: `dsh plugin --profile web remove @perrylink/dsh-cert-mcp` (या प्रोफ़ाइल patch से पंक्ति मिटा दें)। अलग खड़ा stdio MCP सर्वर किसी भी MCP क्लाइंट के लिए पहले की तरह काम करता रहता है।
+हटाने के लिए: `dsh plugin --profile web remove dsh-cert-mcp` (या प्रोफ़ाइल patch से पंक्ति मिटा दें)। अलग खड़ा stdio MCP सर्वर किसी भी MCP क्लाइंट के लिए पहले की तरह काम करता रहता है।
 
 ## यह क्यों मौजूद है
 

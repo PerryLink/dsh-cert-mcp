@@ -33,7 +33,7 @@ test('the entry carries no default export and survives the Loader unwrap', () =>
   // A default export would make unwrapExports return `{ name, apply }` and the
   // inject declaration would never reach the loader.
   assert.equal(unwrapped, plugin)
-  assert.equal(unwrapped.name, '@perrylink/dsh-cert-mcp')
+  assert.equal(unwrapped.name, 'dsh-cert-mcp')
   assert.deepEqual(unwrapped.inject, ['tools'])
   assert.equal(typeof unwrapped.apply, 'function')
 })
