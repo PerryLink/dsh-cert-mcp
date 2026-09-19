@@ -42,7 +42,7 @@ jobs:
       - name: Bare install + import smoke (plugin half and server half)
         run: |
           set -euo pipefail
-          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          TARBALL="$(ls "$RUNNER_TEMP"/dsh-cert-mcp-*.tgz | head -n1)"
           mkdir -p "$RUNNER_TEMP/bare" && cd "$RUNNER_TEMP/bare"
           # Peer auto-install stays off on purpose: this project must prove the
           # tarball works with nothing but Node, so a runtime import that leaked
@@ -88,7 +88,7 @@ jobs:
       - name: Install into a scratch profile (builds allowlisted)
         run: |
           set -euo pipefail
-          TARBALL="$(ls "$RUNNER_TEMP"/perrylink-dsh-cert-mcp-*.tgz | head -n1)"
+          TARBALL="$(ls "$RUNNER_TEMP"/dsh-cert-mcp-*.tgz | head -n1)"
           export DSH_HOME="$RUNNER_TEMP/dsh-home"
           mkdir -p "$DSH_HOME/profiles/compat"
           cat > "$DSH_HOME/profiles/compat/pnpm-workspace.yaml" <<'YAML'
