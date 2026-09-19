@@ -1,0 +1,83 @@
+name: publish-mcp
+
+# Publishes server.json to the official MCP Registry
+# (https://registry.modelcontextprotocol.io) using GitHub OIDC, so no secret is
+# stored anywhere: the registry exchanges the workflow's OIDC token for a
+# short-lived publish token scoped to io.github.<repository_owner>/*.
+#
+# Runs on every release tag (next to release.yml, which publishes the npm
+# package) and can also be dispatched by hand to (re)publish the server entry
+# for the version already in server.json.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  id-token: write # the registry's OIDC exchange
+
+concurrency:
+  group: publish-mcp-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # The registry grants publish permission for the namespace derived from
+      # this claim, compared case-sensitively against server.json's name, so the
+      # value is worth printing before anything is attempted.
+      - name: Show the OIDC identity the registry will see
+        shell: bash
+        run: |
+          set -euo pipefail
+          token="$(curl -sS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mcp-registry" \
+            | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(JSON.parse(s).value))')"
+          printf '%s' "$token" | cut -d. -f2 | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const c=JSON.parse(Buffer.from(s.trim(),"base64url").toString());for(const k of ["repository","repository_owner","ref","event_name"])console.log(k+"="+c[k])})'
+
+      # The registry verifies npm ownership by comparing the published
+      # package.json's mcpName with server.json's name, and it wants the version
+      # it will advertise to exist. Fail loudly here instead of after a publish
+      # attempt.
+      - name: Check the manifests are one consistent story
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./package.json').version")"
+          mcpName="$(node -p "require('./package.json').mcpName || ''")"
+          serverName="$(node -p "require('./server.json').name")"
+          serverVersion="$(node -p "require('./server.json').version")"
+          pkgVersion="$(node -p "require('./server.json').packages[0].version")"
+          echo "package.json  version=${version} mcpName=${mcpName}"
+          echo "server.json   name=${serverName} version=${serverVersion} packages[0].version=${pkgVersion}"
+          if [ "$mcpName" != "$serverName" ]; then
+            echo "::error::package.json mcpName ('${mcpName}') must equal server.json name ('${serverName}')"
+            exit 1
+          fi
+          if [ "$version" != "$serverVersion" ] || [ "$version" != "$pkgVersion" ]; then
+            echo "::error::server.json must state the package.json version ${version}"
+            exit 1
+          fi
+          if ! npm view "dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
+            echo "::error::dsh-cert-mcp@${version} is not on npm yet; publish the package first"
+            exit 1
+          fi
+
+      - name: Install mcp-publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --help >/dev/null
+
+      - name: Authenticate to the MCP Registry (GitHub OIDC)
+        shell: bash
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server.json
+        shell: bash
+        run: ./mcp-publisher publish
