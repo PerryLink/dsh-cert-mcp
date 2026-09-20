@@ -115,7 +115,7 @@ Hay deliberadamente **una sola** regla de tipos. `@deepseek-ai/*` se resuelve a 
 
 ## Familia de plugins DSH de PerryLink
 
-Este proyecto es uno de los [40 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, probablemente los demás también:
+Este proyecto es uno de los [41 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, probablemente los demás también:
 
 | Plugin | En una línea |
 |---|---|

@@ -115,7 +115,7 @@ pnpm pack                                     # प्रकाशित tarball
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [40 DeepSeek Harness प्लगइन्स](https://github.com/PerryLink) में से एक है। अगर यह आपके काम आया, तो बाकी भी आएँगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [41 DeepSeek Harness प्लगइन्स](https://github.com/PerryLink) में से एक है। अगर यह आपके काम आया, तो बाकी भी आएँगे:
 
 | प्लगइन | एक पंक्ति में |
 |---|---|

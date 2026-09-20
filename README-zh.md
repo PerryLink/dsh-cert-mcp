@@ -115,7 +115,7 @@ pnpm pack                                     # 发布用 tarball
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [40 个 DeepSeek Harness 插件](https://github.com/PerryLink)之一。如果它帮到了你，其它插件大概也会：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [41 个 DeepSeek Harness 插件](https://github.com/PerryLink)之一。如果它帮到了你，其它插件大概也会：
 
 | 插件 | 一句话 |
 |---|---|
