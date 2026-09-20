@@ -115,7 +115,7 @@ Há deliberadamente **uma única** régua de tipos. `@deepseek-ai/*` resolve pel
 
 ## Família de plugins DSH da PerryLink
 
-Este projeto é um dos [40 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajudou você, provavelmente os outros também ajudarão:
+Este projeto é um dos [41 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajudou você, provavelmente os outros também ajudarão:
 
 | Plugin | Em uma linha |
 |---|---|
