@@ -115,7 +115,7 @@ Há deliberadamente **uma única** régua de tipos. `@deepseek-ai/*` resolve pel
 
 ## Família de plugins DSH da PerryLink
 
-Este projeto é um dos [41 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajudou você, provavelmente os outros também ajudarão:
+Este projeto é um dos [42 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajudou você, provavelmente os outros também ajudarão:
 
 | Plugin | Em uma linha |
 |---|---|
@@ -165,6 +165,7 @@ Este projeto é um dos [41 plugins do DeepSeek Harness](https://github.com/Perry
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Tradução de parâmetros entre fornecedores e reparo determinístico de JSON |
 | **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | Ponte WeChat ↔ DSH (bot iLink da Tencent), desenvolvida com [pan17](https://github.com/pan17/dsh-wechat), que hospeda o repositório |
 | **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | Injetor de diretivas pessoais com alternador na barra superior (fork de liucai2026/dsh-personal-directive) |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 
 ## Licença
 

@@ -115,7 +115,7 @@ pnpm pack                                     # प्रकाशित tarball
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [41 DeepSeek Harness प्लगइन्स](https://github.com/PerryLink) में से एक है। अगर यह आपके काम आया, तो बाकी भी आएँगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [42 DeepSeek Harness प्लगइन्स](https://github.com/PerryLink) में से एक है। अगर यह आपके काम आया, तो बाकी भी आएँगे:
 
 | प्लगइन | एक पंक्ति में |
 |---|---|
@@ -165,6 +165,7 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | विक्रेता पैरामीटर अनुवाद और नियतात्मक JSON मरम्मत |
 | **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | WeChat ↔ DSH सेतु (Tencent iLink बॉट), [pan17](https://github.com/pan17/dsh-wechat) के साथ विकसित, जो रेपो होस्ट करते हैं |
 | **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | टॉप-बार टॉगल वाला व्यक्तिगत निर्देश इंजेक्टर (liucai2026/dsh-personal-directive का फ़ोर्क) |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 
 ## लाइसेंस
 
