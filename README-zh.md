@@ -116,7 +116,7 @@ pnpm pack                                     # 发布用 tarball
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [41 个 DeepSeek Harness 插件](https://github.com/PerryLink)之一。如果它帮到了你，其它插件大概也会：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [42 个 DeepSeek Harness 插件](https://github.com/PerryLink)之一。如果它帮到了你，其它插件大概也会：
 
 | 插件 | 一句话 |
 |---|---|
@@ -166,6 +166,7 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | 厂商参数翻译与确定性 JSON 修复 |
 | **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | 微信 ↔ DSH 桥（腾讯 iLink 机器人），与 [pan17](https://github.com/pan17/dsh-wechat) 共同开发、由其托管仓库 |
 | **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | 个人指令注入器，带顶栏开关（liucai2026/dsh-personal-directive 的 fork） |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 
 ## 许可证
 
