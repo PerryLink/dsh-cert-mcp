@@ -113,60 +113,61 @@ A suíte de execução monta os registros REAIS `SystemPrompt`/`ToolRuntime` e v
 
 Há deliberadamente **uma única** régua de tipos. `@deepseek-ai/*` resolve pelo `node_modules` deste repositório (as devDependencies fixadas, ou seja, a linha publicada) e o pacote não declara nenhum peer de DSH, então uma segunda configuração de `tsc` seria o mesmo comando sobre o mesmo universo de tipos. O script `typecheck:ci` é mantido como a cópia histórica no-op (sua única chave extra é um `paths: {}` vazio) por compatibilidade com referências existentes, não como uma segunda face de tipos. A segunda evidência independente é o portão de montagem em execução acima.
 
-## Família de plugins DSH da PerryLink
-
-Este projeto é um dos [42 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajudou você, provavelmente os outros também ajudarão:
-
-| Plugin | Em uma linha |
-|---|---|
-| **[dsh-auto-review](https://github.com/PerryLink/dsh-auto-review)** | Revisão automática por um segundo modelo na cadeia de aprovação, fechada por padrão |
-| **[dsh-autotier](https://github.com/PerryLink/dsh-autotier)** | Roteamento automático entre modelo forte e barato, com guardas de risco determinísticas e comando `/tier` |
-| **[dsh-background-agents](https://github.com/PerryLink/dsh-background-agents)** | Subagentes de fundo duráveis com barra lateral na interface web, mensagens e interrupção |
-| **[dsh-budget](https://github.com/PerryLink/dsh-budget)** | Governança de custos para o DeepSeek Harness: orçamentos, carbono e latência em um painel |
-| **[dsh-catalog](https://github.com/PerryLink/dsh-catalog)** | Fonte de catálogo padrão do DSH Desktop Market para a família PerryLink |
-| **[dsh-checkpoint-rewind](https://github.com/PerryLink/dsh-checkpoint-rewind)** | Checkpoints unificados de sessão + espaço de trabalho + configuração com um único `/rewind` |
-| **[dsh-claude-move](https://github.com/PerryLink/dsh-claude-move)** | Migra sessões, memórias e skills do Claude Code, Codex, OpenCode e Hermes para o DSH |
-| **[dsh-click](https://github.com/PerryLink/dsh-click)** | Controle nativo de desktop multiplataforma, com Windows primeiro |
-| **[dsh-composer-history](https://github.com/PerryLink/dsh-composer-history)** | Histórico de entrada estilo terminal para o compositor web: setas e busca Ctrl+R |
-| **[dsh-data-quality](https://github.com/PerryLink/dsh-data-quality)** | Perfilagem, limpeza e verificação de citações de datasets, determinística |
-| **[dsh-defend](https://github.com/PerryLink/dsh-defend)** | Defesa contra injeção de prompt, jailbreak e vazamento de segredos |
-| **[dsh-doublecheck](https://github.com/PerryLink/dsh-doublecheck)** | Guardião de disciplina de engenharia: interrogatório de requisitos, portões de teste, revisão adversária |
-| **[dsh-draw](https://github.com/PerryLink/dsh-draw)** | Roteamento unificado de geração de imagens estáticas |
-| **[dsh-fast](https://github.com/PerryLink/dsh-fast)** | Diagnóstico de desempenho somente leitura: carga, spill, compactação e acerto de cache |
-| **[dsh-fund-research](https://github.com/PerryLink/dsh-fund-research)** | Pesquisa de fundos mútuos chineses com snapshots de fontes selados e rastreáveis |
-| **[dsh-github](https://github.com/PerryLink/dsh-github)** | Integração com PR/issue/CI do GitHub, com toda escrita sob aprovação |
-| **[dsh-industry-research](https://github.com/PerryLink/dsh-industry-research)** | Pacote de pesquisa setorial e de empresas: mapa da cadeia, linha do tempo de políticas, fichas |
-| **[dsh-kit](https://github.com/PerryLink/dsh-kit)** | Pacote inicial que instala o núcleo da família com um comando |
-| **[dsh-library](https://github.com/PerryLink/dsh-library)** | Base de conhecimento local de documentos com busca híbrida e injeção com citações |
-| **[dsh-local-ai](https://github.com/PerryLink/dsh-local-ai)** | Descoberta de modelos Ollama locais e roteamento por tarefa com fallback na nuvem |
-| **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | Diagnósticos LSP, formatação, completude, ações de código, símbolos e renomeação |
-| **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | Mascaramento de PII no limite do modelo com tabela de restauração no host |
-| **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | Console de gestão MCP: comando `/mcp`, aba de configurações e chamadas de teste |
-| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Protocolo de memória entre sessões com aprovação (`ctx.memory` + SQLite) |
-| **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | Exportação de telemetria OpenTelemetry e Langfuse a partir do fluxo de eventos |
-| **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Estilos de saída do modelo trocáveis em tempo de execução |
-| **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Regras declarativas allow/deny/ask e política de rede em nível de processo |
-| **[dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification)** | Registro comunitário de certificação com graus e selos reproduzíveis |
-| **[dsh-plugin-doctor](https://github.com/PerryLink/dsh-plugin-doctor)** | Detector estático e de smoke em sandbox, sem dependências, para plugins DSH |
-| **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | Base de conhecimento de desenvolvimento de plugins, skill de agente e CLI `dsh-plugin-dev` |
-| **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Caixa de ferramentas compartilhada sem dependências de execução para os plugins PerryLink |
-| **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Portal estático sem dependências que renderiza toda a família em uma página |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Cartão de corredor `0.1.3-alpha.1` → `0.1.5-rc.1` já mesclado e scanner de costuras |
-| **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | Ponte multicanal de aprovações e perguntas: WeChat, Telegram, Feishu + console |
-| **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | Relatórios de pesquisa verificáveis: livro de evidências, selo de manifesto, veredictos |
-| **[dsh-score](https://github.com/PerryLink/dsh-score)** | Pontuação de qualidade multidimensional com ranking sustentado por evidências |
-| **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | Fixa sessões e espaços de trabalho na barra lateral web, com cor por fixação |
-| **[dsh-session-sync](https://github.com/PerryLink/dsh-session-sync)** | Sincronização de sessões entre dispositivos via git, preservando ambos os lados |
-| **[dsh-skill-pack-security](https://github.com/PerryLink/dsh-skill-pack-security)** | Pacote de skills de auditoria de segurança e portão de cadeia de suprimentos `plugin_vet` |
-| **[dsh-talk](https://github.com/PerryLink/dsh-talk)** | Laço de sessão por voz: entrada de fala para texto e respostas de texto para fala |
-| **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | Salas de equipe entre sessões: barramento de mensagens, quadro de tarefas e linha do tempo |
-| **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | Testes de instalação e smoke isolados com matriz de aprovado/reprovado |
-| **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | Ponte com TickTick/Dida365: painel no cabeçalho da sessão e onze ferramentas |
-| **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Tradução de parâmetros entre fornecedores e reparo determinístico de JSON |
-| **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | Ponte WeChat ↔ DSH (bot iLink da Tencent), desenvolvida com [pan17](https://github.com/pan17/dsh-wechat), que hospeda o repositório |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | Injetor de diretivas pessoais com alternador na barra superior (fork de liucai2026/dsh-personal-directive) |
-| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
-
 ## Licença
 
 Apache-2.0. Uma listagem ou um grau é um registro de evidência, não uma garantia de segurança: plugins rodam dentro do seu processo DSH com as suas permissões.
+
+**Versão do DSH aplicável:** verificada com `dsh-v0.1.7-alpha.1` (a versão do host que esta compilação visa); requer `>=0.1.7-alpha.1 <0.2.0`.
+
+
+## PerryLink DSH Plugin Family
+
+This project is one of the **45 DeepSeek Harness plugins** maintained by [PerryLink](https://github.com/PerryLink). If this one helps you, the others likely will too:
+
+| Plugin | One-liner |
+|---|---|
+| **[dsh-auto-review](https://github.com/PerryLink/dsh-auto-review)** | Second-model auto-review on the approval chain, fail-closed by default | |
+| **[dsh-autotier](https://github.com/PerryLink/dsh-autotier)** | Automatic strong/cheap model-tier routing with deterministic risk guards and a `/tier` command | |
+| **[dsh-background-agents](https://github.com/PerryLink/dsh-background-agents)** | Durable background child agents with a Web UI sidebar, messaging and interrupt | |
+| **[dsh-budget](https://github.com/PerryLink/dsh-budget)** | Cost governance for DeepSeek Harness: budgets, carbon, and latency in one panel. | |
+| **[dsh-catalog](https://github.com/PerryLink/dsh-catalog)** | DSH Desktop Market standard catalog source for the PerryLink family | |
+| **[dsh-cert-mcp](https://github.com/PerryLink/dsh-cert-mcp)** | Read-only MCP server exposing the certification registry: grades, snapshots and five-dimension evidence | |
+| **[dsh-checkpoint-rewind](https://github.com/PerryLink/dsh-checkpoint-rewind)** | Claude Code /rewind-equivalent: snapshots, session forks, one-shot restore | |
+| **[dsh-claude-move](https://github.com/PerryLink/dsh-claude-move)** | Migrate Claude Code sessions, memory, skills and CLAUDE.md into DSH | |
+| **[dsh-click](https://github.com/PerryLink/dsh-click)** | Cross-platform native desktop control for DeepSeek Harness — Windows first. | |
+| **[dsh-composer-history](https://github.com/PerryLink/dsh-composer-history)** | Terminal-style input history for the web composer: arrows, Ctrl+R search | |
+| **[dsh-data-quality](https://github.com/PerryLink/dsh-data-quality)** | Dataset quality checks and citation cross-checks (the optional numeric bridge consumed here) | |
+| **[dsh-defend](https://github.com/PerryLink/dsh-defend)** | Prompt-injection, jailbreak, and secret-leak defense for DeepSeek Harness. | |
+| **[dsh-doublecheck](https://github.com/PerryLink/dsh-doublecheck)** | Engineering-discipline guard: requirements grill, test gates, adversary review | |
+| **[dsh-draw](https://github.com/PerryLink/dsh-draw)** | Unified static-image generation routing for DeepSeek Harness. | |
+| **[dsh-fast](https://github.com/PerryLink/dsh-fast)** | Read-only performance diagnostics for DeepSeek Harness. | |
+| **[dsh-fund-research](https://github.com/PerryLink/dsh-fund-research)** | Deterministic research reports for Chinese public mutual funds | |
+| **[dsh-github](https://github.com/PerryLink/dsh-github)** | GitHub PR/issues integration for DSH, every write gated by approval | |
+| **[dsh-industry-research](https://github.com/PerryLink/dsh-industry-research)** | Industry research orchestration that seals its deliverables through this plugin's `ctx.researchReport.assemble` | |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-library](https://github.com/PerryLink/dsh-library)** | Local document knowledge base for DeepSeek Harness. | |
+| **[dsh-local-ai](https://github.com/PerryLink/dsh-local-ai)** | Local-model (Ollama) integration for DeepSeek Harness. | |
+| **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | LSP diagnostics, formatting, completion, code actions and rename over language servers | |
+| **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | PII masking middleware: anonymize at the model boundary, restore at the display layer | |
+| **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | Read-only MCP runtime panel: /mcp command + Settings tab with status, tools and errors | |
+| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Approval-gated cross-session memory: ctx.memory seam + SQLite + memory tool | |
+| **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | OpenTelemetry and Langfuse observability exporter for DeepSeek Harness. | |
+| **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Claude Code outputStyles-equivalent runtime style switching | |
+| **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Claude Code-style declarative allow/deny/ask permission rules with audit | |
+| **[dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification)** | Community certification registry with repro-checkable grades and badges | |
+| **[dsh-plugin-doctor](https://github.com/PerryLink/dsh-plugin-doctor)** | Zero-dependency static + sandbox smoke detector for DSH plugins | |
+| **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | Plugin-development knowledge base as an on-demand agent skill | |
+| **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Shared zero-runtime-dependency toolkit for the PerryLink DSH plugins | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
+| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
+| **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | Multi-channel approval/question bridge: WeChat/Telegram/Feishu, session console | |
+| **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | Verifiable research-report engine: content-addressed evidence ledger and sealed versions | |
+| **[dsh-score](https://github.com/PerryLink/dsh-score)** | Multi-dimensional quality scoring for DeepSeek Harness plugins. | |
+| **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | Pin sessions in the Web sidebar with durable ordering | |
+| **[dsh-session-sync](https://github.com/PerryLink/dsh-session-sync)** | Cross-device session sync for DeepSeek Harness — a dedicated git mirror of your session store. | |
+| **[dsh-skill-pack-security](https://github.com/PerryLink/dsh-skill-pack-security)** | Security-audit skill pack: secret scan, dependency and supply-chain review | |
+| **[dsh-talk](https://github.com/PerryLink/dsh-talk)** | Voice-first session loop for DeepSeek Harness: talk to it, hear it answer. | |
+| **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | Cross-session team rooms: shared message bus, task board and timeline | |
+| **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | Isolated install-and-smoke test drives for DeepSeek Harness plugins. | |
+| **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 task bridge: session-header panel + 11 tools | |
+| **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Vendor parameter translation and deterministic JSON repair for DeepSeek Harness. | |
