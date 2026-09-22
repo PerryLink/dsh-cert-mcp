@@ -51,6 +51,7 @@
     "url": "https://github.com/sponsors/PerryLink"
   },
   "scripts": {
+    "check:readmes": "node scripts/check-readme-sync.mjs",
     "test": "node test/smoke.mjs && node --test \"test/*.spec.mjs\"",
     "typecheck": "tsc -p tsconfig.check.json",
     "typecheck:ci": "tsc -p tsconfig.check.ci.json"

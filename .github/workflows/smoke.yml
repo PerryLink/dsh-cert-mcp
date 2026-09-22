@@ -32,3 +32,6 @@ jobs:
           pnpm run typecheck
           pnpm run typecheck:ci
           pnpm test
+
+      - name: README sync (five languages)
+        run: pnpm run check:readmes
