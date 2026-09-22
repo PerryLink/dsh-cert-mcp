@@ -152,7 +152,6 @@ Este proyecto es uno de los [42 plugins de DeepSeek Harness](https://github.com/
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | Base de conocimiento de desarrollo de plugins, skill de agente y CLI `dsh-plugin-dev` |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Caja de herramientas compartida sin dependencias de ejecución para los plugins PerryLink |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Portal estático sin dependencias que renderiza toda la familia en una página |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Tarjeta de corredor `0.1.3-alpha.1` → `0.1.5-rc.1` ya fusionada y escáner de costuras |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | Puente multicanal de aprobaciones y preguntas: WeChat, Telegram, Feishu + consola |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | Informes de investigación verificables: libro de evidencia, sello de manifiesto, veredictos |
 | **[dsh-score](https://github.com/PerryLink/dsh-score)** | Puntuación de calidad multidimensional con clasificación respaldada por evidencia |
@@ -164,9 +163,8 @@ Este proyecto es uno de los [42 plugins de DeepSeek Harness](https://github.com/
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | Pruebas de instalación y humo aisladas con matriz de aprobado/fallo |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | Puente con TickTick/Dida365: panel en la cabecera de sesión y once herramientas |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Traducción de parámetros entre proveedores y reparación determinista de JSON |
-| **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | Puente WeChat ↔ DSH (bot iLink de Tencent), desarrollado con [pan17](https://github.com/pan17/dsh-wechat), que aloja el repositorio |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | Inyector de directivas personales con interruptor en la barra superior (fork de liucai2026/dsh-personal-directive) |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ## Licencia
 

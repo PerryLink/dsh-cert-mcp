@@ -152,7 +152,6 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | 插件开发知识库、agent 技能与 `dsh-plugin-dev` CLI 工具链 |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | PerryLink DSH 插件共享的零运行时依赖工具箱 |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | 零依赖静态门户，把整个插件家族渲染成一页 |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | 已合并的 `0.1.3-alpha.1` → `0.1.5-rc.1` 升级走廊卡 + 零依赖接缝扫描器 |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | 多通道审批/提问桥：微信、Telegram、飞书 + 会话控制台 |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | 可验证研究报告：证据账本、清单封存、逐条结论判定 |
 | **[dsh-score](https://github.com/PerryLink/dsh-score)** | 多维插件质量评分与有证据支撑的排行榜 |
@@ -164,9 +163,8 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | 隔离的安装并冒烟试驾，带通过/失败矩阵 |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/滴答清单桥：会话头部面板 + 十一个 agent 工具 |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | 厂商参数翻译与确定性 JSON 修复 |
-| **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | 微信 ↔ DSH 桥（腾讯 iLink 机器人），与 [pan17](https://github.com/pan17/dsh-wechat) 共同开发、由其托管仓库 |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | 个人指令注入器，带顶栏开关（liucai2026/dsh-personal-directive 的 fork） |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ## 许可证
 

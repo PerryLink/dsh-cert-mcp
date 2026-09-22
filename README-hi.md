@@ -152,7 +152,6 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | प्लगइन-विकास ज्ञानकोश, एजेंट स्किल और `dsh-plugin-dev` CLI टूलचेन |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | PerryLink DSH प्लगइन्स के लिए साझा शून्य-रनटाइम निर्भरता टूलकिट |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | शून्य-निर्भरता स्थिर पोर्टल, पूरे परिवार को एक पृष्ठ पर |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | विलय हो चुका `0.1.3-alpha.1` → `0.1.5-rc.1` अपग्रेड कॉरिडोर कार्ड और शून्य-निर्भरता सीम स्कैनर |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | बहु-चैनल स्वीकृति/प्रश्न सेतु: WeChat, Telegram, Feishu + सत्र कंसोल |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | सत्यापनीय शोध रिपोर्ट: साक्ष्य बही, मैनिफ़ेस्ट सील, प्रति-दावा निर्णय |
 | **[dsh-score](https://github.com/PerryLink/dsh-score)** | बहु-आयामी प्लगइन गुणवत्ता स्कोरिंग, साक्ष्य-आधारित लीडरबोर्ड के साथ |
@@ -164,9 +163,8 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | पृथक इंस्टॉल-और-स्मोक टेस्ट ड्राइव, पास/फ़ेल मैट्रिक्स के साथ |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 सेतु: सत्र-हेडर पैनल और ग्यारह एजेंट टूल |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | विक्रेता पैरामीटर अनुवाद और नियतात्मक JSON मरम्मत |
-| **[dsh-wechat](https://github.com/pan17/dsh-wechat)** | WeChat ↔ DSH सेतु (Tencent iLink बॉट), [pan17](https://github.com/pan17/dsh-wechat) के साथ विकसित, जो रेपो होस्ट करते हैं |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | टॉप-बार टॉगल वाला व्यक्तिगत निर्देश इंजेक्टर (liucai2026/dsh-personal-directive का फ़ोर्क) |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ## लाइसेंस
 
