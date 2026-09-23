@@ -98,23 +98,24 @@ Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/d
 ## Compatibility
 
 - Node `^22.19.0 || >=24.0.0`.
-- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0` (declared in `engines.dsh`, with `dsh.manifestVersion: 1`).
+- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 || >=0.1.7-0 <0.2.0` (declared in `engines.dsh`, with `dsh.manifestVersion: 1`).
 - Peer: `@deepseek-ai/cordis` `^4.0.2`. The host half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node.
 
 ## Development
 
 ```sh
 pnpm install
-pnpm run typecheck                            # the one type ruler: checkJs over the published host face
+pnpm run typecheck                            # the published ruler: checkJs over the installed host face
+pnpm run typecheck:checkout                   # the checkout ruler: the same file set against the local harness checkout's built types
 pnpm test                                     # JSON-RPC smoke + the real-Cordis runtime suite
 pnpm pack                                     # the published tarball
 ```
 
 The runtime suite mounts the REAL `SystemPrompt`/`ToolRuntime` registries and asserts that mounting this package puts all three certification tools into `ctx.tools.schemas()`, that disposing the fiber removes them again, and that a context without the `tools` service parks the plugin in `PENDING`. `dsh --dump-config` is deliberately not used as acceptance: a mounted row and a pending fiber look the same there.
 
-There is deliberately **one** type ruler. `@deepseek-ai/*` resolves through this repo's own `node_modules` (the pinned devDependencies — the published line) and the package declares no DSH peer, so a second `tsc` configuration would be the same command over the same type universe. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a second face. The independent second piece of evidence is the runtime mount gate above.
+There are now **two** type rulers, both on the same host line. `typecheck` resolves `@deepseek-ai/*` through this repo's own `node_modules` (the pinned devDependencies — the published `0.1.7-alpha.2` line) and the package declares no DSH peer, so it measures the published face. `typecheck:checkout` compiles the same file set against the local harness checkout's built type faces through the `paths` block in `tsconfig.checkout.json` (the checkout sits four levels up), so a break the published packages would hide still fails here. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a third face. The independent second piece of evidence is the runtime mount gate above.
 
-**Applicable DSH version:** verified against `dsh-v0.1.7-alpha.1` (the host release this build targets); requires `>=0.1.7-alpha.1 <0.2.0`.
+**Applicable DSH version:** verified against `dsh-v0.1.7-alpha.2` (the host release this build targets); requires `>=0.1.7-alpha.1 <0.2.0`.
 
 ## PerryLink DSH Plugin Family
 

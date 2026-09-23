@@ -11,7 +11,7 @@ packages:
 autoInstallPeers: true
 
 # pnpm >= 10 also enables a 1440-minute minimum release age. The freshly
-# published 0.1.6-alpha.2 pins sit inside that window, so a frozen install would
+# published 0.1.7-alpha.2 pins sit inside that window, so a frozen install would
 # otherwise stay red for 24h after every harness release.
 minimumReleaseAge: 0
 verifyDepsBeforeRun: false

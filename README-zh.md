@@ -98,23 +98,24 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 ## 兼容性
 
 - Node `^22.19.0 || >=24.0.0`。
-- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0`（声明在 `engines.dsh`，并带 `dsh.manifestVersion: 1`）。
+- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 || >=0.1.7-0 <0.2.0`（声明在 `engines.dsh`，并带 `dsh.manifestVersion: 1`）。
 - peer：`@deepseek-ai/cordis` `^4.0.2`。host 半边运行时另需 `tools` 服务；stdio 半边除 Node 外什么都不需要。
 
 ## 开发
 
 ```sh
 pnpm install
-pnpm run typecheck                            # 唯一类型尺子：对已发布 host 面做 checkJs
+pnpm run typecheck                            # 已发布尺子：对已安装 host 面做 checkJs
+pnpm run typecheck:checkout                   # 检出尺子：同一文件集改对本地 harness 检出的已构建类型编译
 pnpm test                                     # JSON-RPC 冒烟 + 真 Cordis 运行时套件
 pnpm pack                                     # 发布用 tarball
 ```
 
 运行时套件挂载**真实**的 `SystemPrompt`/`ToolRuntime` 注册表，断言：挂载本包会把三个认证工具放进 `ctx.tools.schemas()`；释放 fiber 后它们消失；缺少 `tools` 服务的上下文会让插件停在 `PENDING`。验收**刻意不用** `dsh --dump-config`：在那里，已挂载的 row 与 pending 的 fiber 看起来一模一样。
 
-本仓**刻意只有一把类型尺子**：`@deepseek-ai/*` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布线）解析，且本包不声明任何 DSH peer，因此第二份 `tsc` 配置只会是量同一类型宇宙的同一条命令。`typecheck:ci` 脚本作为历史 no-op 副本保留（它唯一的额外键是空 `paths: {}`），只为兼容既有引用，不是第二个类型面。独立的第二份证据是上面的运行时挂载门。
+本仓现在有**两把**类型尺子，且都在同一条宿主线上：`typecheck` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布的 `0.1.7-alpha.2` 线）解析 `@deepseek-ai/*`，本包不声明任何 DSH peer，因此量的是已发布面；`typecheck:checkout` 用 `tsconfig.checkout.json` 的 `paths` 把同一文件集改为对本地 harness 检出的已构建类型面编译（检出位于上四级目录），因此被已发布包掩盖的破坏仍会在这里失败。`typecheck:ci` 脚本作为历史 no-op 副本保留（其唯一额外键是空 `paths: {}`），只为兼容既有引用，不是第三个类型面。独立的第二份证据是上面的运行时挂载门。
 
-**适用的 DSH 版本：** 已在 `dsh-v0.1.7-alpha.1`（本构建所针对的宿主版本）上验证；要求 `>=0.1.7-alpha.1 <0.2.0`。
+**适用的 DSH 版本：** 已在 `dsh-v0.1.7-alpha.2`（本构建所针对的宿主版本）上验证；要求 `>=0.1.7-alpha.1 <0.2.0`。
 
 ## PerryLink DSH Plugin Family
 
