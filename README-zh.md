@@ -113,9 +113,9 @@ pnpm pack                                     # 发布用 tarball
 
 运行时套件挂载**真实**的 `SystemPrompt`/`ToolRuntime` 注册表，断言：挂载本包会把三个认证工具放进 `ctx.tools.schemas()`；释放 fiber 后它们消失；缺少 `tools` 服务的上下文会让插件停在 `PENDING`。验收**刻意不用** `dsh --dump-config`：在那里，已挂载的 row 与 pending 的 fiber 看起来一模一样。
 
-本仓现在有**两把**类型尺子，且都在同一条宿主线上：`typecheck` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布的 `0.1.7-alpha.2` 线）解析 `@deepseek-ai/*`，本包不声明任何 DSH peer，因此量的是已发布面；`typecheck:checkout` 用 `tsconfig.checkout.json` 的 `paths` 把同一文件集改为对本地 harness 检出的已构建类型面编译（检出位于上四级目录），因此被已发布包掩盖的破坏仍会在这里失败。`typecheck:ci` 脚本作为历史 no-op 副本保留（其唯一额外键是空 `paths: {}`），只为兼容既有引用，不是第三个类型面。独立的第二份证据是上面的运行时挂载门。
+本仓现在有**两把**类型尺子，且都在同一条宿主线上：`typecheck` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布的 `0.1.7-rc.1` 线）解析 `@deepseek-ai/*`，本包不声明任何 DSH peer，因此量的是已发布面；`typecheck:checkout` 用 `tsconfig.checkout.json` 的 `paths` 把同一文件集改为对本地 harness 检出的已构建类型面编译（检出位于上四级目录），因此被已发布包掩盖的破坏仍会在这里失败。`typecheck:ci` 脚本作为历史 no-op 副本保留（其唯一额外键是空 `paths: {}`），只为兼容既有引用，不是第三个类型面。独立的第二份证据是上面的运行时挂载门。
 
-**适用的 DSH 版本：** 已在 `dsh-v0.1.7-alpha.2`（本构建所针对的宿主版本）上验证；要求 `>=0.1.7-alpha.1 <0.2.0`。
+**适用的 DSH 版本：** 已在 `dsh-v0.1.7-rc.1`（本构建所针对的宿主版本）上验证；要求 `>=0.1.7-alpha.1 <0.2.0`。
 
 ## PerryLink DSH Plugin Family
 

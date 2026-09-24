@@ -113,9 +113,9 @@ pnpm pack                                     # the published tarball
 
 The runtime suite mounts the REAL `SystemPrompt`/`ToolRuntime` registries and asserts that mounting this package puts all three certification tools into `ctx.tools.schemas()`, that disposing the fiber removes them again, and that a context without the `tools` service parks the plugin in `PENDING`. `dsh --dump-config` is deliberately not used as acceptance: a mounted row and a pending fiber look the same there.
 
-There are now **two** type rulers, both on the same host line. `typecheck` resolves `@deepseek-ai/*` through this repo's own `node_modules` (the pinned devDependencies — the published `0.1.7-alpha.2` line) and the package declares no DSH peer, so it measures the published face. `typecheck:checkout` compiles the same file set against the local harness checkout's built type faces through the `paths` block in `tsconfig.checkout.json` (the checkout sits four levels up), so a break the published packages would hide still fails here. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a third face. The independent second piece of evidence is the runtime mount gate above.
+There are now **two** type rulers, both on the same host line. `typecheck` resolves `@deepseek-ai/*` through this repo's own `node_modules` (the pinned devDependencies — the published `0.1.7-rc.1` line) and the package declares no DSH peer, so it measures the published face. `typecheck:checkout` compiles the same file set against the local harness checkout's built type faces through the `paths` block in `tsconfig.checkout.json` (the checkout sits four levels up), so a break the published packages would hide still fails here. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a third face. The independent second piece of evidence is the runtime mount gate above.
 
-**Applicable DSH version:** verified against `dsh-v0.1.7-alpha.2` (the host release this build targets); requires `>=0.1.7-alpha.1 <0.2.0`.
+**Applicable DSH version:** verified against `dsh-v0.1.7-rc.1` (the host release this build targets); requires `>=0.1.7-alpha.1 <0.2.0`.
 
 ## PerryLink DSH Plugin Family
 

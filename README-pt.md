@@ -113,13 +113,13 @@ pnpm pack                                     # o tarball publicado
 
 A suíte de execução monta os registros REAIS `SystemPrompt`/`ToolRuntime` e verifica que montar este pacote coloca as três ferramentas de certificação em `ctx.tools.schemas()`, que liberar o fiber as remove e que um contexto sem o serviço `tools` deixa o plugin em `PENDING`. O `dsh --dump-config` é deliberadamente evitado como critério de aceitação: ali uma linha montada e um fiber pendente parecem iguais.
 
-Agora há **duas** réguas de tipos, ambas na mesma linha do host. `typecheck` resolve `@deepseek-ai/*` pelo `node_modules` deste repositório (as devDependencies fixadas, ou seja, a linha publicada `0.1.7-alpha.2`) e o pacote não declara nenhum peer de DSH, então mede a face publicada. `typecheck:checkout` compila o mesmo conjunto de arquivos contra as faces de tipos compiladas do checkout local do harness através do bloco `paths` de `tsconfig.checkout.json` (o checkout fica quatro níveis acima), de modo que uma quebra que os pacotes publicados esconderiam ainda falha aqui. O script `typecheck:ci` é mantido como a cópia histórica no-op (sua única chave extra é um `paths: {}` vazio) por compatibilidade com referências existentes, não como uma terceira face. A segunda evidência independente é o portão de montagem em execução acima.
+Agora há **duas** réguas de tipos, ambas na mesma linha do host. `typecheck` resolve `@deepseek-ai/*` pelo `node_modules` deste repositório (as devDependencies fixadas, ou seja, a linha publicada `0.1.7-rc.1`) e o pacote não declara nenhum peer de DSH, então mede a face publicada. `typecheck:checkout` compila o mesmo conjunto de arquivos contra as faces de tipos compiladas do checkout local do harness através do bloco `paths` de `tsconfig.checkout.json` (o checkout fica quatro níveis acima), de modo que uma quebra que os pacotes publicados esconderiam ainda falha aqui. O script `typecheck:ci` é mantido como a cópia histórica no-op (sua única chave extra é um `paths: {}` vazio) por compatibilidade com referências existentes, não como uma terceira face. A segunda evidência independente é o portão de montagem em execução acima.
 
 ## Licença
 
 Apache-2.0. Uma listagem ou um grau é um registro de evidência, não uma garantia de segurança: plugins rodam dentro do seu processo DSH com as suas permissões.
 
-**Versão do DSH aplicável:** verificada com `dsh-v0.1.7-alpha.2` (a versão do host que esta compilação visa); requer `>=0.1.7-alpha.1 <0.2.0`.
+**Versão do DSH aplicável:** verificada com `dsh-v0.1.7-rc.1` (a versão do host que esta compilação visa); requer `>=0.1.7-alpha.1 <0.2.0`.
 
 
 ## PerryLink DSH Plugin Family
