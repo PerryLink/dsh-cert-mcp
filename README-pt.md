@@ -98,9 +98,12 @@ Fonte de dados: [PerryLink/dsh-plugin-certification](https://github.com/PerryLin
 
 ## Compatibilidade
 
-- Node `^22.19.0 || >=24.0.0`.
-- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0` (declarado em `engines.dsh`, com `dsh.manifestVersion: 1`).
-- Peer: `@deepseek-ai/cordis` `^4.0.2`. A metade host precisa ainda do serviço `tools` em tempo de execução; a metade stdio não precisa de nada além do Node.
+| Superfície | Status |
+|---|---|
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (verificado em nível de tipos nessa linha pela régua local `typecheck:checkout`: seus paths em `tsconfig.checkout.json` resolvem o grafo de tipos de `@deepseek-ai/*` a partir do checkout do host `dsh-v0.2.1-alpha.1` em vez do npm. A régua `typecheck` que a CI executa e as devDependencies fixadas continuam na linha `0.1.6-alpha.2`, e a faixa declarada `engines.dsh` não muda — suas quatro cláusulas terminam abaixo de `0.2.0` —, então a linha está coberta em tipos, não admitida pela faixa de host declarada.) |
+| Node | `^22.19.0 \|\| >=24.0.0` |
+| Faixa de host declarada | `engines.dsh`: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`, com `dsh.manifestVersion: 1` |
+| Peer | `@deepseek-ai/cordis` `^4.0.2`. A metade host precisa ainda do serviço `tools` em tempo de execução; a metade stdio não precisa de nada além do Node. |
 
 ## Desenvolvimento
 

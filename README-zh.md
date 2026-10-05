@@ -98,9 +98,12 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 
 ## 兼容性
 
-- Node `^22.19.0 || >=24.0.0`。
-- DSH `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0`（声明在 `engines.dsh`，并带 `dsh.manifestVersion: 1`）。
-- peer：`@deepseek-ai/cordis` `^4.0.2`。host 半边运行时另需 `tools` 服务；stdio 半边除 Node 外什么都不需要。
+| 方面 | 状态 |
+|---|---|
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1`（由本地 `typecheck:checkout` 尺子在该线上做类型检查：其 `tsconfig.checkout.json` 的 paths 从 `dsh-v0.2.1-alpha.1` 宿主检出（而不是 npm）解析 `@deepseek-ai/*` 类型图。CI 跑的 `typecheck` 尺子与钉住的 devDependencies 仍在 `0.1.6-alpha.2` 线上，且声明的 `engines.dsh` 范围未变——四个子句全部止于 `0.2.0` 以下——因此该线只被类型覆盖，尚未被声明的宿主范围接纳。） |
+| Node | `^22.19.0 \|\| >=24.0.0` |
+| 声明的宿主范围 | `engines.dsh`：`>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`，并带 `dsh.manifestVersion: 1` |
+| peer | `@deepseek-ai/cordis` `^4.0.2`。host 半边运行时另需 `tools` 服务；stdio 半边除 Node 外什么都不需要。 |
 
 ## 开发
 
