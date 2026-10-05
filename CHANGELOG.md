@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4] - 2026-10-06
+
+### Fixed
+
+- **0.2.3 was a ghost fix: its CHANGELOG claimed a clause that never reached the tarball.** The 0.2.3 entry says a fourth clause `|| >=0.1.7-0 <0.2.0` was appended to `engines.dsh`, but the published `dsh-cert-mcp@0.2.3` still reads `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0` 鈥?three clauses, so the claim was false on the registry and the declared range still rejected every `0.2.x` host. This release carries the clause that was described, plus `|| >=0.2.0-0 <0.3.0 || >=0.2.1-0 <0.3.0`.
+- **The devDependencies were eight lines behind the line they claimed.** `@deepseek-ai/dsh-system-prompt` and `@deepseek-ai/dsh-tools` were pinned to `0.1.6-alpha.2`, so the `typecheck` ruler the CI runs measured a host line the plugin no longer targets. Both move to `0.2.1-alpha.1`.
+- The five READMEs follow: the Harness row no longer describes a pin that does not exist, and the declared-range row carries the new band.
+
+
 ## [0.2.3] - 2026-10-05
 
 ### Fixed
