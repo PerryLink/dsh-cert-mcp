@@ -100,9 +100,9 @@ Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/d
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (type-checked on that line by the local `typecheck:checkout` ruler: its `tsconfig.checkout.json` paths resolve the `@deepseek-ai/*` type graph from the `dsh-v0.2.1-alpha.1` host checkout instead of npm. The `typecheck` ruler CI runs and the pinned devDependencies stay on the `0.1.6-alpha.2` line, and the declared `engines.dsh` range is unchanged — all four of its clauses stop below `0.2.0` — so this line is type-covered, not admitted by the declared host range.) |
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-alpha.1) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
-| Declared host range | `engines.dsh`: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`, with `dsh.manifestVersion: 1` |
+| Declared host range | `engines.dsh`: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0`, with `dsh.manifestVersion: 1` |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. The host half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node. |
 
 ## Development
