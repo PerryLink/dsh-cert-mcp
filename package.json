@@ -1,6 +1,6 @@
 {
   "name": "dsh-cert-mcp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Read-only MCP server exposing the dsh-plugin-certification registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
   "type": "module",
   "main": "./src/plugin.js",
@@ -27,7 +27,7 @@
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
-    "dsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
+    "dsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 || >=0.1.7-0 <0.2.0"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.2"
