@@ -169,6 +169,7 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | 厂商参数翻译与确定性 JSON 修复 |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 | **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
+| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | 🚫 已退役 —— 走廊由 `dsh-plugin-upgrade` 承担 | |
 
 ## 许可证
 
