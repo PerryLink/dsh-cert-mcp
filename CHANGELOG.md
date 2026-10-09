@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-10-09
+
+### Changed
+
+- **Every tool description rewritten to the Tool Definition Quality Score rubric**, which is what directory listings such as Glama grade an MCP server on. The three descriptions named what each tool returned but never said when to reach for it, so a model had no way to choose between `get_certification`, `list_certified` and `certification_spec` — the single weakest dimension in Glama's published breakdown of this server (`get_certification` scored 3.4, with Usage Guidelines 2/5).
+  - `get_certification` now states the routing explicitly ("use `list_certified` instead to enumerate every certified plugin, and `certification_spec` instead to learn what the dimensions mean"), documents both parameters by example, and describes the not-found path — previously undisclosed, so a caller could not tell a missing record from a failure.
+  - `list_certified` and `certification_spec` gain the same shape: what they return, when to use them, which sibling to use instead, and that both are offline and credential-free.
+- **All four MCP annotations declared on every tool** (`readOnlyHint`, `destructiveHint: false`, `idempotentHint`, `openWorldHint: false`), and each description says what they cannot express — that the server reads a bundled snapshot, writes nothing, contacts no other service, and is deterministic across calls. No annotation contradicts its description.
+- Tool `title` fields added, so a client that renders a display name has one.
+
+None of this changes behaviour: the JSON-RPC surface, the registry data and the responses are identical.
+
 ## [0.2.4] - 2026-10-06
 
 ### Fixed
