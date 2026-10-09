@@ -15,6 +15,12 @@
 
 Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
 
+## What is dsh-cert-mcp?
+
+Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
+
+![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+
 ## Herramientas
 
 | Herramienta | Entrada | Devuelve |
@@ -26,6 +32,10 @@ Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el re
 La instantánea embebida vive en `data/certified.json` (sincronizada desde el repositorio de certificación) y el servidor la actualiza desde el registro público como máximo una vez cada cinco minutos. Sin escrituras, sin secretos, sin ejecución de código.
 
 ## Instalación
+
+```sh
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
+```
 
 ```sh
 git clone https://github.com/PerryLink/dsh-cert-mcp
@@ -64,7 +74,7 @@ El paquete declara `dsh.bundle.patch` → `cordis.patch.yml`, así que también 
 
 ```sh
 # canal git (último main)
-dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
 
 # canal npm (versiones publicadas)
 dsh plugin --profile web add dsh-cert-mcp

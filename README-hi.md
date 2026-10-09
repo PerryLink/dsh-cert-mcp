@@ -15,6 +15,12 @@
 
 केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
 
+## What is dsh-cert-mcp?
+
+केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
+
+![dsh-cert-mcp का टर्मिनल डेमो: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+
 ## टूल्स
 
 | टूल | इनपुट | लौटाता है |
@@ -26,6 +32,10 @@
 अंतर्निहित स्नैपशॉट `data/certified.json` में रहता है (प्रमाणन रिपॉज़िटरी से सिंक होता है) और सर्वर उसे सार्वजनिक रजिस्ट्री से अधिकतम हर पाँच मिनट में रीफ़्रेश करता है। कोई लेखन नहीं, कोई सीक्रेट नहीं, कोई कोड निष्पादन नहीं।
 
 ## इंस्टॉल
+
+```sh
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
+```
 
 ```sh
 git clone https://github.com/PerryLink/dsh-cert-mcp
@@ -64,7 +74,7 @@ DSH: इसे [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) क�
 
 ```sh
 # git चैनल (नवीनतम main)
-dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
 
 # npm चैनल (प्रकाशित रिलीज़)
 dsh plugin --profile web add dsh-cert-mcp

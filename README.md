@@ -16,6 +16,12 @@ Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-pl
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 
+## What is dsh-cert-mcp?
+
+Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
+
+![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+
 ## Tools
 
 | Tool | Input | Returns |
@@ -27,6 +33,10 @@ Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-pl
 The embedded snapshot lives in `data/certified.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
 
 ## Install
+
+```sh
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
+```
 
 ```sh
 git clone https://github.com/PerryLink/dsh-cert-mcp
@@ -65,7 +75,7 @@ The package declares `dsh.bundle.patch` → `cordis.patch.yml`, so it also insta
 
 ```sh
 # git channel (latest main)
-dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
 
 # npm channel (published releases)
 dsh plugin --profile web add dsh-cert-mcp

@@ -15,6 +15,12 @@
 
 只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
 
+## What is dsh-cert-mcp?
+
+只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
+
+![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+
 ## 工具
 
 | 工具 | 输入 | 返回 |
@@ -26,6 +32,10 @@
 内嵌快照位于 `data/certified.json`（由认证仓同步而来），服务器最多每五分钟从公开注册表刷新一次。不写入、不涉及密钥、不执行代码。
 
 ## 安装
+
+```sh
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
+```
 
 ```sh
 git clone https://github.com/PerryLink/dsh-cert-mcp
@@ -64,7 +74,7 @@ DSH：通过 [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) 以 std
 
 ```sh
 # git 通道（main 最新）
-dsh plugin --profile web add "github:PerryLink/dsh-cert-mcp#main"
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
 
 # npm 通道（已发布版本）
 dsh plugin --profile web add dsh-cert-mcp
