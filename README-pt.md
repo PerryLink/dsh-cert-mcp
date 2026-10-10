@@ -21,6 +21,10 @@ Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o reg
 
 ![Demonstração de terminal do dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
 
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*A mesma execução, animada.*
+
 ## Ferramentas
 
 | Ferramenta | Entrada | Retorna |

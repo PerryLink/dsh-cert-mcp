@@ -21,6 +21,10 @@ Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el re
 
 ![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
 
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*La misma ejecución, animada.*
+
 ## Herramientas
 
 | Herramienta | Entrada | Devuelve |

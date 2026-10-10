@@ -21,6 +21,10 @@
 
 ![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
 
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*同一次运行，动图版。*
+
 ## 工具
 
 | 工具 | 输入 | 返回 |
