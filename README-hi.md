@@ -134,7 +134,7 @@ pnpm pack                                     # प्रकाशित tarball
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) के DeepSeek Harness प्लगइन परिवार का हिस्सा है — **33 सक्रिय रूप से अनुरक्षित**, कुल सूची **42** है जिसमें **6 फ़्रोज़न** और **3 सेवानिवृत्त** हैं; हर एक की पंक्ति नीचे बनी रहती है, कारण “स्थिति” कॉलम में है। अगर यह उपयोगी लगे, तो अन्य भी मददगार होंगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) के DeepSeek Harness प्लगइन परिवार का हिस्सा है — **34 सक्रिय रूप से अनुरक्षित**, कुल सूची **42** है जिसमें **5 फ़्रोज़न** और **3 सेवानिवृत्त** हैं; हर एक की पंक्ति नीचे बनी रहती है, कारण “स्थिति” कॉलम में है। अगर यह उपयोगी लगे, तो अन्य भी मददगार होंगे:
 
 | Plugin | एक पंक्ति में | स्थिति |
 |---|---|---|
@@ -161,7 +161,7 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | LSP निदान, फ़ॉर्मैटिंग, पूर्णता, कोड क्रियाएँ, प्रतीक और नाम बदलना | |
 | **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | मॉडल सीमा पर PII मास्किंग, host-पक्षीय रिस्टोर तालिका के साथ | |
 | **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | MCP प्रबंधन कंसोल: `/mcp` कमांड, सेटिंग्स टैब और परीक्षण कॉल | |
-| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | स्वीकृति-गेटेड क्रॉस-सेशन मेमोरी प्रोटोकॉल (`ctx.memory` + SQLite) | 🧊 फ़्रोज़न — रिपॉज़िटरी README देखें |
+| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | स्वीकृति-गेटेड क्रॉस-सेशन मेमोरी प्रोटोकॉल (`ctx.memory` + SQLite) | |
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | सत्र इवेंट स्ट्रीम से OpenTelemetry और Langfuse टेलीमेट्री निर्यात | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | रनटाइम पर बदलने योग्य मॉडल आउटपुट शैलियाँ | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | घोषणात्मक allow/deny/ask नियम और प्रक्रिया-स्तरीय नेटवर्क नीति | |

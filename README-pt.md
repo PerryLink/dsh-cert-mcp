@@ -134,7 +134,7 @@ Há deliberadamente **uma única** régua de tipos. `@deepseek-ai/*` resolve pel
 
 ## Família de plugins DSH da PerryLink
 
-Este projeto é um dos **33 plugins ativamente mantidos** do DeepSeek Harness da [PerryLink](https://github.com/PerryLink): o registro tem **42**, dos quais **6** estão congelados e **3** aposentados; cada um mantém sua linha abaixo, com o motivo na coluna Status. Se este ajudou você, provavelmente os outros também ajudarão:
+Este projeto é um dos **34 plugins ativamente mantidos** do DeepSeek Harness da [PerryLink](https://github.com/PerryLink): o registro tem **42**, dos quais **5** estão congelados e **3** aposentados; cada um mantém sua linha abaixo, com o motivo na coluna Status. Se este ajudou você, provavelmente os outros também ajudarão:
 
 | Plugin | Em uma linha | Status |
 |---|---|---|
@@ -161,7 +161,7 @@ Este projeto é um dos **33 plugins ativamente mantidos** do DeepSeek Harness da
 | **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | Diagnósticos LSP, formatação, completude, ações de código, símbolos e renomeação | |
 | **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | Mascaramento de PII no limite do modelo com tabela de restauração no host | |
 | **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | Console de gestão MCP: comando `/mcp`, aba de configurações e chamadas de teste | |
-| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Protocolo de memória entre sessões com aprovação (`ctx.memory` + SQLite) | 🧊 CONGELADO — ver o README do repositório |
+| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Protocolo de memória entre sessões com aprovação (`ctx.memory` + SQLite) | |
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | Exportação de telemetria OpenTelemetry e Langfuse a partir do fluxo de eventos | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Estilos de saída do modelo trocáveis em tempo de execução | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Regras declarativas allow/deny/ask e política de rede em nível de processo | |

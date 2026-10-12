@@ -134,7 +134,7 @@ pnpm pack                                     # 发布用 tarball
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员：**33 个活跃维护**，名册共 **42** 个，其中 **6 个已冻结**、**3 个已退役**——每一个都在下表保留自己的行，原因见「状态」列。如果它能帮到你，其他的也会：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员：**34 个活跃维护**，名册共 **42** 个，其中 **5 个已冻结**、**3 个已退役**——每一个都在下表保留自己的行，原因见「状态」列。如果它能帮到你，其他的也会：
 
 | Plugin | 一句话 | 状态 |
 |---|---|---|
@@ -161,7 +161,7 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | LSP 诊断、格式化、补全、代码操作、符号与重命名 | |
 | **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | 模型边界上的 PII 遮罩，host 侧保留还原表 | |
 | **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | MCP 管理控制台：`/mcp` 命令、设置页与试调用 | |
-| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | 过审批门的跨会话记忆协议（`ctx.memory` + SQLite） | 🧊 已冻结 — 见仓库 README |
+| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | 过审批门的跨会话记忆协议（`ctx.memory` + SQLite） | |
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | 从会话事件流导出 OpenTelemetry 与 Langfuse 遥测 | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | 运行期可切换的模型输出风格 | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | 声明式 allow/deny/ask 规则与进程级网络策略 | |

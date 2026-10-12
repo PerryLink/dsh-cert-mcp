@@ -134,7 +134,7 @@ Hay deliberadamente **una sola** regla de tipos. `@deepseek-ai/*` se resuelve a 
 
 ## Familia de plugins DSH de PerryLink
 
-Este proyecto es uno de los **33 plugins activamente mantenidos** de DeepSeek Harness de [PerryLink](https://github.com/PerryLink): el registro tiene **42**, de los cuales **6** están congelados y **3** retirados; cada uno conserva su fila abajo, con el motivo en la columna Estado. Si este te ayuda, probablemente los demás también:
+Este proyecto es uno de los **34 plugins activamente mantenidos** de DeepSeek Harness de [PerryLink](https://github.com/PerryLink): el registro tiene **42**, de los cuales **5** están congelados y **3** retirados; cada uno conserva su fila abajo, con el motivo en la columna Estado. Si este te ayuda, probablemente los demás también:
 
 | Plugin | En una línea | Estado |
 |---|---|---|
@@ -161,7 +161,7 @@ Este proyecto es uno de los **33 plugins activamente mantenidos** de DeepSeek Ha
 | **[dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions)** | Diagnósticos LSP, formato, autocompletado, acciones de código, símbolos y renombrado | |
 | **[dsh-mask](https://github.com/PerryLink/dsh-mask)** | Enmascaramiento de PII en el límite del modelo con tabla de restauración en el host | |
 | **[dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)** | Consola de gestión MCP: comando `/mcp`, pestaña de ajustes y llamadas de prueba | |
-| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Protocolo de memoria entre sesiones con aprobación (`ctx.memory` + SQLite) | 🧊 CONGELADO — ver el README del repositorio |
+| **[dsh-memento](https://github.com/PerryLink/dsh-memento)** | Protocolo de memoria entre sesiones con aprobación (`ctx.memory` + SQLite) | |
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | Exportación de telemetría OpenTelemetry y Langfuse desde el flujo de eventos | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Estilos de salida del modelo conmutables en caliente | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Reglas declarativas allow/deny/ask y política de red a nivel de proceso | |
