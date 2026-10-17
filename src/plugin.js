@@ -8,7 +8,7 @@
 // It re-registers the three read-only certification tools on the DSH tool
 // surface, 1:1 backed by the same `handleRequest` used by the stdio server
 // (bin: src/index.js), which keeps working unchanged for any MCP client.
-import { handleRequest } from './server.js'
+import { handleRequest, TOOLS as MCP_TOOLS } from './server.js'
 
 /** @typedef {import('@deepseek-ai/cordis').Context} Context */
 /** @typedef {import('@deepseek-ai/dsh-tools').ToolDefinition} ToolDefinition */
@@ -21,30 +21,13 @@ export const name = 'dsh-cert-mcp'
 // waiting fiber instead of silently contributing nothing.
 export const inject = ['tools']
 
-const TOOLS = [
-  {
-    name: 'get_certification',
-    description: 'Full certification record (grade, snapshot, five dimensions) for owner/repo',
-    parameters: {
-      type: 'object',
-      properties: {
-        owner: { type: 'string', description: 'GitHub owner of the plugin repository' },
-        repo: { type: 'string', description: 'GitHub repository name' },
-      },
-      required: ['owner', 'repo'],
-    },
-  },
-  {
-    name: 'list_certified',
-    description: 'Every entry in the public certification registry',
-    parameters: { type: 'object', properties: {} },
-  },
-  {
-    name: 'certification_spec',
-    description: 'Spec v1 summary: five dimensions, grade scale, veto rule',
-    parameters: { type: 'object', properties: {} },
-  },
-]
+// Single table: the DSH host face is derived from the MCP face, so the two
+// descriptions cannot drift again (the 0.2.7 coverage fix reached only MCP).
+const TOOLS = MCP_TOOLS.map(({ name, description, inputSchema }) => ({
+  name,
+  description,
+  parameters: inputSchema,
+}))
 
 async function callTool(tool, args, signal) {
   const response = await handleRequest(

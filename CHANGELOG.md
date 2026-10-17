@@ -5,6 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.2.8] - 2026-10-17
+
+### Fixed
+
+- **DSH host face now derives from the MCP face.** `src/plugin.js` had its own one-line tool descriptions, so the 0.2.7 coverage disclosure never reached `list_certified` on the DSH tool surface. There is now one `TOOLS` table in `src/server.js`; the host maps its `inputSchema` to `parameters` and gets the same descriptions verbatim.
+- **"offline" is now precise.** The registry may be refreshed opportunistically; the descriptions say so instead of claiming "contacts no other service".
+- Compatibility: `engines.dsh` -> `>=0.2.1-0 <0.3.0`; devDependencies to `0.2.1-rc.2`; add `@deepseek-ai/dsh-working-directory`.
+
+### Fixed
+
+- **The registry's coverage was undisclosed, so a one-entry snapshot read as an
+  ecosystem verdict.** `data/certified.json` is synced byte-for-byte from
+  `dsh-plugin-certification` (that repository owns the schedule and the
+  freshness check — this package has no `MAX_AGE_DAYS` and must not invent one),
+  and it held exactly **one** entry: `PerryLink/dsh-auto-review`, grade A,
+  snapshot 2026-09-07. `list_certified` answered `count: 1` with a description
+  promising "list every plugin in the public registry … compare grades across
+  plugins", and the README showed a plain data-source line. Nothing on any
+  surface said the registry is an **opt-in subset** — a plugin appears only
+  after it was evaluated — so the honest reading of that output was "this
+  ecosystem has one certified plugin", and there is nothing to compare with one
+  row.
+
+  Added, in the tool output an agent actually reads:
+
+  - `list_certified` now returns a `coverage` object next to `count`:
+    `certified` (the same number, named for what it is), `subset`, `scope`
+    ("not a census of published DSH plugins"), `representative` ("single-entry
+    subsets carry no statistical meaning"), plus the registry URL and snapshot
+    date. It deliberately carries **no denominator**: the registry does not
+    record how many candidates were assessed, so any "N of M" would be invented.
+  - the `list_certified` description states the same thing, because an agent may
+    choose the tool from its description alone;
+  - the README's Registry section says it in all five languages, and records
+    that the snapshot date is the certification repository's fact rather than a
+    freshness promise from this server.
+
+  No change to the data file, the sync, or `get_certification`.
+
 ## [0.2.6] - 2026-10-10
 
 ### Changed

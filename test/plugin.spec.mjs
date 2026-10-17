@@ -11,6 +11,7 @@ import Loader from '@deepseek-ai/cordis-plugin-loader'
 import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
 import ToolRuntime from '@deepseek-ai/dsh-tools'
 import * as plugin from '../src/plugin.js'
+import { TOOLS as MCP_TOOLS } from '../src/server.js'
 
 const TOOL_NAMES = ['get_certification', 'list_certified', 'certification_spec']
 // `FiberState` is a type-only enum in cordis (`fiber.d.ts`: PENDING = 0), so the
@@ -47,6 +48,14 @@ test('mounting on a real ToolRuntime registers the three certification tools', a
     assert.ok(schema.description.length > 0, `${schema.name} needs a model-facing description`)
     assert.equal(typeof schema.parameters, 'object')
   }
+  for (const schema of schemas) {
+    const mcp = MCP_TOOLS.find(tool => tool.name === schema.name)
+    assert.ok(mcp, `${schema.name} has an MCP definition`)
+    assert.equal(schema.description, mcp.description, `${schema.name} descriptions are one table`)
+  }
+  const list = schemas.find(schema => schema.name === 'list_certified')
+  assert.match(list.description, /coverage/)
+  assert.match(list.description, /opt-in subset/)
   const lookup = schemas.find(schema => schema.name === 'get_certification')
   assert.deepEqual(Object.keys(lookup.parameters.properties ?? {}), ['owner', 'repo'])
   assert.deepEqual(lookup.parameters.required ?? [], ['owner', 'repo'])
