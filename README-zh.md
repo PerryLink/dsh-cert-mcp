@@ -19,7 +19,7 @@
 
 只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
 
-![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
 
 ![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
 
@@ -109,6 +109,8 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 ## 注册表
 
 数据源：[PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) —— `data/certified.json`，规范 v1。
+
+**注册表是什么，以及本服务给出简短回答意味着什么。** 注册表是一个**自愿加入的子集**：只有被评估过并留下记录的仓才会出现在里面，所以"查不到记录"**不等于**该插件未认证，`list_certified` 只返回很少几行也**不等于**被评估的插件很少。撰写本段时随包快照里只有 **1 条**（grade A，快照日 2026-09-07）；单条列表不具备统计意义 —— 一个等级只描述那一个仓，跨插件可排序的比较要等注册表积累到足够多才成立。每一次 `list_certified` 回复都带一个 `coverage` 对象把这件事说清楚，因此只读工具输出的 agent 不会把条数误当成生态覆盖率。快照日期是**认证仓的事实**，不是本服务的时效承诺：它与 `dsh-plugin-certification` 逐字节同步，进度与门禁都由那边负责。
 
 ## 兼容性
 

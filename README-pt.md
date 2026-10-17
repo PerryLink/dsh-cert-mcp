@@ -19,7 +19,7 @@ Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o reg
 
 Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): graus de certificação, datas de snapshot e evidências em cinco dimensões para plugins do DeepSeek Harness (DSH). Zero dependências de execução, transporte stdio.
 
-![Demonstração de terminal do dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+![Demonstração de terminal do dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
 
 ![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
 
@@ -109,6 +109,8 @@ O repositório oficial do DeepSeek Harness não opera um registro de plugins e n
 ## Registro
 
 Fonte de dados: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, especificação v1.
+
+**O que o registro é, e o que uma resposta curta deste servidor significa.** O registro é um **subconjunto de adesão voluntária**: um repositório só aparece nele depois de ter sido avaliado, então a ausência de registro **não** é prova de que um plugin não seja certificado, e `list_certified` devolver poucas linhas não é prova de que poucos plugins foram avaliados. O snapshot incluído tinha **uma** entrada (nota A, snapshot 2026-09-07) quando isto foi escrito; uma lista de uma entrada não tem significado estatístico — uma nota descreve aquele único repositório, e a comparação ordenável entre plugins só passa a existir quando o registro contém muitos. Toda resposta de `list_certified` traz um objeto `coverage` que diz exatamente isso, para que um agente que leia apenas a saída da ferramenta não confunda a contagem com cobertura do ecossistema. A data do snapshot é um fato **do repositório de certificação**, não uma promessa de atualidade deste servidor: ele é sincronizado byte a byte de `dsh-plugin-certification`, que é o dono do calendário e da verificação.
 
 ## Compatibilidade
 

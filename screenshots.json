@@ -1,5 +1,14 @@
-{
-  "screenshots": [
-    "docs/assets/dsh-cert-mcp-demo.png"
-  ]
-}
+[
+  {
+    "path": "docs/assets/dsh-cert-mcp-hero.png",
+    "kind": "hero",
+    "alt": "dsh-cert-mcp terminal output",
+    "caption": "Real dsh-cert-mcp test run; test suite green."
+  },
+  {
+    "path": "docs/assets/dsh-cert-mcp-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-cert-mcp terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]

@@ -20,7 +20,7 @@ Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-pl
 
 Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
 
-![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
 
 ![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
 
@@ -110,6 +110,20 @@ The official DeepSeek Harness repository does not run a plugin registry and does
 ## Registry
 
 Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, spec v1.
+
+**What the registry is, and what a short answer from this server means.** The
+registry is an **opt-in subset**: a repository appears in it only after it has
+been evaluated, so the absence of a record is *not* evidence that a plugin is
+uncertified, and `list_certified` returning few rows is not evidence that few
+plugins were assessed. The bundled snapshot held **one** entry (grade A, snapshot
+2026-09-07) when this was written; a single-entry list carries no statistical
+meaning — a grade describes that one repository, and rankable comparison across
+plugins only becomes possible once the registry holds many. Every
+`list_certified` reply carries a `coverage` object stating exactly this, so an
+agent reading only the tool output cannot mistake the count for ecosystem
+coverage. The snapshot's date is **the certification repo's** fact, not a
+freshness promise from this server: it is synced byte-for-byte from
+`dsh-plugin-certification`, which owns the schedule and the check.
 
 ## Compatibility
 

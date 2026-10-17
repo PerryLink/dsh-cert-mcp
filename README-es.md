@@ -19,7 +19,7 @@ Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el re
 
 Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
 
-![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
 
 ![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
 
@@ -109,6 +109,8 @@ El repositorio oficial de DeepSeek Harness no opera un registro de plugins ni ac
 ## Registro
 
 Fuente de datos: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, especificación v1.
+
+**Qué es el registro y qué significa una respuesta corta de este servidor.** El registro es un **subconjunto de adhesión voluntaria**: un repositorio aparece en él solo después de haber sido evaluado, así que la ausencia de registro **no** es prueba de que un plugin no esté certificado, y que `list_certified` devuelva pocas filas no es prueba de que se evaluaran pocos plugins. La instantánea incluida tenía **una** entrada (grado A, instantánea 2026-09-07) al escribir esto; una lista de una entrada no tiene significado estadístico: una nota describe ese único repositorio, y la comparación ordenable entre plugins solo es posible cuando el registro contiene muchos. Cada respuesta de `list_certified` lleva un objeto `coverage` que dice exactamente esto, de modo que un agente que solo lea la salida de la herramienta no pueda confundir el recuento con la cobertura del ecosistema. La fecha de la instantánea es un hecho **del repositorio de certificación**, no una promesa de frescura de este servidor: se sincroniza byte a byte desde `dsh-plugin-certification`, que es dueño del calendario y de la comprobación.
 
 ## Compatibilidad
 

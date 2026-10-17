@@ -19,7 +19,7 @@
 
 केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
 
-![dsh-cert-mcp का टर्मिनल डेमो: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.png)
+![dsh-cert-mcp का टर्मिनल डेमो: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
 
 ![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
 
@@ -109,6 +109,8 @@ DeepSeek Harness का आधिकारिक रिपॉज़िटरी 
 ## रजिस्ट्री
 
 डेटा स्रोत: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, स्पेक v1।
+
+**यह रजिस्ट्री क्या है, और इस सर्वर का छोटा उत्तर क्या बताता है।** रजिस्ट्री एक **ऑप्ट-इन उपसमुच्चय** है: कोई रिपॉज़िटरी उसमें तभी आती है जब उसका मूल्यांकन हो चुका हो, इसलिए रिकॉर्ड न मिलना यह **सबूत नहीं** कि वह प्लगइन प्रमाणित नहीं है, और `list_certified` का कम पंक्तियाँ लौटाना यह सबूत नहीं कि बहुत कम प्लगइनों का मूल्यांकन हुआ। यह लिखे जाने के समय साथ भेजे गए स्नैपशॉट में **एक** प्रविष्टि थी (ग्रेड A, स्नैपशॉट 2026-09-07); एक-प्रविष्टि वाली सूची का कोई सांख्यिकीय अर्थ नहीं होता — एक ग्रेड उस एक रिपॉज़िटरी का वर्णन करता है, और प्लगइनों के बीच क्रम-योग्य तुलना तभी संभव होती है जब रजिस्ट्री में बहुत सी प्रविष्टियाँ हों। हर `list_certified` उत्तर के साथ एक `coverage` ऑब्जेक्ट आता है जो यही बात कहता है, ताकि केवल टूल आउटपुट पढ़ने वाला एजेंट गिनती को इकोसिस्टम कवरेज समझ न ले। स्नैपशॉट की तारीख़ **प्रमाणन रिपॉज़िटरी** का तथ्य है, इस सर्वर की ताज़गी की गारंटी नहीं: यह `dsh-plugin-certification` से बाइट-दर-बाइट सिंक होता है, और समय-सारणी तथा जाँच उसी की है।
 
 ## अनुकूलता
 
