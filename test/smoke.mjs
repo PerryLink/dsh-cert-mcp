@@ -50,6 +50,23 @@ const all = await handleRequest({ jsonrpc: '2.0', id: 5, method: 'tools/call', p
 const parsed = JSON.parse(all.result.content[0].text)
 assert.ok(parsed.count >= 1)
 
+// Coverage honesty gate. The registry is an opt-in subset, so `count` alone
+// reads as ecosystem coverage ("the ecosystem has N certified plugins") which
+// the data cannot support — the bundled snapshot holds one entry. Every reply
+// must therefore carry the non-representative claim next to the count, on the
+// tool-output surface an agent actually reads.
+assert.ok(parsed.coverage, 'list_certified must disclose coverage next to the count')
+assert.equal(parsed.coverage.certified, parsed.count)
+assert.match(parsed.coverage.subset, /subset/)
+assert.match(parsed.coverage.scope, /not a census of published DSH plugins/)
+assert.match(parsed.coverage.representative, /no statistical meaning/)
+assert.equal(parsed.coverage.registry, 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/certified.json')
+// The description is model-facing prose: it has to say the same thing, because
+// an agent may pick the tool from the description alone.
+const listTool = list.result.tools.find((tool) => tool.name === 'list_certified')
+assert.match(listTool.description, /coverage/)
+assert.match(listTool.description, /opt-in subset/)
+
 const spec = await handleRequest({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'certification_spec', arguments: {} } })
 assert.match(spec.result.content[0].text, /five dimensions/)
 
