@@ -246,6 +246,8 @@ Este projeto é um dos **87 plugins ativamente mantidos** do DeepSeek Harness da
 
 </details>
 
-</details>## Licença
+</details>
+
+## Licença
 
 Apache-2.0. Uma listagem ou um grau é um registro de evidência, não uma garantia de segurança: plugins rodam dentro do seu processo DSH com as suas permissões.

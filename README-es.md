@@ -246,6 +246,8 @@ Este proyecto es uno de los **87 plugins activamente mantenidos** de DeepSeek Ha
 
 </details>
 
-</details>## Licencia
+</details>
+
+## Licencia
 
 Apache-2.0. Una ficha o un grado es un registro de evidencia, no una garantía de seguridad: los plugins se ejecutan dentro de tu proceso DSH con tus permisos.

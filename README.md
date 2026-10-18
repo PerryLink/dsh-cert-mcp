@@ -261,6 +261,8 @@ This project is one of the **87 actively maintained** DeepSeek Harness plugins f
 
 </details>
 
-</details>## License
+</details>
+
+## License
 
 Apache-2.0. A listing or grade is an evidence record, not a security guarantee: plugins run inside your DSH process with your permissions.

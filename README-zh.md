@@ -246,6 +246,8 @@ pnpm pack                                     # 发布用 tarball
 
 </details>
 
-</details>## 许可证
+</details>
+
+## 许可证
 
 Apache-2.0。列表或等级是证据记录，不是安全保证：插件以你的权限运行在你的 DSH 进程内。
