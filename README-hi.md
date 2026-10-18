@@ -139,7 +139,7 @@ pnpm pack                                     # प्रकाशित tarball
 
 यहाँ जान-बूझकर **केवल एक** टाइप रूलर है। `@deepseek-ai/*` इस रेपो के अपने `node_modules` (पिन की गई devDependencies, यानी प्रकाशित लाइन) से resolve होता है और पैकेज कोई DSH peer घोषित नहीं करता, इसलिए दूसरा `tsc` कॉन्फ़िग उसी टाइप ब्रह्मांड पर वही कमांड होता। `typecheck:ci` स्क्रिप्ट ऐतिहासिक no-op प्रतिलिपि है (उसका अतिरिक्त मात्र खाली `paths: {}` है) और पुराने संदर्भों के लिए रखी गई है, दूसरी टाइप सतह के रूप में नहीं। स्वतंत्र दूसरा साक्ष्य ऊपर दिया गया रनटाइम माउंट गेट है।
 
-## PerryLink DSH प्लगइन परिवार
+## PerryLink DSH Plugin Family
 
 यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) के **87 सक्रिय रूप से अनुरक्षित** DeepSeek Harness प्लगइन में से एक है। पूरा परिवार **95** प्लगइन है — **5 फ़्रोज़न**, **3 सेवानिवृत्त** — और नीचे संक्षिप्त रखा गया है ताकि हर README की पहली स्क्रीन छोटी रहे। हर पंक्ति देखने के लिए इसे खोलें; कारण स्थिति कॉलम में है।
 
@@ -243,6 +243,8 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 task bridge: session-header panel + 11 tools |  |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Vendor parameter translation and deterministic JSON repair for DeepSeek Harness. |  |
 | **[dsh-warranty-calc](https://github.com/PerryLink/dsh-warranty-calc)** | 质保期与索赔金额核对（按质保期月数与里程、索赔金额算式核对自洽，仅提示差异，不作出定性结论） |  |
+
+</details>
 
 </details>## लाइसेंस
 

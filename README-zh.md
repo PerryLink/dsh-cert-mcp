@@ -139,7 +139,7 @@ pnpm pack                                     # 发布用 tarball
 
 本仓**刻意只有一把类型尺子**：`@deepseek-ai/*` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布线）解析，且本包不声明任何 DSH peer，因此第二份 `tsc` 配置只会是量同一类型宇宙的同一条命令。`typecheck:ci` 脚本作为历史 no-op 副本保留（它唯一的额外键是空 `paths: {}`），只为兼容既有引用，不是第二个类型面。独立的第二份证据是上面的运行时挂载门。
 
-## PerryLink DSH 插件家族
+## PerryLink DSH Plugin Family
 
 本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员：**87 个活跃维护**，名册共 **95** 个，其中 **5 个已冻结**、**3 个已退役**。完整名单默认折叠，避免每个 README 的首屏被长表淹没；点击展开可查看每一行，原因见「状态」列。
 
@@ -243,6 +243,8 @@ pnpm pack                                     # 发布用 tarball
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 task bridge: session-header panel + 11 tools |  |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Vendor parameter translation and deterministic JSON repair for DeepSeek Harness. |  |
 | **[dsh-warranty-calc](https://github.com/PerryLink/dsh-warranty-calc)** | 质保期与索赔金额核对（按质保期月数与里程、索赔金额算式核对自洽，仅提示差异，不作出定性结论） |  |
+
+</details>
 
 </details>## 许可证
 
