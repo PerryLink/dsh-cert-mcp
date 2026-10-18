@@ -2,6 +2,11 @@
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+
 Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
 
 
@@ -15,26 +20,6 @@ Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-pl
 [![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-cert-mcp?metric=downloads)](https://dshfind.com/plugins/PerryLink/dsh-cert-mcp?ref=badge)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
 [![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
-
-## What is dsh-cert-mcp?
-
-Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
-
-![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
-
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
-
-*The same run, animated.*
-
-## Tools
-
-| Tool | Input | Returns |
-|---|---|---|
-| `get_certification` | `owner`, `repo` | Full certification record (grade, snapshot, five dimensions, veto, notes) or "no record" |
-| `list_certified` | — | Every entry in the public registry: repo / grade / snapshot |
-| `certification_spec` | — | Spec v1 summary: five dimensions, grade scale, veto rule |
-
-The embedded snapshot lives in `data/certified.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
 
 ## Install
 
@@ -102,6 +87,26 @@ export function apply(ctx) {
 **Two halves, one data path.** The bundle row and the stdio server are separate entry points over the same `handleRequest` core. The server half is an independent process any MCP client can spawn (`node src/index.js`), and it is *not* part of the plugin path: installing this bundle never starts it, and removing the bundle never touches it. Conversely `npx dsh-cert-mcp` registers nothing on the DSH tool surface.
 
 Remove the bundle with `dsh plugin --profile web remove dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
+
+## What is dsh-cert-mcp?
+
+Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
+
+![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*The same run, animated.*
+
+## Tools
+
+| Tool | Input | Returns |
+|---|---|---|
+| `get_certification` | `owner`, `repo` | Full certification record (grade, snapshot, five dimensions, veto, notes) or "no record" |
+| `list_certified` | — | Every entry in the public registry: repo / grade / snapshot |
+| `certification_spec` | — | Spec v1 summary: five dimensions, grade scale, veto rule |
+
+The embedded snapshot lives in `data/certified.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
 
 ## Why this exists
 

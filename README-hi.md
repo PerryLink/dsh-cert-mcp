@@ -13,27 +13,12 @@
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+
 केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
-
-## What is dsh-cert-mcp?
-
-केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
-
-![dsh-cert-mcp का टर्मिनल डेमो: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
-
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
-
-*वही रन, एनिमेटेड।*
-
-## टूल्स
-
-| टूल | इनपुट | लौटाता है |
-|---|---|---|
-| `get_certification` | `owner`, `repo` | पूरा प्रमाणन रिकॉर्ड (ग्रेड, स्नैपशॉट, पाँच आयाम, वीटो, टिप्पणियाँ) या «कोई रिकॉर्ड नहीं» |
-| `list_certified` | — | सार्वजनिक रजिस्ट्री की हर प्रविष्टि: रिपॉज़िटरी / ग्रेड / स्नैपशॉट |
-| `certification_spec` | — | स्पेक v1 सारांश: पाँच आयाम, ग्रेड पैमाना, वीटो नियम |
-
-अंतर्निहित स्नैपशॉट `data/certified.json` में रहता है (प्रमाणन रिपॉज़िटरी से सिंक होता है) और सर्वर उसे सार्वजनिक रजिस्ट्री से अधिकतम हर पाँच मिनट में रीफ़्रेश करता है। कोई लेखन नहीं, कोई सीक्रेट नहीं, कोई कोड निष्पादन नहीं।
 
 ## इंस्टॉल
 
@@ -101,6 +86,26 @@ export function apply(ctx) {
 **दो आधे, एक ही डेटा पथ।** बंडल पंक्ति और stdio सर्वर एक ही `handleRequest` कोर के दो प्रवेश हैं। सर्वर आधा एक स्वतंत्र प्रक्रिया है जिसे कोई भी MCP क्लाइंट चला सकता है (`node src/index.js`), और वह **प्लगइन पथ का हिस्सा नहीं है**: यह बंडल इंस्टॉल करने से वह कभी शुरू नहीं होता, और हटाने से वह कभी प्रभावित नहीं होता। इसके विपरीत `npx dsh-cert-mcp` DSH टूल सतह पर कुछ भी रजिस्टर नहीं करता।
 
 हटाने के लिए: `dsh plugin --profile web remove dsh-cert-mcp` (या प्रोफ़ाइल patch से पंक्ति मिटा दें)। अलग खड़ा stdio MCP सर्वर किसी भी MCP क्लाइंट के लिए पहले की तरह काम करता रहता है।
+
+## What is dsh-cert-mcp?
+
+केवल-पढ़ने योग्य [MCP](https://modelcontextprotocol.io) सर्वर, जो [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) रजिस्ट्री उजागर करता है: DeepSeek Harness (DSH) प्लगइन्स के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य। शून्य रनटाइम निर्भरताएँ, stdio ट्रांसपोर्ट।
+
+![dsh-cert-mcp का टर्मिनल डेमो: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*वही रन, एनिमेटेड।*
+
+## टूल्स
+
+| टूल | इनपुट | लौटाता है |
+|---|---|---|
+| `get_certification` | `owner`, `repo` | पूरा प्रमाणन रिकॉर्ड (ग्रेड, स्नैपशॉट, पाँच आयाम, वीटो, टिप्पणियाँ) या «कोई रिकॉर्ड नहीं» |
+| `list_certified` | — | सार्वजनिक रजिस्ट्री की हर प्रविष्टि: रिपॉज़िटरी / ग्रेड / स्नैपशॉट |
+| `certification_spec` | — | स्पेक v1 सारांश: पाँच आयाम, ग्रेड पैमाना, वीटो नियम |
+
+अंतर्निहित स्नैपशॉट `data/certified.json` में रहता है (प्रमाणन रिपॉज़िटरी से सिंक होता है) और सर्वर उसे सार्वजनिक रजिस्ट्री से अधिकतम हर पाँच मिनट में रीफ़्रेश करता है। कोई लेखन नहीं, कोई सीक्रेट नहीं, कोई कोड निष्पादन नहीं।
 
 ## यह क्यों मौजूद है
 

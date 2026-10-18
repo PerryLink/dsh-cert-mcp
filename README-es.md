@@ -13,27 +13,12 @@
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+
 Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
-
-## What is dsh-cert-mcp?
-
-Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
-
-![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
-
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
-
-*La misma ejecución, animada.*
-
-## Herramientas
-
-| Herramienta | Entrada | Devuelve |
-|---|---|---|
-| `get_certification` | `owner`, `repo` | El registro de certificación completo (grado, instantánea, cinco dimensiones, veto, notas) o «sin registro» |
-| `list_certified` | — | Todas las entradas del registro público: repositorio / grado / instantánea |
-| `certification_spec` | — | Resumen de la especificación v1: cinco dimensiones, escala de grados, regla de veto |
-
-La instantánea embebida vive en `data/certified.json` (sincronizada desde el repositorio de certificación) y el servidor la actualiza desde el registro público como máximo una vez cada cinco minutos. Sin escrituras, sin secretos, sin ejecución de código.
 
 ## Instalación
 
@@ -101,6 +86,26 @@ export function apply(ctx) {
 **Dos mitades, una sola ruta de datos.** La fila del bundle y el servidor stdio son dos entradas sobre el mismo núcleo `handleRequest`. La mitad servidor es un proceso independiente que cualquier cliente MCP puede lanzar (`node src/index.js`), y **no forma parte de la ruta del plugin**: instalar este bundle nunca lo arranca y desinstalarlo nunca lo toca. A la inversa, `npx dsh-cert-mcp` no registra nada en la superficie de herramientas de DSH.
 
 Para quitarlo: `dsh plugin --profile web remove dsh-cert-mcp` (o borra la fila del patch del perfil). El servidor MCP stdio independiente sigue funcionando para cualquier cliente MCP.
+
+## What is dsh-cert-mcp?
+
+Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
+
+![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*La misma ejecución, animada.*
+
+## Herramientas
+
+| Herramienta | Entrada | Devuelve |
+|---|---|---|
+| `get_certification` | `owner`, `repo` | El registro de certificación completo (grado, instantánea, cinco dimensiones, veto, notas) o «sin registro» |
+| `list_certified` | — | Todas las entradas del registro público: repositorio / grado / instantánea |
+| `certification_spec` | — | Resumen de la especificación v1: cinco dimensiones, escala de grados, regla de veto |
+
+La instantánea embebida vive en `data/certified.json` (sincronizada desde el repositorio de certificación) y el servidor la actualiza desde el registro público como máximo una vez cada cinco minutos. Sin escrituras, sin secretos, sin ejecución de código.
 
 ## Por qué existe
 

@@ -13,27 +13,12 @@
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+
 Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): graus de certificação, datas de snapshot e evidências em cinco dimensões para plugins do DeepSeek Harness (DSH). Zero dependências de execução, transporte stdio.
-
-## What is dsh-cert-mcp?
-
-Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): graus de certificação, datas de snapshot e evidências em cinco dimensões para plugins do DeepSeek Harness (DSH). Zero dependências de execução, transporte stdio.
-
-![Demonstração de terminal do dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
-
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
-
-*A mesma execução, animada.*
-
-## Ferramentas
-
-| Ferramenta | Entrada | Retorna |
-|---|---|---|
-| `get_certification` | `owner`, `repo` | O registro completo de certificação (grau, snapshot, cinco dimensões, veto, notas) ou «sem registro» |
-| `list_certified` | — | Todas as entradas do registro público: repositório / grau / snapshot |
-| `certification_spec` | — | Resumo da especificação v1: cinco dimensões, escala de graus, regra de veto |
-
-O snapshot embutido fica em `data/certified.json` (sincronizado do repositório de certificação) e o servidor o atualiza a partir do registro público no máximo uma vez a cada cinco minutos. Sem escritas, sem segredos, sem execução de código.
 
 ## Instalação
 
@@ -101,6 +86,26 @@ export function apply(ctx) {
 **Duas metades, um único caminho de dados.** A linha do bundle e o servidor stdio são entradas separadas sobre o mesmo núcleo `handleRequest`. A metade servidor é um processo independente que qualquer cliente MCP pode iniciar (`node src/index.js`), e **não faz parte do caminho do plugin**: instalar este bundle nunca o inicia e removê-lo nunca o afeta. Na direção oposta, `npx dsh-cert-mcp` não registra nada na superfície de ferramentas do DSH.
 
 Para remover: `dsh plugin --profile web remove dsh-cert-mcp` (ou apague a linha do patch do perfil). O servidor MCP stdio independente continua funcionando para qualquer cliente MCP.
+
+## What is dsh-cert-mcp?
+
+Servidor [MCP](https://modelcontextprotocol.io) somente leitura que expõe o registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): graus de certificação, datas de snapshot e evidências em cinco dimensões para plugins do DeepSeek Harness (DSH). Zero dependências de execução, transporte stdio.
+
+![Demonstração de terminal do dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*A mesma execução, animada.*
+
+## Ferramentas
+
+| Ferramenta | Entrada | Retorna |
+|---|---|---|
+| `get_certification` | `owner`, `repo` | O registro completo de certificação (grau, snapshot, cinco dimensões, veto, notas) ou «sem registro» |
+| `list_certified` | — | Todas as entradas do registro público: repositório / grau / snapshot |
+| `certification_spec` | — | Resumo da especificação v1: cinco dimensões, escala de graus, regra de veto |
+
+O snapshot embutido fica em `data/certified.json` (sincronizado do repositório de certificação) e o servidor o atualiza a partir do registro público no máximo uma vez a cada cinco minutos. Sem escritas, sem segredos, sem execução de código.
 
 ## Por que isto existe
 

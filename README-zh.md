@@ -13,27 +13,12 @@
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+
 只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
-
-## What is dsh-cert-mcp?
-
-只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
-
-![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
-
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
-
-*同一次运行，动图版。*
-
-## 工具
-
-| 工具 | 输入 | 返回 |
-|---|---|---|
-| `get_certification` | `owner`、`repo` | 完整认证记录（等级、快照、五个维度、否决项、备注）或「无记录」 |
-| `list_certified` | — | 公开注册表的全部条目：仓库 / 等级 / 快照 |
-| `certification_spec` | — | 规范 v1 摘要：五个维度、等级刻度、否决规则 |
-
-内嵌快照位于 `data/certified.json`（由认证仓同步而来），服务器最多每五分钟从公开注册表刷新一次。不写入、不涉及密钥、不执行代码。
 
 ## 安装
 
@@ -101,6 +86,26 @@ export function apply(ctx) {
 **两个半边，同一条数据路径。** bundle row 与 stdio 服务器是同一份 `handleRequest` 核心的两个入口。server 半边是独立进程，任何 MCP 客户端都能拉起（`node src/index.js`），它**不在插件路径上**：安装本 bundle 不会启动它，卸载本 bundle 也不会碰它；反过来 `npx dsh-cert-mcp` 不会在 DSH 工具面上注册任何东西。
 
 卸载：`dsh plugin --profile web remove dsh-cert-mcp`（或从 profile patch 里删掉该 row）。上面的独立 stdio MCP 服务器对任何 MCP 客户端照旧可用。
+
+## What is dsh-cert-mcp?
+
+只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
+
+![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+
+![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+
+*同一次运行，动图版。*
+
+## 工具
+
+| 工具 | 输入 | 返回 |
+|---|---|---|
+| `get_certification` | `owner`、`repo` | 完整认证记录（等级、快照、五个维度、否决项、备注）或「无记录」 |
+| `list_certified` | — | 公开注册表的全部条目：仓库 / 等级 / 快照 |
+| `certification_spec` | — | 规范 v1 摘要：五个维度、等级刻度、否决规则 |
+
+内嵌快照位于 `data/certified.json`（由认证仓同步而来），服务器最多每五分钟从公开注册表刷新一次。不写入、不涉及密钥、不执行代码。
 
 ## 为什么需要它
 
