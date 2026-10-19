@@ -292,6 +292,22 @@ get_certification
 
 *来源 `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
+#### 失败分支
+
+**输入**
+
+~~~text
+{"owner":"nobody","repo":"nothing"}
+~~~
+
+**输出**
+
+~~~text
+No certification record for nobody/nothing in registry snapshot 2026-09-07.
+~~~
+
+*来源 `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+
 #### 简短示例
 
 - `list_certified`

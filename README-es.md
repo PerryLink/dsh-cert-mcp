@@ -292,6 +292,22 @@ get_certification
 
 *Observado en `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
+#### Rama de fallo
+
+**Entrada**
+
+~~~text
+{"owner":"nobody","repo":"nothing"}
+~~~
+
+**Salida**
+
+~~~text
+No certification record for nobody/nothing in registry snapshot 2026-09-07.
+~~~
+
+*Observado en `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+
 #### Ejemplos breves
 
 - `list_certified`
