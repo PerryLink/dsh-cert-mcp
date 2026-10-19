@@ -91,9 +91,10 @@ export function apply(ctx) {
 
 只读 [MCP](https://modelcontextprotocol.io) 服务器，对外暴露 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 注册表：DeepSeek Harness（DSH）插件的认证等级、快照日期与五维证据。零运行时依赖，stdio 传输。
 
-![dsh-cert-mcp 终端演示：dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+![dsh-cert-mcp 工作流图：安装 → 打开面板 → 操作。](docs/assets/dsh-cert-mcp-flow.svg)
 
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+*工作流概览：安装 → 打开面板 → 操作。下面的示例使用实际命令面。*
+
 
 *同一次运行，动图版。*
 
@@ -249,3 +250,17 @@ pnpm pack                                     # 发布用 tarball
 ## 许可证
 
 Apache-2.0。列表或等级是证据记录，不是安全保证：插件以你的权限运行在你的 DSH 进程内。
+
+### 示例
+
+以下为插件真实入口；安装后调用一个即可。
+
+#### 详细示例
+
+- `get_certification`
+
+#### 简短示例
+
+- `list_certified`
+- `certification_spec`
+

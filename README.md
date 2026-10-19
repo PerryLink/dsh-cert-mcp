@@ -92,11 +92,11 @@ Remove the bundle with `dsh plugin --profile web remove dsh-cert-mcp` (or delete
 
 Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
 
-![Terminal demo of dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+![Workflow diagram for dsh-cert-mcp: install → open panel → act.](docs/assets/dsh-cert-mcp-flow.svg)
 
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+*Workflow overview: install → open panel → act. The examples below use the real command surface.*
 
-*The same run, animated.*
+
 
 ## Tools
 
@@ -262,3 +262,17 @@ This project is part of the DeepSeek Harness plugin family from [PerryLink](http
 ## License
 
 Apache-2.0. A listing or grade is an evidence record, not a security guarantee: plugins run inside your DSH process with your permissions.
+
+### Examples
+
+These are the plugin's real entry points; install once, then call one.
+
+#### Detailed example
+
+- `get_certification`
+
+#### Brief examples
+
+- `list_certified`
+- `certification_spec`
+

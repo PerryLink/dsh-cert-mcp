@@ -91,9 +91,10 @@ Para quitarlo: `dsh plugin --profile web remove dsh-cert-mcp` (o borra la fila d
 
 Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el registro [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification): grados de certificación, fechas de instantánea y evidencia en cinco dimensiones para los plugins de DeepSeek Harness (DSH). Cero dependencias en tiempo de ejecución, transporte stdio.
 
-![Demostración de terminal de dsh-cert-mcp: dsh-cert-mcp — stdio MCP server answering tools/list](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-hero.png)
+![Diagrama de flujo de dsh-cert-mcp: instalar → abrir panel → actuar.](docs/assets/dsh-cert-mcp-flow.svg)
 
-![Animated terminal demo of dsh-cert-mcp](https://raw.githubusercontent.com/PerryLink/dsh-cert-mcp/main/docs/assets/dsh-cert-mcp-demo.gif)
+*Resumen del flujo: instalar → abrir panel → actuar. Los ejemplos siguientes usan la superficie de comandos real.*
+
 
 *La misma ejecución, animada.*
 
@@ -249,3 +250,17 @@ Este proyecto forma parte de la familia de plugins de DeepSeek Harness de [Perry
 ## Licencia
 
 Apache-2.0. Una ficha o un grado es un registro de evidencia, no una garantía de seguridad: los plugins se ejecutan dentro de tu proceso DSH con tus permisos.
+
+### Ejemplos
+
+Son los puntos de entrada reales; instala y llama a uno.
+
+#### Ejemplo detallado
+
+- `get_certification`
+
+#### Ejemplos breves
+
+- `list_certified`
+- `certification_spec`
+
