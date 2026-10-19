@@ -72,9 +72,24 @@ jobs:
           version="$(node -p "require('./package.json').version")"
           if npm view "dsh-cert-mcp@${version}" version >/dev/null 2>&1; then
             echo "dsh-cert-mcp@${version} is already published; skipping npm publish"
-          else
-            npm publish --access public --provenance
+            exit 0
           fi
+          # A tag push and a workflow_dispatch can race (different refs, so the
+          # concurrency group does not serialize them). If the other run wins,
+          # the registry answers 403 "previously published"; that is success for
+          # this run, not a red release. A staged-but-unapproved version (409)
+          # still fails: it is not installable until a maintainer approves it.
+          set +e
+          out="$(npm publish --access public --provenance 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$out"
+          if [ "$status" -eq 0 ]; then exit 0; fi
+          if printf '%s' "$out" | grep -qE 'EPUBLISHCONFLICT|previously published'; then
+            echo "dsh-cert-mcp@${version} was already published by a concurrent run; treating this as done"
+            exit 0
+          fi
+          exit "$status"
       # Advisory only. The publish step above is the hard gate (it exits non-zero
       # when the publish itself fails); npm's READ side can lag minutes behind a
       # successful publish, and a hard failure here skipped the GitHub Release
@@ -94,9 +109,18 @@ jobs:
           done
           echo "::warning::dsh-cert-mcp@${version} is still not visible on the registry after ~3 minutes (the publish step reported success; npm's read side is lagging)"
 
+      # workflow_dispatch has no tag ref, so action-gh-release cannot infer one
+      # and fails with "GitHub Releases requires a tag" after npm has already
+      # published. Resolve the tag from the version that was just released.
+      - name: Resolve the release tag
+        id: release-tag
+        shell: bash
+        run: echo "tag=v$(node -p "require('./package.json').version")" >> "${GITHUB_OUTPUT}"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
+          tag_name: ${{ steps.release-tag.outputs.tag }}
           generate_release_notes: true
 
   # Publishes server.json to the official MCP Registry. It needs `publish` (the
