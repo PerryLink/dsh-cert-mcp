@@ -244,6 +244,8 @@ pnpm pack                                     # प्रकाशित tarball
 | **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | 🚫 सेवानिवृत्त — रिपॉज़िटरी README देखें |
 | **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | 🚫 सेवानिवृत्त — रिपॉज़िटरी README देखें |
 
-</details>## लाइसेंस
+</details>
+
+## लाइसेंस
 
 Apache-2.0. सूची या ग्रेड एक साक्ष्य रिकॉर्ड है, सुरक्षा की गारंटी नहीं: प्लगइन आपके DSH प्रोसेस में आपकी अनुमतियों के साथ चलते हैं।

@@ -244,6 +244,8 @@ Este proyecto forma parte de la familia de plugins de DeepSeek Harness de [Perry
 | **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | 🚫 RETIRADO — ver el README del repositorio |
 | **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | 🚫 RETIRADO — ver el README del repositorio |
 
-</details>## Licencia
+</details>
+
+## Licencia
 
 Apache-2.0. Una ficha o un grado es un registro de evidencia, no una garantía de seguridad: los plugins se ejecutan dentro de tu proceso DSH con tus permisos.
