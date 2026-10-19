@@ -269,7 +269,40 @@ These are the plugin's real entry points; install once, then call one.
 
 #### Detailed example
 
-- `get_certification`
+**Command**
+
+~~~sh
+get_certification
+~~~
+
+**Input**
+
+~~~json
+{
+  "owner": "PerryLink",
+  "repo": "dsh-auto-review"
+}
+~~~
+
+**Output**
+
+~~~text
+{
+  "repo": "PerryLink/dsh-auto-review",
+  "grade": "A",
+  "snapshot": "2026-09-07",
+  "dimensions": {
+    "manifest": { "result": "pass" },
+    "buildHygiene": { "result": "pass" },
+    "supplyChain": { "result": "pass", "score": 5.4 },
+    "releaseIntegrity": { "result": "pass" },
+    "installSmoke": { "result": "ok" }
+  },
+  "veto": null
+}
+~~~
+
+*Observed from `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### Brief examples
 

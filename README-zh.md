@@ -257,7 +257,40 @@ Apache-2.0。列表或等级是证据记录，不是安全保证：插件以你�
 
 #### 详细示例
 
-- `get_certification`
+**命令**
+
+~~~sh
+get_certification
+~~~
+
+**输入**
+
+~~~json
+{
+  "owner": "PerryLink",
+  "repo": "dsh-auto-review"
+}
+~~~
+
+**输出**
+
+~~~text
+{
+  "repo": "PerryLink/dsh-auto-review",
+  "grade": "A",
+  "snapshot": "2026-09-07",
+  "dimensions": {
+    "manifest": { "result": "pass" },
+    "buildHygiene": { "result": "pass" },
+    "supplyChain": { "result": "pass", "score": 5.4 },
+    "releaseIntegrity": { "result": "pass" },
+    "installSmoke": { "result": "ok" }
+  },
+  "veto": null
+}
+~~~
+
+*来源 `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### 简短示例
 
