@@ -139,7 +139,7 @@ A suíte de execução monta os registros REAIS `SystemPrompt`/`ToolRuntime` e v
 
 Há deliberadamente **uma única** régua de tipos. `@deepseek-ai/*` resolve pelo `node_modules` deste repositório (as devDependencies fixadas, ou seja, a linha publicada) e o pacote não declara nenhum peer de DSH, então uma segunda configuração de `tsc` seria o mesmo comando sobre o mesmo universo de tipos. O script `typecheck:ci` é mantido como a cópia histórica no-op (sua única chave extra é um `paths: {}` vazio) por compatibilidade com referências existentes, não como uma segunda face de tipos. A segunda evidência independente é o portão de montagem em execução acima.
 
-## Família de plugins DSH da PerryLink
+## PerryLink DSH Plugin Family
 
 Este projeto faz parte da família de plugins do DeepSeek Harness da [PerryLink](https://github.com/PerryLink). O registro fica recolhido abaixo para que cada README mantenha uma primeira tela curta; expanda para ver cada linha e seu status.
 

@@ -139,7 +139,7 @@ pnpm pack                                     # 发布用 tarball
 
 本仓**刻意只有一把类型尺子**：`@deepseek-ai/*` 经本仓自己的 `node_modules`（钉住的 devDependencies，即已发布线）解析，且本包不声明任何 DSH peer，因此第二份 `tsc` 配置只会是量同一类型宇宙的同一条命令。`typecheck:ci` 脚本作为历史 no-op 副本保留（它唯一的额外键是空 `paths: {}`），只为兼容既有引用，不是第二个类型面。独立的第二份证据是上面的运行时挂载门。
 
-## PerryLink DSH 插件家族
+## PerryLink DSH Plugin Family
 
 本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员。完整名单默认折叠，避免每个 README 的首屏被长表淹没；点击展开可查看每一行及其状态。
 
