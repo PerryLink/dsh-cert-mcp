@@ -122,9 +122,9 @@ Fonte de dados: [PerryLink/dsh-plugin-certification](https://github.com/PerryLin
 
 | Superfície | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-alpha.1) |
+| Harness | DeepSeek Harness `dsh-v0.2.1-rc.2` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-rc.2) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
-| Faixa de host declarada | `engines.dsh`: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0`, com `dsh.manifestVersion: 1` |
+| Faixa de host declarada | `engines.dsh`: `>=0.2.1-0 <0.3.0`, com `dsh.manifestVersion: 1` |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. A metade host precisa ainda do serviço `tools` em tempo de execução; a metade stdio não precisa de nada além do Node. |
 
 ## Desenvolvimento

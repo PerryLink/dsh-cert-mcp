@@ -110,7 +110,7 @@ The embedded snapshot lives in `data/certified.json` (synced from the certificat
 
 ## Why this exists
 
-The official DeepSeek Harness repository does not run a plugin registry and does not accept external PRs; discovery happens through the `dsh-plugin` GitHub topic and community lists, none of which certify anything. `dsh-plugin-certification` turns "can I install this plugin" into a reproducible five-dimension check (manifest, build hygiene, supply-chain Scorecard, release provenance, sandboxed install smoke test) with a public registry and README badges. This MCP server is the same data with an agent-facing interface: agents can look up a plugin's certification before recommending or installing it.
+The DeepSeek Harness repository does not run a plugin registry and does not accept external PRs; discovery happens through the `dsh-plugin` GitHub topic and community lists, none of which certify anything. `dsh-plugin-certification` turns "can I install this plugin" into a reproducible five-dimension check (manifest, build hygiene, supply-chain Scorecard, release provenance, sandboxed install smoke test) with a public registry and README badges. This MCP server is the same data with an agent-facing interface: agents can look up a plugin's certification before recommending or installing it.
 
 ## Registry
 
@@ -134,9 +134,9 @@ freshness promise from this server: it is synced byte-for-byte from
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-alpha.1) |
+| Harness | DeepSeek Harness `dsh-v0.2.1-rc.2` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-rc.2) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
-| Declared host range | `engines.dsh`: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0`, with `dsh.manifestVersion: 1` |
+| Declared host range | `engines.dsh`: `>=0.2.1-0 <0.3.0`, with `dsh.manifestVersion: 1` |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. The host half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node. |
 
 ## Development

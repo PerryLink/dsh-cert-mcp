@@ -23,7 +23,8 @@
     "README-pt.md",
     "README-hi.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "docs"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",

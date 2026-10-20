@@ -1,5 +1,40 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Fixed
+
+- `release.yml` could never publish to the MCP Registry on a manual dispatch. `publish` carried
+  `if: startsWith(github.ref, 'refs/tags/v')`, and a dispatch run's ref is `refs/heads/main`, so `publish`
+  was skipped - and `mcp-registry` needs it. The run still reported **success**. Observed 2026-10-20:
+  two dispatches, both green, both skipping the only job that publishes.
+- The registry publish no longer shares a job with the GitHub Release. On 2026-10-18 npm accepted 0.2.9 at
+  08:29:33Z, `Create GitHub Release` failed, and because a failed `needs` skips its dependants,
+  `mcp-registry` was skipped: red on the Release step, grey on the registry, and the two surfaces diverged
+  for a week.
+- `scripts/check-registry-drift.mjs`: the daily cron now passes `--require-published`, so a registry that
+  has lost the entry reports drift instead of `in sync`; and an unknown flag is an error rather than being
+  silently ignored.
+
+### Added
+
+- `registry-drift.yml` — a daily three-way comparison of package.json, server.json, npm and the registry.
+  A post-publish assertion cannot catch this class of failure, because in this class nothing publishes.
+- `scripts/check-registry-drift.mjs`, dependency-free, usable from any package directory.
+
+### Changed
+
+- README: the compatibility table now states what `package.json` actually declares. It named
+  `0.2.1-alpha.1` and a six-clause `engines.dsh` alternation; the package pins `0.2.1-rc.2` and declares a
+  single range, `>=0.2.1-0 <0.3.0`. Both halves of the sentence were re-verified against the installed host
+  packages: `typecheck` exits 0 and the 5-test suite passes.
+- `docs/` is now in `files`, so the diagram the README embeds is actually in the tarball.
+
 ## [0.2.9] - 2026-10-18
 
 ### Changed
@@ -10,179 +45,3 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-
-## [0.2.8] - 2026-10-17
-
-### Fixed
-
-- **DSH host face now derives from the MCP face.** `src/plugin.js` had its own one-line tool descriptions, so the 0.2.7 coverage disclosure never reached `list_certified` on the DSH tool surface. There is now one `TOOLS` table in `src/server.js`; the host maps its `inputSchema` to `parameters` and gets the same descriptions verbatim.
-- **"offline" is now precise.** The registry may be refreshed opportunistically; the descriptions say so instead of claiming "contacts no other service".
-- Compatibility: `engines.dsh` -> `>=0.2.1-0 <0.3.0`; devDependencies to `0.2.1-rc.2`; add `@deepseek-ai/dsh-working-directory`.
-
-### Fixed
-
-- **The registry's coverage was undisclosed, so a one-entry snapshot read as an
-  ecosystem verdict.** `data/certified.json` is synced byte-for-byte from
-  `dsh-plugin-certification` (that repository owns the schedule and the
-  freshness check — this package has no `MAX_AGE_DAYS` and must not invent one),
-  and it held exactly **one** entry: `PerryLink/dsh-auto-review`, grade A,
-  snapshot 2026-09-07. `list_certified` answered `count: 1` with a description
-  promising "list every plugin in the public registry … compare grades across
-  plugins", and the README showed a plain data-source line. Nothing on any
-  surface said the registry is an **opt-in subset** — a plugin appears only
-  after it was evaluated — so the honest reading of that output was "this
-  ecosystem has one certified plugin", and there is nothing to compare with one
-  row.
-
-  Added, in the tool output an agent actually reads:
-
-  - `list_certified` now returns a `coverage` object next to `count`:
-    `certified` (the same number, named for what it is), `subset`, `scope`
-    ("not a census of published DSH plugins"), `representative` ("single-entry
-    subsets carry no statistical meaning"), plus the registry URL and snapshot
-    date. It deliberately carries **no denominator**: the registry does not
-    record how many candidates were assessed, so any "N of M" would be invented.
-  - the `list_certified` description states the same thing, because an agent may
-    choose the tool from its description alone;
-  - the README's Registry section says it in all five languages, and records
-    that the snapshot date is the certification repository's fact rather than a
-    freshness promise from this server.
-
-  No change to the data file, the sync, or `get_certification`.
-
-## [0.2.6] - 2026-10-10
-
-### Changed
-
-- The README now carries the terminal demo and an animated version of it: the same
-  real run, shown assembling line by line. The static image stays as the primary
-  one, because a crawler or an assistant can read a PNG and cannot read a GIF.
-
-  Both frames are that plugin's own output — the card is generated by running its
-  code over its own fixture, not drawn by hand.
-
-
-## [0.2.5] - 2026-10-09
-
-### Changed
-
-- **Every tool description rewritten to the Tool Definition Quality Score rubric**, which is what directory listings such as Glama grade an MCP server on. The three descriptions named what each tool returned but never said when to reach for it, so a model had no way to choose between `get_certification`, `list_certified` and `certification_spec` — the single weakest dimension in Glama's published breakdown of this server (`get_certification` scored 3.4, with Usage Guidelines 2/5).
-  - `get_certification` now states the routing explicitly ("use `list_certified` instead to enumerate every certified plugin, and `certification_spec` instead to learn what the dimensions mean"), documents both parameters by example, and describes the not-found path — previously undisclosed, so a caller could not tell a missing record from a failure.
-  - `list_certified` and `certification_spec` gain the same shape: what they return, when to use them, which sibling to use instead, and that both are offline and credential-free.
-- **All four MCP annotations declared on every tool** (`readOnlyHint`, `destructiveHint: false`, `idempotentHint`, `openWorldHint: false`), and each description says what they cannot express — that the server reads a bundled snapshot, writes nothing, contacts no other service, and is deterministic across calls. No annotation contradicts its description.
-- Tool `title` fields added, so a client that renders a display name has one.
-
-None of this changes behaviour: the JSON-RPC surface, the registry data and the responses are identical.
-
-## [0.2.4] - 2026-10-06
-
-### Fixed
-
-- **0.2.3 was a ghost fix: its CHANGELOG claimed a clause that never reached the tarball.** The 0.2.3 entry says a fourth clause `|| >=0.1.7-0 <0.2.0` was appended to `engines.dsh`, but the published `dsh-cert-mcp@0.2.3` still reads `>=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0` 鈥?three clauses, so the claim was false on the registry and the declared range still rejected every `0.2.x` host. This release carries the clause that was described, plus `|| >=0.2.0-0 <0.3.0 || >=0.2.1-0 <0.3.0`.
-- **The devDependencies were eight lines behind the line they claimed.** `@deepseek-ai/dsh-system-prompt` and `@deepseek-ai/dsh-tools` were pinned to `0.1.6-alpha.2`, so the `typecheck` ruler the CI runs measured a host line the plugin no longer targets. Both move to `0.2.1-alpha.1`.
-- The five READMEs follow: the Harness row no longer describes a pin that does not exist, and the declared-range row carries the new band.
-
-
-## [0.2.3] - 2026-10-05
-
-### Fixed
-
-- **The declared DSH host range rejected every `0.2.x` host.** `engines.dsh` stopped at `<0.2.0`, and under semver's prerelease rule a range whose prerelease comparators all sit on earlier tuples cannot admit a later prerelease — so `0.2.0-rc.2` (the current npm `latest`) and `0.2.1-alpha.1` both failed the range. A fourth clause `|| >=0.1.7-0 <0.2.0` is appended; nothing previously supported is dropped.
-
-### Changed
-
-- Version lockstep across `package.json` and `server.json` (both the root `version` and `packages[0].version`), which `publish-mcp.yml` asserts before it publishes to the MCP Registry.
-
-## [0.2.2] - 2026-09-19
-
-### Changed
-
-- The MCP Registry server name is now **`io.github.PerryLink/dsh-cert`** (it was all lowercase). The registry grants publish permission for the namespace derived from the GitHub Actions OIDC `repository_owner` claim and compares it **case-sensitively** with `server.json`'s `name`; GitHub reports this organization as `PerryLink`, so the first publish attempt was refused (`403 ... You have permission to publish: io.github.PerryLink/*. Attempting to publish: io.github.perrylink/dsh-cert`). `package.json`'s `mcpName` moves with it — the registry verifies npm ownership by comparing that field on the **published** package, which is why the correction needs a release of its own. The server had never been registered, so nothing consumed the old name.
-
-### Added
-
-- `.github/workflows/publish-mcp.yml` publishes `server.json` to the official MCP Registry through GitHub OIDC (no stored secret). It is a reusable workflow that `release.yml` calls **after** the npm package is live, and it can be dispatched by hand to (re)publish the version `server.json` states.
-
-## [0.2.1] - 2026-09-19
-
-### Changed
-
-- The one-off bootstrap publish workflow is gone: the package now exists on the registry, so every release publishes through **trusted publishing (OIDC)** like the rest of the family.
-
-## [0.2.0] - 2026-09-19
-
-### Changed
-
-- The package moved from the scoped `@perrylink/dsh-cert-mcp` to **`dsh-cert-mcp`**. The prepared 0.1.8 release was never published under the old name, so its changes (the npm trusted-publishing switch and the `check:lockfile` gate) ship here as part of 0.2.0. The scoped name stays on the registry as a deprecated pointer; `server.json` keeps the MCP server identifier `io.github.perrylink/dsh-cert` and repoints its npm `identifier` at the new name.
-### Added
-
-- `pnpm run check:lockfile` (`scripts/check-lockfile-drift.mjs`) fails fast when `package.json` and `pnpm-lock.yaml` disagree; the probe is read-only and the documented checks chain runs it alongside the other gates.
-
-### Changed
-
-- The release workflow now publishes through **npm trusted publishing** (OIDC) instead of the long-lived `NPM_TOKEN` secret: `setup-node` no longer sets `registry-url` (its empty `_authToken` line made the registry answer 404 on PUT), npm is upgraded to >= 11.5.1 before publishing, and the "NPM_TOKEN is not set -> skip" guard is gone so a missing publisher cannot turn a release into a silent no-op.
-## [0.1.7] - 2026-09-18
-
-### Fixed
-
-- **The DSH tool surface was never registered.** The bundle entry exported a default object (`export default { name, apply }`) while declaring `inject` nowhere, so the Loader's `unwrapExports` (`exports.default ?? exports`) handed the host a plugin without its dependency declaration, and every installation silently contributed zero tools. The entry now exports `name`, `inject` and `apply` as named exports, reads the service through `ctx.tools`, and no longer returns early when the service is absent: a profile without `dsh-tools` parks the row in `PENDING` where it can be seen.
-- `serverInfo.version` was hard-coded (`0.1.5`) and `server.json` still said `0.1.4`, so MCP clients were told a version this package never published. `package.json#version` is now the single source: the server derives `SERVER_INFO` from it and `test/smoke.mjs` asserts `serverInfo` plus both `server.json` version fields against it.
-- An aborted tool call kept its registry refresh alive until the 10 s deadline. `execute` now forwards `exec.signal` into `handleRequest`, which fuses it with the request timeout; an aborted refresh still answers from the embedded snapshot.
-
-### Added
-
-- `dsh.manifestVersion: 1`, `engines.dsh` (the family's three-clause range) and `engines.node` `^22.19.0 || >=24.0.0`; peer `@deepseek-ai/cordis` `^4.0.2`.
-- `test/plugin.spec.mjs` — runtime gate over the REAL Cordis `Context`, `SystemPrompt` and `ToolRuntime`: no default export, the Loader unwrap keeps `inject`, mounting registers `get_certification` / `list_certified` / `certification_spec` with their model-facing schemas, disposing the fiber removes them, a tools-less context stays `PENDING`, and an aborted call still answers from the embedded snapshot.
-- `.github/workflows/compat.yml` — monthly + per-PR compatibility probe: bare tarball import of the plugin half, a stdio `initialize`/`tools/list` round-trip that proves the server half answers on its own, a scratch-profile install with the row-mount assertion and a keyless headless smoke, and a reversible uninstall.
-- `pnpm-workspace.yaml` (own workspace root, `minimumReleaseAge: 0`) and five-language READMEs.
-
-### Changed
-
-- `pnpm test` runs the JSON-RPC smoke suite and the new runtime suite; the CI and release workflows install the devDependencies first, because the runtime suite mounts the real runtimes.
-- **Type-ruler honesty.** This repo has exactly one `tsc` ruler: `pnpm run typecheck` resolves `@deepseek-ai/*` through the repo's own pinned `node_modules` (the published line) because `tsconfig.check.json` declares no `paths`. `typecheck:ci` / `tsconfig.check.ci.json` were added as a second face but differ only by an empty `paths: {}`, so they run the same command over the same type universe; both are kept for compatibility with existing references and are documented as a no-op duplicate rather than a second ruler. The independent second piece of evidence is the runtime mount gate in `test/plugin.spec.mjs` — the REAL `ToolRuntime` with all three tools in `ctx.tools.schemas()` — not a second `tsc` invocation.
-- **Embedded registry resynced.** `data/certified.json` (shipped in the tarball, and served whenever the remote fetch is unavailable) is now byte-identical to `dsh-plugin-certification` at that repository's `57519f5`, which rewrote the auto-review entry's peer-range and npx-pin evidence as dated historical snapshots. The certification repository's `check-freshness` gate asserts this parity, so the two copies can no longer drift apart silently.
-
-## [0.1.5] - 2026-09-10
-
-### Fixed
-
-- `certification_spec` relayed grades B and D with wording that does not match spec v1 as the registry publishes it — B was "E environment-blocked only" and D was "critical dimension failures". The tool now relays the registry's own definitions: B is "E passes and at least three of A/B/C/D pass" (an E that ends `install-fail` purely because of an unattended-environment gate also keeps B when A–D pass, and records `environment-blocked`), and D is "any hard gate fails" (`dsh.bundle` missing, no license, malicious pattern hit). The registry README owns these definitions; this tool only relays them.
-- The relayed spec text now also states the two rules that were missing: environment gates are never recorded as D, and every score comes from real, reproducible execution — absent evidence is `no-evidence`, never a guess.
-
-### Docs
-
-- Added the security-veto line to the relayed grade scale (obfuscated code, credential exfiltration, or surprising install-time behaviour grades D immediately, with the reason published).
-
-
-## [0.1.4] - 2026-09-07
-
-### Docs
-
-- Fix the DSH plugin badge URL: shields.io rejects the four-segment static badge form with "404 badge not found"; the label now uses the documented double-dash form (`dsh--plugin`), rendering identically; no behavior change.
-
-
-## [0.1.3] - 2026-09-07
-
-### Docs
-
-- Refresh the README badge block (standard shields.io set + Glama directory score) and add the `Dockerfile`/`glama.json` used by the Glama directory release checks; no behavior change.
-
-
-## [0.1.2] - 2026-09-04
-
-### Fixed
-
-- `serverInfo.version` in the MCP `initialize` response was hard-coded to `0.1.0`; it now matches the package version.
-- The registry refresh fetch had no timeout, so a black-holed network could stall the first request; it now aborts after 10 s and falls back to the embedded snapshot.
-
-### Changed
-
-- README install section now points at the published npm package (`npx @perrylink/dsh-cert-mcp`).
-
-## [0.1.1] - 2026-09-04
-
-### Added
-
-- First published release on npm (`@perrylink/dsh-cert-mcp`), MCP Registry baseline.

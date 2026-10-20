@@ -122,9 +122,9 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 
 | 方面 | 状态 |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1`（devDependencies 与声明的 `engines.dsh` 范围均已接纳该线；`typecheck` 与 5 项测试套件已对 `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-alpha.1 跑绿） |
+| Harness | DeepSeek Harness `dsh-v0.2.1-rc.2`（devDependencies 与声明的 `engines.dsh` 范围均已接纳该线；`typecheck` 与 5 项测试套件已对 `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-rc.2 跑绿） |
 | Node | `^22.19.0 \|\| >=24.0.0` |
-| 声明的宿主范围 | `engines.dsh`：`>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0`，并带 `dsh.manifestVersion: 1` |
+| 声明的宿主范围 | `engines.dsh`：`>=0.2.1-0 <0.3.0`，并带 `dsh.manifestVersion: 1` |
 | peer | `@deepseek-ai/cordis` `^4.0.2`。host 半边运行时另需 `tools` 服务；stdio 半边除 Node 外什么都不需要。 |
 
 ## 开发
