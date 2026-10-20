@@ -97,3 +97,52 @@ jobs:
       - name: Publish server.json
         shell: bash
         run: ./mcp-publisher publish
+
+      # mcp-publisher's exit code only says the request was accepted; it does not
+      # say the registry now serves the version. Read the version back, because
+      # "the step went green" is the exact evidence that was missing when the
+      # registry stayed on 0.2.6 while npm served 0.2.9.
+      #
+      # Deliberately advisory: a freshly published version can take a moment to
+      # appear (and a version awaiting moderation is indistinguishable from one
+      # that failed to land, since both read as 404 on /versions/<v>). The hard
+      # gate is registry-drift.yml, which runs daily and fails loudly.
+      - name: Read the version back from the registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./package.json').version")"
+          name="$(node -p "require('./server.json').name")"
+          encoded="$(node -e 'process.stdout.write(encodeURIComponent(process.argv[1]))' "$name")"
+          # /versions/latest answers HTTP 500 on the live service, so the list
+          # endpoint plus the isLatest flag is the only usable source.
+          latest_of() {
+            node -e '
+              let s = ""
+              process.stdin.on("data", d => s += d).on("end", () => {
+                try {
+                  const entries = JSON.parse(s).servers ?? []
+                  const meta = e => ((e._meta ?? e.meta ?? {})["io.modelcontextprotocol.registry/official"] ?? {})
+                  const hit = entries.find(e => meta(e).isLatest === true)
+                    ?? [...entries].sort((a, b) => String(meta(b).publishedAt ?? "").localeCompare(String(meta(a).publishedAt ?? "")))[0]
+                  process.stdout.write(hit?.server?.version ?? "")
+                } catch { process.stdout.write("") }
+              })'
+          }
+          for attempt in $(seq 1 12); do
+            got="$(curl -sS "https://registry.modelcontextprotocol.io/v0/servers/${encoded}/versions" 2>/dev/null | latest_of || true)"
+            echo "attempt ${attempt}: registry latest=${got:-<unreadable>} (want ${version})"
+            if [ "$got" = "$version" ]; then
+              echo "registry is serving ${name}@${version}"
+              exit 0
+            fi
+            sleep 10
+          done
+          {
+            echo "### Registry not yet serving ${version}"
+            echo ""
+            echo "Publish reported success but \`${name}\` still resolves to \`${got:-<none>}\`."
+            echo "This is expected while a version is queued for moderation, and is not a failure here."
+            echo "If the daily registry-drift run also reports drift, dispatch this workflow again."
+          } >> "${GITHUB_STEP_SUMMARY}"
+          echo "::warning::registry has not surfaced ${name}@${version} yet; registry-drift.yml is the hard gate"

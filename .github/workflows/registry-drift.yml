@@ -1,0 +1,67 @@
+name: registry-drift
+
+# Fails when package.json, server.json, npm and the official MCP Registry stop
+# telling the same story.
+#
+# Why a schedule and not just a post-publish check: the failure that motivated
+# this workflow produced no failing run at all. release.yml's `publish` job was
+# guarded by `if: startsWith(github.ref, 'refs/tags/v')`, so workflow_dispatch
+# skipped it, `mcp-registry` skipped with it, and the run was green while the
+# registry served 0.2.6 and npm served 0.2.9 for a week. Every downstream index
+# (Glama included) reads the registry, so the whole cascade was stale and quiet.
+#
+# A post-publish assertion cannot catch that class of bug, because in that class
+# nothing publishes. Only a check that compares the two published surfaces on a
+# timer can.
+on:
+  schedule:
+    # 03:17 UTC daily - off the hour so it does not queue behind the cron rush.
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - package.json
+      - server.json
+      - scripts/check-registry-drift.mjs
+      - .github/workflows/registry-drift.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: registry-drift
+  cancel-in-progress: true
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # No install step: the checker is dependency-free on purpose, so a lockfile
+      # problem can never be mistaken for a registry problem.
+      - name: Compare package.json / server.json / npm / MCP Registry
+        id: check
+        shell: bash
+        run: |
+          set +e
+          node scripts/check-registry-drift.mjs | tee drift.txt
+          status=${PIPESTATUS[0]}
+          set -e
+          {
+            echo "### registry-drift: $([ "$status" -eq 0 ] && echo in sync || echo DRIFT)"
+            echo ""
+            echo '```'
+            cat drift.txt
+            echo '```'
+          } >> "${GITHUB_STEP_SUMMARY}"
+          if [ "$status" -eq 2 ]; then
+            echo "::error::could not complete the comparison (network or manifest problem); see the log"
+          elif [ "$status" -ne 0 ]; then
+            echo "::error::registry drift detected - the versions disagree, see the job summary"
+          fi
+          exit "$status"

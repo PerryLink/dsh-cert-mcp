@@ -55,7 +55,8 @@
     "test": "node test/smoke.mjs && node --test \"test/*.spec.mjs\"",
     "typecheck": "tsc -p tsconfig.check.json",
     "typecheck:ci": "tsc -p tsconfig.check.ci.json",
-    "typecheck:checkout": "tsc -p tsconfig.checkout.json --noEmit"
+    "typecheck:checkout": "tsc -p tsconfig.checkout.json --noEmit",
+    "check:registry": "node scripts/check-registry-drift.mjs"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",

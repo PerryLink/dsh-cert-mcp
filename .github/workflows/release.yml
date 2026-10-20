@@ -31,7 +31,16 @@ jobs:
       - run: pnpm test
 
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')
+    # A tag push is the normal path, but workflow_dispatch must ALSO reach this
+    # job: it is the only way to re-drive publish-mcp for a version that already
+    # exists on npm, which is how a skipped registry publish gets repaired.
+    # The guard used to be `startsWith(github.ref, 'refs/tags/v')` alone, so a
+    # dispatch run skipped `publish` - and because `mcp-registry` needs it, the
+    # registry publish was skipped too while the run still reported green.
+    # That is how the registry sat on 0.2.6 for a week while npm served 0.2.9.
+    # The tag/version check is already a step below and short-circuits for
+    # workflow_dispatch, so the job-level guard does not need to.
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     needs: checks
     runs-on: ubuntu-latest
     steps:
