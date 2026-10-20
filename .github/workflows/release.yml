@@ -122,17 +122,6 @@ jobs:
       # workflow_dispatch has no tag ref, so action-gh-release cannot infer one
       # and fails with "GitHub Releases requires a tag" after npm has already
       # published. Resolve the tag from the version that was just released.
-      - name: Resolve the release tag
-        id: release-tag
-        shell: bash
-        run: echo "tag=v$(node -p "require('./package.json').version")" >> "${GITHUB_OUTPUT}"
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          tag_name: ${{ steps.release-tag.outputs.tag }}
-          generate_release_notes: true
-
   # Publishes server.json to the official MCP Registry. It needs `publish` (the
   # registry verifies npm ownership through package.json#mcpName on the published
   # package) and is its own job, so a registry hiccup cannot cost the GitHub
@@ -143,3 +132,26 @@ jobs:
       contents: read
       id-token: write
     uses: ./.github/workflows/publish-mcp.yml
+
+  # Kept separate from `publish` on purpose. Creating the GitHub Release is
+  # presentation; the registry publish is delivery. While both lived in one job,
+  # a failed Release step (2026-10-18, 0.2.9) skipped `mcp-registry` entirely even
+  # though npm had already accepted the version - so the red was on the Release
+  # step while the registry silently stayed behind. Now the two are siblings: both
+  # need a successful npm publish, neither can block the other.
+  github-release:
+    needs: publish
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Resolve the release tag
+        id: release-tag
+        shell: bash
+        run: echo "tag=v$(node -p "require('./package.json').version")" >> "${GITHUB_OUTPUT}"
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.release-tag.outputs.tag }}
+          generate_release_notes: true

@@ -21,7 +21,7 @@
 //     list endpoint can tell those apart.
 //
 // Usage:
-//   node scripts/check-registry-drift.mjs [packageDir] [--json] [--quiet]
+//   node scripts/check-registry-drift.mjs [packageDir] [--json] [--quiet] [--require-published]
 // Exit codes: 0 in sync, 1 drift, 2 could not check (network / bad manifest).
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -32,9 +32,20 @@ const REGISTRY = 'https://registry.modelcontextprotocol.io/v0'
 const NPM = 'https://registry.npmjs.org'
 
 const argv = process.argv.slice(2)
+const KNOWN_FLAGS = new Set(['--json', '--quiet', '--require-published'])
 const flags = new Set(argv.filter(a => a.startsWith('--')))
+for (const flag of flags) {
+  // A misspelt flag used to be ignored, so `--require-publishd` silently degraded
+  // this check to one that reports "in sync" for a package that was never published.
+  if (!KNOWN_FLAGS.has(flag)) {
+    console.error(`unknown flag: ${flag}\nknown: ${[...KNOWN_FLAGS].join(' ')}`)
+    process.exit(2)
+  }
+}
 const positional = argv.filter(a => !a.startsWith('--'))
 const json = flags.has('--json')
+// CI 用：新包还没发布到 npm 或 registry 时，「两边都不存在」不该算作 in sync。
+const requirePublished = flags.has('--require-published')
 const quiet = flags.has('--quiet')
 
 const readJson = (file) => {
@@ -157,6 +168,12 @@ const main = async () => {
 
   // npm and the registry are separate transports with separate failure modes:
   // saying which one is behind is the whole point of this check.
+  if (requirePublished && npmVersion === undefined) {
+    problems.push(`npm has no ${name} at all - the package was never published`)
+  }
+  if (requirePublished && registryLatest === undefined) {
+    problems.push(`${serverName} is not registered at all - publish-mcp never succeeded`)
+  }
   if (npmVersion !== undefined && npmVersion !== version) {
     problems.push(`npm latest is ${npmVersion}, package.json is ${version} - the release did not land`)
   }

@@ -49,7 +49,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          node scripts/check-registry-drift.mjs | tee drift.txt
+          node scripts/check-registry-drift.mjs --require-published | tee drift.txt
           status=${PIPESTATUS[0]}
           set -e
           {
