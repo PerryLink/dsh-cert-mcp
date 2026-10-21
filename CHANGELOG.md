@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.10] - 2026-10-21
+
+### Fixed
+
+- The published README named the wrong host version. It said `dsh-v0.2.1-alpha.1` and listed a six-clause
+  `engines.dsh` alternation; the package pins `0.2.1-rc.2` and declares one range, `>=0.2.1-0 <0.3.0`.
+  Every language carried the same stale table. Verified rather than re-worded: `tsc -p tsconfig.check.json`
+  exits 0 and the 5-test suite passes against the installed 0.2.1-rc.2 host packages.
+- `docs/` is in `files`, so `docs/assets/dsh-cert-mcp-flow.svg` - which every README embeds by relative path -
+  is actually in the tarball. On 0.2.9 it was a broken image on the npm page.
+- Removed "official" from the sentence about the DeepSeek Harness repository: that is a claim about a third
+  party, not something this repository can verify.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

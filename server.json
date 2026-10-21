@@ -1,17 +1,17 @@
 {
-    "$schema":  "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-    "name":  "io.github.PerryLink/dsh-cert",
-    "description":  "Read-only MCP server exposing the dsh-plugin-certification registry for DeepSeek Harness plugins.",
-    "title":  "DSH Plugin Certification",
-    "version":  "0.2.9",
-    "packages":  [
-                     {
-                         "registryType":  "npm",
-                         "identifier":  "dsh-cert-mcp",
-                         "version":  "0.2.9",
-                         "transport":  {
-                                           "type":  "stdio"
-                                       }
-                     }
-                 ]
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.PerryLink/dsh-cert",
+    "description": "Read-only MCP server exposing the dsh-plugin-certification registry for DeepSeek Harness plugins.",
+    "title": "DSH Plugin Certification",
+    "version": "0.2.10",
+    "packages": [
+        {
+            "registryType": "npm",
+            "identifier": "dsh-cert-mcp",
+            "version": "0.2.10",
+            "transport": {
+                "type": "stdio"
+            }
+        }
+    ]
 }
