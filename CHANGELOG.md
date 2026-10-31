@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.11] - 2026-10-31
+
+### Changed
+
+- Docs: mark the package FROZEN as a reference-only MCP endpoint; no code change.
+
 ## [0.2.10] - 2026-10-21
 
 ### Fixed
