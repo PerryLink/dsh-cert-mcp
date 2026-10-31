@@ -1,5 +1,12 @@
 # dsh-cert-mcp
 
+> 🧊 **FROZEN — 2026-10-31. Reference only.** No new certification features; the registry remains in `dsh-plugin-certification`.
+
+## Maintenance status: 🧊 FROZEN
+
+Frozen on 2026-10-31. This read-only MCP endpoint stays available as a reference integration; certification data is owned by `dsh-plugin-certification`.
+
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 ```sh

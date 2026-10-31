@@ -1,5 +1,11 @@
 # dsh-cert-mcp
 
+> 🧊 **2026-10-31 起冻结，仅作参考。** 不再新增认证功能；registry 仍在 `dsh-plugin-certification`。
+
+## 维护状态：🧊 已冻结
+
+2026-10-31 起冻结。这个只读 MCP 端点继续作为参考集成；认证数据归 `dsh-plugin-certification` 所有。
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/)

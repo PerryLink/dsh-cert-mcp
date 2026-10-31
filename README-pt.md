@@ -1,5 +1,12 @@
 # dsh-cert-mcp
 
+> 🧊 **CONGELADO — 2026-10-31. Apenas referência.** Sem novos recursos de certificação; o registro continua em `dsh-plugin-certification`.
+
+## Estado de manutenção: 🧊 CONGELADO
+
+Congelado em 2026-10-31. Este endpoint MCP somente leitura continua disponível como integração de referência; os dados de certificação pertencem a `dsh-plugin-certification`.
+
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)

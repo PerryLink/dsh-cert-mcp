@@ -1,5 +1,12 @@
 # dsh-cert-mcp
 
+> 🧊 **2026-10-31 से फ़्रीज़। केवल संदर्भ।** कोई नई प्रमाणन सुविधा नहीं; रजिस्ट्री `dsh-plugin-certification` में रहती है।
+
+## रखरखाव स्थिति: 🧊 फ़्रीज़
+
+2026-10-31 से फ़्रीज़। यह read-only MCP endpoint संदर्भ एकीकरण के रूप में उपलब्ध रहता है; प्रमाणन डेटा `dsh-plugin-certification` का है।
+
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
