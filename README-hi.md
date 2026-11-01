@@ -113,7 +113,7 @@ export function apply(ctx) {
 | `list_certified` | — | सार्वजनिक रजिस्ट्री की हर प्रविष्टि: रिपॉज़िटरी / ग्रेड / स्नैपशॉट |
 | `certification_spec` | — | स्पेक v1 सारांश: पाँच आयाम, ग्रेड पैमाना, वीटो नियम |
 
-अंतर्निहित स्नैपशॉट `data/certified.json` में रहता है (प्रमाणन रिपॉज़िटरी से सिंक होता है) और सर्वर उसे सार्वजनिक रजिस्ट्री से अधिकतम हर पाँच मिनट में रीफ़्रेश करता है। कोई लेखन नहीं, कोई सीक्रेट नहीं, कोई कोड निष्पादन नहीं।
+अंतर्निहित स्नैपशॉट `data/attestations.json` में रहता है (प्रमाणन रिपॉज़िटरी से सिंक होता है) और सर्वर उसे सार्वजनिक रजिस्ट्री से अधिकतम हर पाँच मिनट में रीफ़्रेश करता है। कोई लेखन नहीं, कोई सीक्रेट नहीं, कोई कोड निष्पादन नहीं।
 
 ## यह क्यों मौजूद है
 
@@ -121,7 +121,7 @@ DeepSeek Harness का आधिकारिक रिपॉज़िटरी 
 
 ## रजिस्ट्री
 
-डेटा स्रोत: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, स्पेक v1।
+डेटा स्रोत: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/attestations.json`, स्पेक v1।
 
 **यह रजिस्ट्री क्या है, और इस सर्वर का छोटा उत्तर क्या बताता है।** रजिस्ट्री एक **ऑप्ट-इन उपसमुच्चय** है: कोई रिपॉज़िटरी उसमें तभी आती है जब उसका मूल्यांकन हो चुका हो, इसलिए रिकॉर्ड न मिलना यह **सबूत नहीं** कि वह प्लगइन प्रमाणित नहीं है, और `list_certified` का कम पंक्तियाँ लौटाना यह सबूत नहीं कि बहुत कम प्लगइनों का मूल्यांकन हुआ। यह लिखे जाने के समय साथ भेजे गए स्नैपशॉट में **एक** प्रविष्टि थी (ग्रेड A, स्नैपशॉट 2026-09-07); एक-प्रविष्टि वाली सूची का कोई सांख्यिकीय अर्थ नहीं होता — एक ग्रेड उस एक रिपॉज़िटरी का वर्णन करता है, और प्लगइनों के बीच क्रम-योग्य तुलना तभी संभव होती है जब रजिस्ट्री में बहुत सी प्रविष्टियाँ हों। हर `list_certified` उत्तर के साथ एक `coverage` ऑब्जेक्ट आता है जो यही बात कहता है, ताकि केवल टूल आउटपुट पढ़ने वाला एजेंट गिनती को इकोसिस्टम कवरेज समझ न ले। स्नैपशॉट की तारीख़ **प्रमाणन रिपॉज़िटरी** का तथ्य है, इस सर्वर की ताज़गी की गारंटी नहीं: यह `dsh-plugin-certification` से बाइट-दर-बाइट सिंक होता है, और समय-सारणी तथा जाँच उसी की है।
 
@@ -297,7 +297,7 @@ get_certification
 }
 ~~~
 
-*स्रोत `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
+*स्रोत `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/attestations.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### विफलता शाखा
 
@@ -313,7 +313,7 @@ get_certification
 No certification record for nobody/nothing in registry snapshot 2026-09-07.
 ~~~
 
-*स्रोत `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+*स्रोत `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/attestations.json`*
 
 #### संक्षिप्त उदाहरण
 

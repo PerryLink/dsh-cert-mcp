@@ -60,7 +60,7 @@ assert.equal(parsed.coverage.certified, parsed.count)
 assert.match(parsed.coverage.subset, /subset/)
 assert.match(parsed.coverage.scope, /not a census of published DSH plugins/)
 assert.match(parsed.coverage.representative, /no statistical meaning/)
-assert.equal(parsed.coverage.registry, 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/certified.json')
+assert.equal(parsed.coverage.registry, 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/attestations.json')
 // The description is model-facing prose: it has to say the same thing, because
 // an agent may pick the tool from the description alone.
 const listTool = list.result.tools.find((tool) => tool.name === 'list_certified')

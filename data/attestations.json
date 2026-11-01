@@ -1,4 +1,5 @@
 {
+  "schema": "dsh-attestation-registry/1",
   "specVersion": "v1",
   "generatedAt": "2026-11-01",
   "entries": [

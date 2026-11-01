@@ -112,7 +112,7 @@ export function apply(ctx) {
 | `list_certified` | — | 公开注册表的全部条目：仓库 / 等级 / 快照 |
 | `certification_spec` | — | 规范 v1 摘要：五个维度、等级刻度、否决规则 |
 
-内嵌快照位于 `data/certified.json`（由认证仓同步而来），服务器最多每五分钟从公开注册表刷新一次。不写入、不涉及密钥、不执行代码。
+内嵌快照位于 `data/attestations.json`（由认证仓同步而来），服务器最多每五分钟从公开注册表刷新一次。不写入、不涉及密钥、不执行代码。
 
 ## 为什么需要它
 
@@ -120,7 +120,7 @@ DeepSeek Harness 官方仓不运营插件注册表，也不接受外部 PR；发
 
 ## 注册表
 
-数据源：[PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) —— `data/certified.json`，规范 v1。
+数据源：[PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) —— `data/attestations.json`，规范 v1。
 
 **注册表是什么，以及本服务给出简短回答意味着什么。** 注册表是一个**自愿加入的子集**：只有被评估过并留下记录的仓才会出现在里面，所以"查不到记录"**不等于**该插件未认证，`list_certified` 只返回很少几行也**不等于**被评估的插件很少。撰写本段时随包快照里只有 **1 条**（grade A，快照日 2026-09-07）；单条列表不具备统计意义 —— 一个等级只描述那一个仓，跨插件可排序的比较要等注册表积累到足够多才成立。每一次 `list_certified` 回复都带一个 `coverage` 对象把这件事说清楚，因此只读工具输出的 agent 不会把条数误当成生态覆盖率。快照日期是**认证仓的事实**，不是本服务的时效承诺：它与 `dsh-plugin-certification` 逐字节同步，进度与门禁都由那边负责。
 
@@ -296,7 +296,7 @@ get_certification
 }
 ~~~
 
-*来源 `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
+*来源 `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/attestations.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### 失败分支
 
@@ -312,7 +312,7 @@ get_certification
 No certification record for nobody/nothing in registry snapshot 2026-09-07.
 ~~~
 
-*来源 `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+*来源 `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/attestations.json`*
 
 #### 简短示例
 

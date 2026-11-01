@@ -113,7 +113,7 @@ Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-pl
 | `list_certified` | — | Every entry in the public registry: repo / grade / snapshot |
 | `certification_spec` | — | Spec v1 summary: five dimensions, grade scale, veto rule |
 
-The embedded snapshot lives in `data/certified.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
+The embedded snapshot lives in `data/attestations.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
 
 ## Why this exists
 
@@ -121,7 +121,7 @@ The DeepSeek Harness repository does not run a plugin registry and does not acce
 
 ## Registry
 
-Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, spec v1.
+Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/attestations.json`, spec v1.
 
 **What the registry is, and what a short answer from this server means.** The
 registry is an **opt-in subset**: a repository appears in it only after it has
@@ -309,7 +309,7 @@ get_certification
 }
 ~~~
 
-*Observed from `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
+*Observed from `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/attestations.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### Failure branch
 
@@ -325,7 +325,7 @@ get_certification
 No certification record for nobody/nothing in registry snapshot 2026-09-07.
 ~~~
 
-*Observed from `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+*Observed from `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/attestations.json`*
 
 #### Brief examples
 

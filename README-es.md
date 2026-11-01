@@ -113,7 +113,7 @@ Servidor [MCP](https://modelcontextprotocol.io) de solo lectura que expone el re
 | `list_certified` | — | Todas las entradas del registro público: repositorio / grado / instantánea |
 | `certification_spec` | — | Resumen de la especificación v1: cinco dimensiones, escala de grados, regla de veto |
 
-La instantánea embebida vive en `data/certified.json` (sincronizada desde el repositorio de certificación) y el servidor la actualiza desde el registro público como máximo una vez cada cinco minutos. Sin escrituras, sin secretos, sin ejecución de código.
+La instantánea embebida vive en `data/attestations.json` (sincronizada desde el repositorio de certificación) y el servidor la actualiza desde el registro público como máximo una vez cada cinco minutos. Sin escrituras, sin secretos, sin ejecución de código.
 
 ## Por qué existe
 
@@ -121,7 +121,7 @@ El repositorio oficial de DeepSeek Harness no opera un registro de plugins ni ac
 
 ## Registro
 
-Fuente de datos: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/certified.json`, especificación v1.
+Fuente de datos: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/attestations.json`, especificación v1.
 
 **Qué es el registro y qué significa una respuesta corta de este servidor.** El registro es un **subconjunto de adhesión voluntaria**: un repositorio aparece en él solo después de haber sido evaluado, así que la ausencia de registro **no** es prueba de que un plugin no esté certificado, y que `list_certified` devuelva pocas filas no es prueba de que se evaluaran pocos plugins. La instantánea incluida tenía **una** entrada (grado A, instantánea 2026-09-07) al escribir esto; una lista de una entrada no tiene significado estadístico: una nota describe ese único repositorio, y la comparación ordenable entre plugins solo es posible cuando el registro contiene muchos. Cada respuesta de `list_certified` lleva un objeto `coverage` que dice exactamente esto, de modo que un agente que solo lea la salida de la herramienta no pueda confundir el recuento con la cobertura del ecosistema. La fecha de la instantánea es un hecho **del repositorio de certificación**, no una promesa de frescura de este servidor: se sincroniza byte a byte desde `dsh-plugin-certification`, que es dueño del calendario y de la comprobación.
 
@@ -297,7 +297,7 @@ get_certification
 }
 ~~~
 
-*Observado en `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/certified.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
+*Observado en `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/attestations.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
 
 #### Rama de fallo
 
@@ -313,7 +313,7 @@ get_certification
 No certification record for nobody/nothing in registry snapshot 2026-09-07.
 ~~~
 
-*Observado en `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/certified.json`*
+*Observado en `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/attestations.json`*
 
 #### Ejemplos breves
 

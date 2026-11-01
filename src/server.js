@@ -11,7 +11,7 @@ const PROTOCOL_VERSION = '2024-11-05'
 // Single source of truth for the reported version: package.json. server.json and
 // the npm tarball are checked against it by test/smoke.mjs.
 const SERVER_INFO = { name: 'dsh-cert-mcp', version: PACKAGE.version }
-const REGISTRY_URL = 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/certified.json'
+const REGISTRY_URL = 'https://raw.githubusercontent.com/PerryLink/dsh-plugin-certification/main/data/attestations.json'
 const REFRESH_MS = 5 * 60 * 1000
 const FETCH_TIMEOUT_MS = 10_000
 
@@ -37,7 +37,7 @@ Grades (spec v1 — the registry README is the owner of these definitions):
 
 async function loadRegistry(force = false, caller) {
   if (!registry) {
-    const dataUrl = new URL('../data/certified.json', import.meta.url)
+    const dataUrl = new URL('../data/attestations.json', import.meta.url)
     try {
       registry = JSON.parse(await readFile(dataUrl, 'utf8'))
     } catch {
