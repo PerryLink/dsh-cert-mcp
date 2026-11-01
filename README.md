@@ -1,5 +1,8 @@
 # dsh-cert-mcp
 
+> **Non-official companion tool.** Part of the DSH standards family; not a certification, accreditation, security audit, or official endorsement. Standard: https://github.com/PerryLink/dsh-standards. The `dsh.standards` block is a `not-run` placeholder, not a pass.
+
+
 > 🧊 **FROZEN — 2026-10-31. Reference only.** No new certification features; the registry remains in `dsh-plugin-certification`.
 
 ## Maintenance status: 🧊 FROZEN

@@ -1,6 +1,6 @@
 {
   "name": "dsh-cert-mcp",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Read-only MCP server exposing the dsh-plugin-attestation registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
   "type": "module",
   "main": "./src/plugin.js",
@@ -24,7 +24,8 @@
     "README-hi.md",
     "CHANGELOG.md",
     "LICENSE",
-    "docs"
+    "docs",
+    "STANDARDS.md"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
@@ -76,6 +77,21 @@
     "manifestVersion": 1,
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "standards": {
+      "schema": "dsh-levels/1",
+      "entry": {
+        "status": "not-run",
+        "evidence": null
+      },
+      "flow": {
+        "status": "not-run",
+        "evidence": null
+      },
+      "boost": {
+        "status": "not-measured",
+        "evidence": null
+      }
     }
   }
 }
