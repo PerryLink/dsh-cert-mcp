@@ -96,7 +96,16 @@ jobs:
 
       - name: Publish server.json
         shell: bash
-        run: ./mcp-publisher publish
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./package.json').version")"
+          name="$(node -p "require('./server.json').name")"
+          encoded="$(node -e 'process.stdout.write(encodeURIComponent(process.argv[1]))' "$name")"
+          if curl -fsS "https://registry.modelcontextprotocol.io/v0/servers/${encoded}/versions" 2>/dev/null | grep -q "\"version\":\"${version}\""; then
+            echo "already published: ${name}@${version}; skipping the registry publish"
+            exit 0
+          fi
+          ./mcp-publisher publish
 
       # mcp-publisher's exit code only says the request was accepted; it does not
       # say the registry now serves the version. Read the version back, because
