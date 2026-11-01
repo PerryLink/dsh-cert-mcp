@@ -31,7 +31,9 @@
         }
       },
       "veto": null,
-      "notes": "Re-audited at 0.15.0 on 2026-11-01; grade A retained. Supply-chain score moved 5.4 -> 4.1 (Scorecard v5.6.0 run 2026-10-31). Install smoke uses --ignore-scripts; the package ships prebuilt lib/ and declares no postinstall."
+      "notes": "Re-audited at 0.15.0 on 2026-11-01; grade A retained. Supply-chain score moved 5.4 -> 4.1 (Scorecard v5.6.0 run 2026-10-31). Install smoke uses --ignore-scripts; the package ships prebuilt lib/ and declares no postinstall. Self-assessed: the certifier and the plugin author are the same maintainer; this entry is not independent third-party certification. Add an independent assessor before citing it as external validation.",
+      "selfAssessed": true,
+      "assessor": "PerryLink (maintainer; same party as the plugin author)"
     }
   ]
 }
