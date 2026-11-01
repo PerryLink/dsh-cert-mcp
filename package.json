@@ -25,7 +25,10 @@
     "CHANGELOG.md",
     "LICENSE",
     "docs",
-    "STANDARDS.md"
+    "STANDARDS.md",
+    "PRIVACY.md",
+    "SECURITY.md",
+    "icon.svg"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
@@ -93,5 +96,6 @@
         "evidence": null
       }
     }
-  }
+  },
+  "icon": "icon.svg"
 }
