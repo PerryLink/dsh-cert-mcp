@@ -1,19 +1,14 @@
 # Changelog
 
-## [0.2.12] - 2026-11-02
+## [Unreleased]
 
 ### Changed
 
-- Add the `dsh.standards` `not-run` placeholder to `dsh` in `package.json`.
-- Add `STANDARDS.md` and a non-official/companion disclaimer in the README.
-- Point the package at the public standard repository.
+- **Host 0.2.2 line support.** devDependencies move from 0.2.1-rc.2 to 0.2.2-rc.1, cordis to 4.1.0 / include 1.1.0 / loader 1.1.0, and schemastery to ~3.19.0 so a single copy resolves against `@deepseek-ai/dsh-llm` 0.2.2. `engines.dsh` appends `>=0.2.2-0 <0.3.0` (append-only) and `engines.node` becomes `^22.19.0 || >=24.9.0`.
 
+### Fixed
 
-## [0.2.11] - 2026-10-31
-
-### Changed
-
-- Docs: mark the package FROZEN as a reference-only MCP endpoint; no code change.
+- Add `@deepseek-ai/dsh-package-manifest`: `@deepseek-ai/dsh-llm` 0.2.2's published types import it but its manifest does not declare it.
 
 ## [0.2.10] - 2026-10-21
 
