@@ -1,9 +1,34 @@
+<div align="center">
+
 # dsh-cert-mcp
 
-> **Non-official companion tool.** Part of the DSH standards family; not a certification, accreditation, security audit, or official endorsement. Standard: https://github.com/PerryLink/dsh-standards. The `dsh.standards` block is a `not-run` placeholder, not a pass.
+**Read-only MCP server exposing the dsh-plugin-certification registry: grades, snapshot dates, and five-dimension evidence for DSH plugins.**
 
+Zero runtime dependencies, stdio transport — a reference integration, not a certification or endorsement.
 
-> 🧊 **FROZEN — 2026-10-31. Reference only.** No new certification features; the registry remains in `dsh-plugin-certification`.
+[简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
+> 🧊 **FROZEN — 2026-10-31. Reference only.** No new certification features; the registry remains in dsh-plugin-certification.
+
+[![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#compatibility)
+[![npm](https://img.shields.io/npm/v/dsh-cert-mcp?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-cert-mcp/smoke.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-cert-mcp/actions/workflows/smoke.yml)
+[![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E=24-339933?style=flat-square&labelColor=2B3245)](#compatibility)
+
+[![Stars](https://img.shields.io/github/stars/PerryLink/dsh-cert-mcp?style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-cert-mcp/stargazers)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-cert-mcp)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-cert-mcp?metric=downloads)](https://dshfind.com/plugins/PerryLink/dsh-cert-mcp?ref=badge)
+[![DSH Market](https://img.shields.io/badge/DSH_Market-listed-4B67B4?style=flat-square&labelColor=2B3245)](https://dsh.market/)
+[![Gitee](https://img.shields.io/badge/Gitee-mirror-C71D23?style=flat-square&labelColor=2B3245&logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
+
+```sh
+dsh plugin --profile <name> add dsh-cert-mcp
+```
+
+</div>
+
+<sub>Community plugin, not affiliated with DeepSeek. Canonical repository: <https://github.com/PerryLink/dsh-cert-mcp> (Gitee is a mirror).</sub>
 
 ## Maintenance status: 🧊 FROZEN
 
