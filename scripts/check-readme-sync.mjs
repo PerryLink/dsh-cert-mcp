@@ -1,13 +1,13 @@
 // Five-language README sync gate: every README must carry the same number of
-// `## ` sections as the English source, state the install command, and contain
-// every configuration-table key. Section headings may be translated; the
-// English file is the source of truth.
+// `## ` sections as the source, state the install command, and contain
+// every configuration-table key. Section headings may be translated; README.md
+// (Chinese) is the source of truth.
 import { readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
-const FILES = ['README.md', 'README-zh.md', 'README-es.md', 'README-pt.md', 'README-hi.md']
+const FILES = ['README.md', 'README.en.md', 'README.es.md', 'README.pt.md', 'README.hi.md']
 const INSTALL_COMMAND = 'dsh plugin --profile web add dsh-cert-mcp'
 
 const failures = []

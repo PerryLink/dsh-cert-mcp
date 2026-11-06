@@ -1,25 +1,28 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-cert-mcp-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-cert-mcp-hero-zh-light.webp" width="100%" alt="dsh-cert-mcp：只读 MCP 端点，把认证等级、快照日期与五维证据交给 agent">
+</picture>
+
 # dsh-cert-mcp
 
-**Read-only MCP server exposing the dsh-plugin-certification registry: grades, snapshot dates, and five-dimension evidence for DSH plugins.**
+**一个只读 MCP 端点：把 DSH 插件的认证等级、快照日期与五维证据交给 agent。**
 
-Zero runtime dependencies, stdio transport — a reference integration, not a certification or endorsement.
+推荐或安装某个插件之前，agent 可以先查它的认证记录——等级、测量日期、五个维度各自的结果、有没有触发否决。三件只读工具、一份内嵌快照、stdio 传输；不写文件、不执行代码、不需要凭据。
 
-[简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
-
-> 🧊 **FROZEN — 2026-10-31. Reference only.** No new certification features; the registry remains in dsh-plugin-certification.
+[安装](#三步上手) · [工具](#核心能力) · [注册表](#数据与覆盖度) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
-[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#compatibility)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#兼容性)
 [![npm](https://img.shields.io/npm/v/dsh-cert-mcp?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-cert-mcp)
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-cert-mcp/smoke.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-cert-mcp/actions/workflows/smoke.yml)
-[![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E=24-339933?style=flat-square&labelColor=2B3245)](#compatibility)
+[![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24.9-339933?style=flat-square&labelColor=2B3245)](#兼容性)
 
 [![Stars](https://img.shields.io/github/stars/PerryLink/dsh-cert-mcp?style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-cert-mcp/stargazers)
 [![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-cert-mcp)
-[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-cert-mcp?metric=downloads)](https://dshfind.com/plugins/PerryLink/dsh-cert-mcp?ref=badge)
-[![DSH Market](https://img.shields.io/badge/DSH_Market-listed-4B67B4?style=flat-square&labelColor=2B3245)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-cert-mcp?metric=downloads&lang=zh)](https://dshfind.com/zh/plugins/PerryLink/dsh-cert-mcp?ref=badge)
+[![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-C71D23?style=flat-square&labelColor=2B3245&logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
 
 ```sh
@@ -28,57 +31,40 @@ dsh plugin --profile <name> add dsh-cert-mcp
 
 </div>
 
-<sub>Community plugin, not affiliated with DeepSeek. Canonical repository: <https://github.com/PerryLink/dsh-cert-mcp> (Gitee is a mirror).</sub>
+<sub>社区插件，与 DeepSeek 官方无关。唯一仓库：<https://github.com/PerryLink/dsh-cert-mcp>（Gitee 为镜像）。维护状态：🧊 FROZEN，2026-10-31 起冻结，仅作参考集成。</sub>
 
-## Maintenance status: 🧊 FROZEN
+## 它是什么
 
-Frozen on 2026-10-31. This read-only MCP endpoint stays available as a reference integration; certification data is owned by `dsh-plugin-certification`.
+只读 MCP server：把 `dsh-plugin-certification` 的注册表暴露成 agent 可以直接调用的三件工具——单条记录的等级、快照日期与五维证据；整个注册表的条目清单与覆盖度说明；以及规范 v1 本身。零运行时依赖，stdin/stdout 上的换行分隔 JSON-RPC，任何支持 stdio 的 MCP 客户端都能拉起它。同一个 `handleRequest` 核也被 DSH bundle 半边复用，所以装成 bundle 之后，这三个工具直接出现在 DSH 工具面上。
 
+它刻意不做的事：不写文件、不执行代码、不需要凭据，也不判断某个插件“该不该装”。查不到记录**不等于**该插件未认证（注册表是自愿加入的子集），一个 A 级**不等于**安全保证（等级是证据记录；插件以你的权限跑在你自己的 DSH 进程里）。
 
-[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-cert-mcp-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-cert-mcp-flow-v5-light.svg" width="100%" alt="dsh-cert-mcp 结构图：两个入口（stdio 进程 / DSH bundle row）汇入同一个 handleRequest 核，核读取内嵌的 data/attestations.json 快照，再分成三种回包（get_certification / list_certified / certification_spec）">
+</picture>
 
-```sh
-dsh plugin --profile <name> add dsh-cert-mcp
-```
+## 三步上手
 
-
-Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
-
-
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
-[![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
-[![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-cert-mcp)
-[![Version](https://img.shields.io/github/v/tag/PerryLink/dsh-cert-mcp?label=version)](https://github.com/PerryLink/dsh-cert-mcp/releases)
-[![npm version](https://img.shields.io/npm/v/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
-[![npm downloads](https://img.shields.io/npm/dm/dsh-cert-mcp)](https://www.npmjs.com/package/dsh-cert-mcp)
-[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-cert-mcp?metric=downloads)](https://dshfind.com/plugins/PerryLink/dsh-cert-mcp?ref=badge)
-[![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/score.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
-[![dsh-cert-mcp MCP server](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp/badges/card.svg)](https://glama.ai/mcp/servers/PerryLink/dsh-cert-mcp)
-
-## Install
+### 1. 安装（三选一）
 
 ```sh
-dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
+dsh plugin --profile web add dsh-cert-mcp                   # npm 通道（已发布版本）
+dsh plugin --profile web add github:PerryLink/dsh-cert-mcp  # git 通道（main 最新）
+npx dsh-cert-mcp                                            # 或免安装，直接当 stdio server 跑
 ```
 
-```sh
-git clone https://github.com/PerryLink/dsh-cert-mcp
-cd dsh-cert-mcp
-node src/index.js        # stdio server
-```
+本包声明了 `dsh.bundle.patch` → `cordis.patch.yml`，插进 profile 的是一行 `id: cert-mcp` 的 bundle row；也可以只当 MCP server 用：`node src/index.js` 或 `npx dsh-cert-mcp`。两种用法互不启动对方（见“两个半边”）。
 
-Run it directly from the published npm package: `npx dsh-cert-mcp`.
+### 2. 在 MCP 客户端里注册
 
-### Register in an MCP client
-
-Claude Code:
+Claude Code：
 
 ```sh
 claude mcp add dsh-cert -- node <path-to-repo>/src/index.js
 ```
 
-Claude Desktop (`claude_desktop_config.json`):
+Claude Desktop（`claude_desktop_config.json`）：
 
 ```json
 {
@@ -91,118 +77,202 @@ Claude Desktop (`claude_desktop_config.json`):
 }
 ```
 
-DSH: add it through [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) as a stdio server, or any MCP client that supports `stdio`.
+DSH 侧：用 [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) 以 stdio 服务器方式添加，或者直接安装上面的 bundle。
 
-### Install as a DSH bundle
-
-The package declares `dsh.bundle.patch` → `cordis.patch.yml`, so it also installs as a DeepSeek Harness bundle:
+### 3. 验证
 
 ```sh
-# git channel (latest main)
-dsh plugin --profile web add github:PerryLink/dsh-cert-mcp
-
-# npm channel (published releases)
-dsh plugin --profile web add dsh-cert-mcp
+printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' | node src/index.js
 ```
 
-The inserted row loads the package through the standard Cordis plugin contract: the host half is a plain ESM module exporting `name`, `inject` and `apply(ctx)`. This package ships no browser UI, so there is no `dsh.client` declaration.
+应看到一行回答：
+
+```text
+{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"tools":{}},"serverInfo":{"name":"dsh-cert-mcp","version":"0.2.13"}}}
+```
+
+再发 `tools/list` 应看到三件工具。
+
+*实测自 `src/server.js:165-176`（initialize 应答）与 `src/index.js:9-23`（stdio 逐行读取）；版本号取自 `package.json`。*
+
+## 核心能力
+
+### 三件工具
+
+| 工具 | 入参 | 返回 | 用来做什么 |
+|---|---|---|---|
+| `get_certification` | `owner`、`repo`（大小写不敏感） | 整条记录 JSON：`grade`、`snapshot`、`specVersion`、五个维度、`veto`、`notes`、`selfAssessed`、`assessor` | 已经知道是哪个插件，要它的等级，或等级背后的证据 |
+| `list_certified` | 无 | `specVersion`、`generatedAt`、`count`、`coverage`、`entries[]`（repo / grade / snapshot） | 想知道注册表里都有谁，或跨插件比较 |
+| `certification_spec` | 无 | 规范 v1 全文：五个维度 A–E、等级刻度、否决规则、证据纪律 | 读到一个等级，想知道它到底意味着什么 |
+
+三件工具都声明了 MCP 只读注解（`readOnlyHint: true` / `destructiveHint: false` / `idempotentHint: true` / `openWorldHint: false`），同样的参数重复调用返回同一条记录。每次 `tools/call` 先过 `loadRegistry`：命中五分钟内的刷新窗口就直接用当前快照，否则尝试拉一次公开注册表，最多等十秒，失败就保留内嵌快照。
+
+### 两个半边，同一条数据路径
+
+bundle row 与 stdio 服务器是同一份 `handleRequest` 核心的两个入口：
+
+- **server 半边**（`src/index.js`，bin 名 `dsh-cert-mcp`）是独立进程，任何 MCP 客户端都能拉起。它**不在插件路径上**：安装 bundle 不会启动它，卸载 bundle 也不会碰它。
+- **bundle 半边**（`src/plugin.js`）由 `cordis.patch.yml` 里那一行加载，声明 `inject = ['tools']`，把三件工具挂到 DSH 工具面上。反过来，`npx dsh-cert-mcp` 不会在 DSH 工具面上注册任何东西。
 
 ```js
-// bundle entry (host half) — the contract the patch row loads
+// src/plugin.js — the contract the patch row loads
 export const name = 'dsh-cert-mcp'
 export const inject = ['tools'] // the host tool surface, provided by dsh-tools
 export function apply(ctx) {
-  // registers the read-only certification lookup surface
-  // (get_certification / list_certified / certification_spec)
+  // registers the three read-only tools on ctx.tools, 1:1
 }
 ```
 
-**The host half needs the `tools` service** (shipped by `@deepseek-ai/dsh-tools`). A profile without it does not lose the tools silently: Cordis holds this row in `PENDING` until `tools` exists, which is visible in the profile's plugin list. Nothing else is required — no config keys, no credentials, and no network access at load time.
+`tools` 是硬依赖：缺少该服务的 profile 不会静默丢工具，Cordis 会把这行停在 `PENDING`，在 profile 的插件列表里看得见。除此之外没有配置键、没有凭据，加载期也不联网。本包不含浏览器 UI，因此没有 `dsh.client` 声明。
 
-**Two halves, one data path.** The bundle row and the stdio server are separate entry points over the same `handleRequest` core. The server half is an independent process any MCP client can spawn (`node src/index.js`), and it is *not* part of the plugin path: installing this bundle never starts it, and removing the bundle never touches it. Conversely `npx dsh-cert-mcp` registers nothing on the DSH tool surface.
+### 示例：真实调用
 
-Remove the bundle with `dsh plugin --profile web remove dsh-cert-mcp` (or delete the row from the profile patch). The standalone stdio MCP server above keeps working for any MCP client.
+#### 详细示例
 
-## What is dsh-cert-mcp?
+**调用**
 
-Read-only [MCP](https://modelcontextprotocol.io) server that exposes the [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) registry: certification grades, snapshot dates and five-dimension evidence for DeepSeek Harness (DSH) plugins. Zero runtime dependencies, stdio transport.
+~~~text
+get_certification
+~~~
 
-![Workflow diagram for dsh-cert-mcp: install → open panel → act.](docs/assets/dsh-cert-mcp-flow.svg)
+**入参**
 
-*Workflow overview: install → open panel → act. The examples below use the real command surface.*
+~~~json
+{ "owner": "PerryLink", "repo": "dsh-auto-review" }
+~~~
 
+**返回**（`dimensions.*.evidence` 因长度省略为 `…`，其余字段逐字来自快照）
 
+```json
+{
+  "repo": "PerryLink/dsh-auto-review",
+  "grade": "A",
+  "specVersion": "v1",
+  "snapshot": "2026-11-01",
+  "dimensions": {
+    "manifest": { "result": "pass", "evidence": "…" },
+    "buildHygiene": { "result": "pass", "evidence": "…" },
+    "supplyChain": { "result": "pass", "score": 4.1, "evidence": "…" },
+    "releaseIntegrity": { "result": "pass", "evidence": "…" },
+    "installSmoke": { "result": "ok", "evidence": "…" }
+  },
+  "veto": null,
+  "notes": "Re-audited at 0.15.0 on 2026-11-01; grade A retained. … Self-assessed: the certifier and the plugin author are the same maintainer …",
+  "selfAssessed": true,
+  "assessor": "PerryLink (maintainer; same party as the plugin author)"
+}
+```
 
-## Tools
+*实测自 `src/server.js:192-199`；数据来自 `data/attestations.json`。*
 
-| Tool | Input | Returns |
-|---|---|---|
-| `get_certification` | `owner`, `repo` | Full certification record (grade, snapshot, five dimensions, veto, notes) or "no record" |
-| `list_certified` | — | Every entry in the public registry: repo / grade / snapshot |
-| `certification_spec` | — | Spec v1 summary: five dimensions, grade scale, veto rule |
+#### 失败分支
 
-The embedded snapshot lives in `data/attestations.json` (synced from the certification repo) and the server refreshes it from the public registry at most once per five minutes. No writes, no secrets, no code execution.
+**入参**
 
-## Why this exists
+~~~text
+{"owner":"nobody","repo":"nothing"}
+~~~
 
-The DeepSeek Harness repository does not run a plugin registry and does not accept external PRs; discovery happens through the `dsh-plugin` GitHub topic and community lists, none of which certify anything. `dsh-plugin-certification` turns "can I install this plugin" into a reproducible five-dimension check (manifest, build hygiene, supply-chain Scorecard, release provenance, sandboxed install smoke test) with a public registry and README badges. This MCP server is the same data with an agent-facing interface: agents can look up a plugin's certification before recommending or installing it.
+**返回**
 
-## Registry
+~~~text
+No certification record for nobody/nothing in registry snapshot 2026-11-01.
+~~~
 
-Data source: [PerryLink/dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) — `data/attestations.json`, spec v1.
+*实测自 `src/server.js:191-199`；查不到就明确说查不到，不猜等级。*
 
-**What the registry is, and what a short answer from this server means.** The
-registry is an **opt-in subset**: a repository appears in it only after it has
-been evaluated, so the absence of a record is *not* evidence that a plugin is
-uncertified, and `list_certified` returning few rows is not evidence that few
-plugins were assessed. The bundled snapshot held **one** entry (grade A, snapshot
-2026-09-07) when this was written; a single-entry list carries no statistical
-meaning — a grade describes that one repository, and rankable comparison across
-plugins only becomes possible once the registry holds many. Every
-`list_certified` reply carries a `coverage` object stating exactly this, so an
-agent reading only the tool output cannot mistake the count for ecosystem
-coverage. The snapshot's date is **the certification repo's** fact, not a
-freshness promise from this server: it is synced byte-for-byte from
-`dsh-plugin-certification`, which owns the schedule and the check.
+#### 简短示例
 
-## Compatibility
+- `list_certified` → `count: 1`、`coverage.certified: 1`，并附带“注册表只列被评估过的仓，不是普查”这句说明
+- `certification_spec` → 规范 v1 全文（五维 A–E、等级 A–D、否决规则、证据纪律）
 
-| Surface | Status |
+## 数据与覆盖度
+
+注册表是 `dsh-plugin-certification` 的**自愿加入子集**：一个仓只有被评估过并留下记录，才会出现在里面。所以有四个推论：
+
+- **查不到 ≠ 未认证。** 记录不存在只说明注册表里没有它，不说明它没被评估过，更不说明它有问题。
+- **条数 ≠ 生态覆盖率。** `list_certified` 只返回很少几行，不代表被评估的插件很少；注册表不记录候选总数，所以这里刻意不给任何“N / M”式的分母——那会是编的。
+- **单条列表没有统计意义。** 随包快照此刻只有 1 条（`PerryLink/dsh-auto-review`，grade A，快照 2026-11-01，且 `selfAssessed: true`——评估者与插件作者是同一维护者，不是独立第三方认证）；一个等级只描述那一个仓，跨插件可排序的比较要等注册表积累起来。
+- **快照日期是认证仓的事实。** `data/attestations.json` 与 `dsh-plugin-certification` 逐字节同步（`schema: dsh-attestation-registry/1`、`specVersion: v1`），刷新节奏与门禁都由那边负责；本 server 只负责搬运。
+
+每一次 `list_certified` 回复都带一个 `coverage` 对象（`certified` / `subset` / `scope` / `representative` / `registry` / `generatedAt`），把上面几条随数值一起发出去，因此只看工具输出的 agent 不会把条数误当成生态覆盖率。
+
+## FAQ
+
+**为什么我在注册表里找不到某个插件？**
+
+注册表是自愿加入的子集，只列被评估过并留下记录的仓；不在里面不构成“未认证”的结论。进注册表的评估流程在 `dsh-plugin-certification`，不在本仓。
+
+**这个仓还会加新功能吗？**
+
+不会。2026-10-31 起冻结，只作参考集成；注册表与评估规则归 `dsh-plugin-certification` 所有。
+
+**要联网吗？要凭据吗？**
+
+都不要凭据。唯一出网动作是快照刷新（最多每五分钟一次、超时十秒），失败就继续用内嵌快照。`initialize` 与 `tools/list` 完全不联网；三件工具都会经过 `loadRegistry`，刷新窗口内同样不出网。
+
+**bundle 和 stdio server 要都装吗？**
+
+不用。两者独立：装 bundle 只影响 DSH 工具面，stdio server 只服务 MCP 客户端；同一个核，互不启动。
+
+**grade A 就代表安全吗？**
+
+不代表。等级是证据记录（清单、构建卫生、供应链 Scorecard、发布溯源、沙箱安装冒烟），不是安全保证；插件以你的权限跑在你自己的进程里。
+
+**刷新之后快照日期会变吗？**
+
+会跟着公开注册表变。这个日期是认证仓的事实，不是本 server 的时效承诺。
+
+## 已知限制
+
+- **冻结在 2026-10-31。** 不再新增认证功能，也不接受把本仓当注册表源的改动。
+- **随包快照只有 1 条记录。** `list_certified` 的排序与比较能力此刻没有可比较的对象。
+- **没有写入面。** 不能提交认证、不能触发重新评估、不能改快照；要更新只能等上游。
+- **刷新是尽力而为。** 命中缓存就不出网，超时或失败静默回落内嵌快照，日志里没有额外提示。
+- **协议版本固定在 `2024-11-05`**，能力只声明 `tools`，不支持 resources / prompts。
+- **不做鉴权。** 能运行这个进程的人就能读注册表（数据本身是公开的）。
+- **等级不含实时安全扫描。** `veto` 只在认证仓判定后出现，本 server 不重新判定。
+
+## 兼容性
+
+| 方面 | 状态 |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-rc.2` (devDependencies and the declared `engines.dsh` range both admit that line; `typecheck` and the 5-test suite are green against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.1-rc.2) |
-| Node | `^22.19.0 \|\| >=24.0.0` |
-| Declared host range | `engines.dsh`: `>=0.2.1-0 <0.3.0`, with `dsh.manifestVersion: 1` |
-| Peer | `@deepseek-ai/cordis` `^4.0.2`. The host half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node. |
+| Harness | `engines.dsh`：`>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`；开发与测试跑在 `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 上 |
+| Node | `^22.19.0 \|\| >=24.9.0`（`package.json` 的 `engines.node`） |
+| peer | `@deepseek-ai/cordis` `^4.0.2`。bundle 半边运行时还需要 `tools` 服务；stdio 半边除 Node 外什么都不需要。 |
+| MCP | 协议版本 `2024-11-05`，只声明 `tools` 能力，stdio 传输 |
+| 运行时依赖 | 无——`package.json` 里没有 `dependencies` 字段 |
 
-## Development
+## 开发
 
 ```sh
 pnpm install
-pnpm run typecheck                            # the one type ruler: checkJs over the published host face
-pnpm test                                     # JSON-RPC smoke + the real-Cordis runtime suite
-pnpm pack                                     # the published tarball
+pnpm run typecheck     # 唯一类型尺子：对已发布 host 面做 checkJs
+pnpm test              # JSON-RPC 冒烟 + 真 Cordis 运行时套件
+pnpm run check:readmes # 五语 README 同步门
+pnpm pack
 ```
 
-The runtime suite mounts the REAL `SystemPrompt`/`ToolRuntime` registries and asserts that mounting this package puts all three certification tools into `ctx.tools.schemas()`, that disposing the fiber removes them again, and that a context without the `tools` service parks the plugin in `PENDING`. `dsh --dump-config` is deliberately not used as acceptance: a mounted row and a pending fiber look the same there.
+运行时套件挂载**真实**的 `SystemPrompt` / `ToolRuntime` 注册表，断言：挂载本包会把三件认证工具放进 `ctx.tools.schemas()`；释放 fiber 后它们消失；缺少 `tools` 服务的上下文会让插件停在 `PENDING`。验收刻意不用 `dsh --dump-config`：在那里，已挂载的 row 与 pending 的 fiber 看起来一模一样。
 
-There is deliberately **one** type ruler. `@deepseek-ai/*` resolves through this repo's own `node_modules` (the pinned devDependencies — the published line) and the package declares no DSH peer, so a second `tsc` configuration would be the same command over the same type universe. The `typecheck:ci` script is kept as the historical no-op duplicate (its only extra key is an empty `paths: {}`) for compatibility with existing references, not as a second face. The independent second piece of evidence is the runtime mount gate above.
+本仓刻意只有一把类型尺子：`@deepseek-ai/*` 经本仓自己的 `node_modules`（钉住的 devDependencies）解析，且本包不声明 DSH peer，第二份 `tsc` 配置只会是量同一类型宇宙的同一条命令。独立的第二份证据是上面的运行时挂载门。
 
-## PerryLink DSH Plugin Family
+## 家族与致谢
 
-This project is part of the DeepSeek Harness plugin family from [PerryLink](https://github.com/PerryLink). The roster stays collapsed below so every README keeps a short first screen; expand it to see every row and its status.
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员。完整名单默认折叠，避免每个 README 的首屏被长表淹没。
 
 <details>
-<summary>Expand all plugins</summary>
+<summary>展开全部插件</summary>
 
-| Plugin | Status |
+| 插件 | 状态 |
 |---|---|
 | **[dsh-aqua-input-check](https://github.com/PerryLink/dsh-aqua-input-check)** |  |
 | **[dsh-archive-check](https://github.com/PerryLink/dsh-archive-check)** |  |
 | **[dsh-auto-review](https://github.com/PerryLink/dsh-auto-review)** |  |
-| **[dsh-autotier](https://github.com/PerryLink/dsh-autotier)** | 🧊 FROZEN — see the repo README |
+| **[dsh-autotier](https://github.com/PerryLink/dsh-autotier)** |  |
 | **[dsh-bid-ca-precheck](https://github.com/PerryLink/dsh-bid-ca-precheck)** |  |
 | **[dsh-bid-qual-check](https://github.com/PerryLink/dsh-bid-qual-check)** |  |
-| **[dsh-cert-mcp](https://github.com/PerryLink/dsh-cert-mcp)** | 🧊 FROZEN — see the repo README |
+| **[dsh-cert-mcp](https://github.com/PerryLink/dsh-cert-mcp)** |  |
 | **[dsh-checkpoint-rewind](https://github.com/PerryLink/dsh-checkpoint-rewind)** |  |
 | **[dsh-click](https://github.com/PerryLink/dsh-click)** |  |
 | **[dsh-composer-history](https://github.com/PerryLink/dsh-composer-history)** |  |
@@ -283,80 +353,19 @@ This project is part of the DeepSeek Harness plugin family from [PerryLink](http
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** |  |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** |  |
 | **[dsh-warranty-calc](https://github.com/PerryLink/dsh-warranty-calc)** |  |
-| **[dsh-budget](https://github.com/PerryLink/dsh-budget)** | 🧊 FROZEN — see the repo README |
-| **[dsh-claude-move](https://github.com/PerryLink/dsh-claude-move)** | 🧊 FROZEN — see the repo README |
-| **[dsh-defend](https://github.com/PerryLink/dsh-defend)** | 🧊 FROZEN — see the repo README |
-| **[dsh-draw](https://github.com/PerryLink/dsh-draw)** | 🧊 FROZEN — see the repo README |
-| **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | 🧊 FROZEN — see the repo README |
-| **[dsh-background-agents](https://github.com/PerryLink/dsh-background-agents)** | 🚫 RETIRED — see the repo README |
-| **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | 🚫 RETIRED — see the repo README |
-| **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | 🚫 RETIRED — see the repo README |
+| **[dsh-budget](https://github.com/PerryLink/dsh-budget)** | 🧊 已冻结 — 见仓库 README |
+| **[dsh-claude-move](https://github.com/PerryLink/dsh-claude-move)** | 🧊 已冻结 — 见仓库 README |
+| **[dsh-defend](https://github.com/PerryLink/dsh-defend)** | 🧊 已冻结 — 见仓库 README |
+| **[dsh-draw](https://github.com/PerryLink/dsh-draw)** | 🧊 已冻结 — 见仓库 README |
+| **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | 🧊 已冻结 — 见仓库 README |
+| **[dsh-background-agents](https://github.com/PerryLink/dsh-background-agents)** | 🚫 已退役 — 见仓库 README |
+| **[dsh-session-pin](https://github.com/PerryLink/dsh-session-pin)** | 🚫 已退役 — 见仓库 README |
+| **[dsh-team-rooms](https://github.com/PerryLink/dsh-team-rooms)** | 🚫 已退役 — 见仓库 README |
 
 </details>
 
+致谢：注册表与五维规范由 [dsh-plugin-certification](https://github.com/PerryLink/dsh-plugin-certification) 维护；协议侧见 [Model Context Protocol](https://modelcontextprotocol.io)；DSH 侧的 MCP 管理界面是 [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel)。
+
 ## License
 
-Apache-2.0. A listing or grade is an evidence record, not a security guarantee: plugins run inside your DSH process with your permissions.
-
-### Examples
-
-These are the plugin's real entry points; install once, then call one.
-
-#### Detailed example
-
-**Command**
-
-~~~sh
-get_certification
-~~~
-
-**Input**
-
-~~~json
-{
-  "owner": "PerryLink",
-  "repo": "dsh-auto-review"
-}
-~~~
-
-**Output**
-
-~~~text
-{
-  "repo": "PerryLink/dsh-auto-review",
-  "grade": "A",
-  "snapshot": "2026-09-07",
-  "dimensions": {
-    "manifest": { "result": "pass" },
-    "buildHygiene": { "result": "pass" },
-    "supplyChain": { "result": "pass", "score": 5.4 },
-    "releaseIntegrity": { "result": "pass" },
-    "installSmoke": { "result": "ok" }
-  },
-  "veto": null
-}
-~~~
-
-*Observed from `plugins/dsh-cert-mcp/src/server.js:192-199; data in plugins/dsh-cert-mcp/data/attestations.json:1-30; smoke test at plugins/dsh-cert-mcp/test/smoke.mjs:29-39`*
-
-#### Failure branch
-
-**Input**
-
-~~~text
-{"owner":"nobody","repo":"nothing"}
-~~~
-
-**Output**
-
-~~~text
-No certification record for nobody/nothing in registry snapshot 2026-09-07.
-~~~
-
-*Observed from `plugins/dsh-cert-mcp/src/server.js:191-199; plugins/dsh-cert-mcp/test/smoke.mjs:41-47; plugins/dsh-cert-mcp/data/attestations.json`*
-
-#### Brief examples
-
-- `list_certified`
-- `certification_spec`
-
+Apache-2.0。列表或等级是证据记录，不是安全保证：插件以你的权限运行在你的 DSH 进程内。

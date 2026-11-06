@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="660" viewBox="0 0 1100 660" role="img" aria-labelledby="t d">
+<title id="t">dsh-cert-mcp structure: two entry points merge into one handleRequest core over one embedded registry snapshot, and fan out into three reply shapes</title>
+<desc id="d">Left: the stdio process (node src/index.js) and the DSH bundle row (cordis.patch.yml, inject tools) both call the same handleRequest core. Under the core: data/attestations.json, the embedded snapshot, optionally refreshed at most once per five minutes with a ten second timeout and an inline fallback. Right: the three reply shapes — get_certification (one record), list_certified (rows plus coverage), certification_spec (the compiled spec text).</desc>
+<defs>
+  <filter id="soft" x="-40%" y="-40%" width="180%" height="200%">
+    <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1b1735" flood-opacity="0.55"/>
+  </filter>
+  <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+    <circle cx="1.2" cy="1.2" r="1.2" fill="#1b2231"/>
+  </pattern>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#8496f5"/>
+  </marker>
+  <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#3fb950"/>
+  </marker>
+</defs>
+<rect width="1100" height="660" fill="#0d1117"/>
+<rect width="1100" height="660" fill="url(#dots)" opacity=".55"/>
+<text x="44" y="52" fill="#f0f3f9" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="700">dsh-cert-mcp</text>
+<text x="44" y="82" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="15.5">two entry points, one handleRequest core, three reply shapes</text>
+<text x="1056" y="50" text-anchor="end" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">stdio · JSON-RPC 2.0 · spec v1 · read-only</text>
+
+<rect x="28" y="132" width="372" height="360" rx="22" fill="#121824" stroke="#2a3142"/>
+<rect x="728" y="132" width="344" height="444" rx="22" fill="#121824" stroke="#2a3142"/>
+<text x="40" y="118" fill="#8496f5" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="1.1">1 · TWO ENTRY POINTS</text>
+<text x="428" y="118" fill="#8496f5" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="1.1">2 · ONE CORE</text>
+<text x="740" y="118" fill="#8496f5" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="1.1">3 · THREE REPLIES</text>
+<g filter="url(#soft)"><rect x="40" y="146" width="348" height="160" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="60" y="174" fill="#8496f5" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700">stdio process</text>
+<text x="60" y="204" fill="#f0f3f9" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.5" font-weight="700">node src/index.js</text>
+<text x="60" y="236" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">readline: one JSON-RPC frame per line</text>
+<text x="60" y="262" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">initialize · tools/list · tools/call</text>
+<text x="60" y="292" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">any MCP client can spawn it</text>
+<g filter="url(#soft)"><rect x="40" y="320" width="348" height="160" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="60" y="348" fill="#8496f5" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700">DSH bundle row · id cert-mcp</text>
+<text x="60" y="378" fill="#f0f3f9" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.5" font-weight="700">cordis.patch.yml</text>
+<text x="60" y="410" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">inject: ['tools'] → PENDING without it</text>
+<text x="60" y="436" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">apply(ctx) registers the three tools</text>
+<text x="60" y="466" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">no dsh.client, no browser half</text>
+<g filter="url(#soft)"><rect x="428" y="232" width="272" height="124" rx="18" fill="#161b26" stroke="#8496f5" stroke-width="2.2"/></g>
+<text x="448" y="260" fill="#8496f5" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700">shared core</text>
+<text x="448" y="292" fill="#f0f3f9" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="700">handleRequest</text>
+<text x="448" y="318" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">src/server.js · one switch</text>
+<text x="448" y="344" fill="#a8b1c4" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">unknown method → -32601</text>
+<g filter="url(#soft)"><rect x="428" y="390" width="272" height="152" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="448" y="418" fill="#8496f5" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700">data source</text>
+<text x="448" y="449" fill="#f0f3f9" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16.5" font-weight="700">data/attestations.json</text>
+<text x="448" y="477" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">embedded · specVersion v1</text>
+<text x="448" y="503" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">generatedAt 2026-11-01</text>
+<text x="448" y="530" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">≤1/5min · 10s · fallback</text>
+<g filter="url(#soft)"><rect x="740" y="146" width="320" height="134" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="760" y="178" fill="#3fb950" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="700">get_certification</text>
+<text x="760" y="210" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">one record: grade · snapshot</text>
+<text x="760" y="236" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">five dimensions · veto</text>
+<text x="760" y="262" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">miss → a no-record sentence</text>
+<g filter="url(#soft)"><rect x="740" y="290" width="320" height="134" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="760" y="322" fill="#3fb950" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="700">list_certified</text>
+<text x="760" y="354" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">repo / grade / snapshot rows</text>
+<text x="760" y="380" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">coverage: opt-in subset</text>
+<text x="760" y="406" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">count ≠ ecosystem coverage</text>
+<g filter="url(#soft)"><rect x="740" y="434" width="320" height="134" rx="18" fill="#161b26" stroke="#2a3142"/></g>
+<text x="760" y="466" fill="#3fb950" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="700">certification_spec</text>
+<text x="760" y="498" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">spec v1 text, compiled in</text>
+<text x="760" y="524" fill="#f0f3f9" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">five dimensions · A–D · veto</text>
+<text x="760" y="550" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">same bytes on every call</text>
+<path d="M388 226 H414 V294" fill="none" stroke="#8496f5" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M388 400 H414 V294" fill="none" stroke="#8496f5" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M414 294 H424" fill="none" stroke="#8496f5" stroke-width="2.4" marker-end="url(#arr)"/>
+<circle cx="414" cy="294" r="4.2" fill="#8496f5"/>
+<path d="M564 390 L564 362" fill="none" stroke="#8496f5" stroke-width="2.2" marker-end="url(#arr)" stroke-dasharray="6 5"/>
+<text x="576" y="382" fill="#8496f5" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">loadRegistry</text>
+<path d="M700 294 H714" fill="none" stroke="#3fb950" stroke-width="2.2"/>
+<path d="M714 213 V501" fill="none" stroke="#3fb950" stroke-width="2.2"/>
+<path d="M714 213 H736" fill="none" stroke="#3fb950" stroke-width="2.2" marker-end="url(#arr2)"/>
+<path d="M714 357 H736" fill="none" stroke="#3fb950" stroke-width="2.2" marker-end="url(#arr2)"/>
+<path d="M714 501 H736" fill="none" stroke="#3fb950" stroke-width="2.2" marker-end="url(#arr2)"/>
+<circle cx="714" cy="294" r="4.2" fill="#3fb950"/>
+<line x1="44" y1="600" x2="1056" y2="600" stroke="#1b2231" stroke-width="2"/>
+<text x="44" y="624" fill="#a8b1c4" font-family="Segoe UI, Microsoft YaHei, ui-sans-serif, system-ui, sans-serif" font-size="14">read-only: no writes, no code execution, no credentials</text>
+<text x="44" y="646" fill="#737b8d" font-family="Consolas, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">the only network call is the optional snapshot refresh, and it is allowed to fail</text>
+</svg>
