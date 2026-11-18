@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.14] - 2026-11-18
+
 ### Fixed
 
 - `release.yml` could never publish to the MCP Registry on a manual dispatch. `publish` carried

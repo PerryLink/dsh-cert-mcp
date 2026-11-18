@@ -239,7 +239,7 @@ No certification record for nobody/nothing in registry snapshot 2026-11-01.
 
 | सतह | स्थिति |
 |---|---|
-| Harness | `engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; विकास और परीक्षण `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 पर चलते हैं |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; विकास और परीक्षण `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 पर चलते हैं |
 | Node | `^22.19.0 \|\| >=24.9.0` (`package.json` में `engines.node`) |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. bundle आधे हिस्से को रनटाइम पर `tools` सेवा भी चाहिए; stdio आधे हिस्से को Node के अलावा कुछ नहीं चाहिए। |
 | MCP | प्रोटोकॉल संस्करण `2024-11-05`, केवल `tools` क्षमता, stdio ट्रांसपोर्ट |

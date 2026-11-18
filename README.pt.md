@@ -239,7 +239,7 @@ Segue o registro público. Essa data é um fato do repositório de certificaçã
 
 | Superfície | Estado |
 |---|---|
-| Harness | `engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; o desenvolvimento e os testes rodam contra `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; o desenvolvimento e os testes rodam contra `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 |
 | Node | `^22.19.0 \|\| >=24.9.0` (`engines.node` no `package.json`) |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. A metade bundle ainda precisa do serviço `tools` em execução; a metade stdio não precisa de nada além do Node. |
 | MCP | Versão de protocolo `2024-11-05`, apenas a capacidade `tools`, transporte stdio |

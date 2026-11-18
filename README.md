@@ -239,7 +239,7 @@ No certification record for nobody/nothing in registry snapshot 2026-11-01.
 
 | 方面 | 状态 |
 |---|---|
-| Harness | `engines.dsh`：`>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`；开发与测试跑在 `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 上 |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh`：`>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`；开发与测试跑在 `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 上 |
 | Node | `^22.19.0 \|\| >=24.9.0`（`package.json` 的 `engines.node`） |
 | peer | `@deepseek-ai/cordis` `^4.0.2`。bundle 半边运行时还需要 `tools` 服务；stdio 半边除 Node 外什么都不需要。 |
 | MCP | 协议版本 `2024-11-05`，只声明 `tools` 能力，stdio 传输 |

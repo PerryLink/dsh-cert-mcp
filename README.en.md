@@ -239,7 +239,7 @@ It follows the public registry. That date is the certification repo's fact, not 
 
 | Surface | Status |
 |---|---|
-| Harness | `engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; development and tests run against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh`: `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; development and tests run against `@deepseek-ai/dsh-system-prompt` / `@deepseek-ai/dsh-tools` 0.2.2-rc.1 |
 | Node | `^22.19.0 \|\| >=24.9.0` (`engines.node` in `package.json`) |
 | Peer | `@deepseek-ai/cordis` `^4.0.2`. The bundle half additionally needs the `tools` service at runtime; the stdio half needs nothing but Node. |
 | MCP | Protocol version `2024-11-05`, `tools` capability only, stdio transport |
