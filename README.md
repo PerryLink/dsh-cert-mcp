@@ -37,6 +37,10 @@ dsh plugin --profile <name> add dsh-cert-mcp
 
 ## 它是什么
 
+![dsh-cert-mcp 真实终端运行](docs/assets/dsh-cert-mcp-demo.gif)
+
+*本仓库一次真实运行的动图回放。*
+
 只读 MCP server：把 `dsh-plugin-certification` 的注册表暴露成 agent 可以直接调用的三件工具——单条记录的等级、快照日期与五维证据；整个注册表的条目清单与覆盖度说明；以及规范 v1 本身。零运行时依赖，stdin/stdout 上的换行分隔 JSON-RPC，任何支持 stdio 的 MCP 客户端都能拉起它。同一个 `handleRequest` 核也被 DSH bundle 半边复用，所以装成 bundle 之后，这三个工具直接出现在 DSH 工具面上。
 
 它刻意不做的事：不写文件、不执行代码、不需要凭据，也不判断某个插件“该不该装”。查不到记录**不等于**该插件未认证（注册表是自愿加入的子集），一个 A 级**不等于**安全保证（等级是证据记录；插件以你的权限跑在你自己的 DSH 进程里）。

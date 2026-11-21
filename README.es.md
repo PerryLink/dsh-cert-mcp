@@ -46,6 +46,11 @@ Lo que deliberadamente no hace: no escribe, no ejecuta nada, no necesita credenc
   <img src="docs/assets/dsh-cert-mcp-flow-v5-light.svg" width="100%" alt="estructura de dsh-cert-mcp: dos puntos de entrada (proceso stdio / fila de bundle DSH) se unen en un solo núcleo handleRequest, que lee la instantánea integrada data/attestations.json y se abre en tres formas de respuesta (get_certification / list_certified / certification_spec)">
 </picture>
 
+![dsh-cert-mcp: ejecución real de terminal](docs/assets/dsh-cert-mcp-demo.gif)
+
+*Repetición animada de una ejecución real registrada en este repositorio.*
+
+
 ## Inicio rápido
 
 ### 1. Instalar (tres canales)

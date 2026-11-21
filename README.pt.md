@@ -46,6 +46,11 @@ O que ele deliberadamente não faz: não escreve, não executa nada, não precis
   <img src="docs/assets/dsh-cert-mcp-flow-v5-light.svg" width="100%" alt="estrutura do dsh-cert-mcp: dois pontos de entrada (processo stdio / linha de bundle DSH) convergem em um único núcleo handleRequest, que lê o snapshot embutido data/attestations.json e se abre em três formas de resposta (get_certification / list_certified / certification_spec)">
 </picture>
 
+![dsh-cert-mcp: execução real de terminal](docs/assets/dsh-cert-mcp-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Início rápido
 
 ### 1. Instalar (três canais)

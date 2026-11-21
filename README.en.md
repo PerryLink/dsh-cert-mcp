@@ -48,6 +48,10 @@ What it deliberately does not do: it writes nothing, executes nothing, needs no 
 
 ## Quick start
 
+![dsh-cert-mcp: real terminal run](docs/assets/dsh-cert-mcp-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
 ### 1. Install (three channels)
 
 ```sh

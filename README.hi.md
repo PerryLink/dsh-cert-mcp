@@ -46,6 +46,11 @@ dsh plugin --profile <name> add dsh-cert-mcp
   <img src="docs/assets/dsh-cert-mcp-flow-v5-light.svg" width="100%" alt="dsh-cert-mcp संरचना: दो प्रवेश बिंदु (stdio प्रक्रिया / DSH bundle row) एक ही handleRequest कोर में मिलते हैं, जो अंतर्निहित data/attestations.json स्नैपशॉट पढ़ता है और तीन प्रतिक्रिया आकारों में खुलता है (get_certification / list_certified / certification_spec)">
 </picture>
 
+![dsh-cert-mcp का असली टर्मिनल रन](docs/assets/dsh-cert-mcp-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## त्वरित शुरुआत
 
 ### 1. इंस्टॉल (तीन तरीके)
