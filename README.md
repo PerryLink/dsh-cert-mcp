@@ -1,5 +1,3 @@
-> 宿主兼容性：DeepSeek Harness `dsh-v0.2.2-rc.4`（2026-11-18 核验）。
-
 <div align="center">
 
 <picture>
@@ -12,6 +10,8 @@
 **一个只读 MCP 端点：把 DSH 插件的认证等级、快照日期与五维证据交给 agent。**
 
 推荐或安装某个插件之前，agent 可以先查它的认证记录——等级、测量日期、五个维度各自的结果、有没有触发否决。三件只读工具、一份内嵌快照、stdio 传输；不写文件、不执行代码、不需要凭据。
+
+最近一次核验：DeepSeek Harness `dsh-v0.2.3-alpha.1`（2026-11-22）。
 
 [安装](#三步上手) · [工具](#核心能力) · [注册表](#数据与覆盖度) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 

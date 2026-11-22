@@ -1,5 +1,3 @@
-> Host compatibility: DeepSeek Harness `dsh-v0.2.2-rc.4` (verified 2026-11-18).
-
 <div align="center">
 
 <picture>
@@ -12,6 +10,8 @@
 **एक read-only MCP endpoint जो DSH प्लगइन के प्रमाणन ग्रेड, स्नैपशॉट तिथियाँ और पाँच-आयामी साक्ष्य agent तक पहुँचाता है।**
 
 किसी प्लगइन की सिफ़ारिश या इंस्टॉल से पहले agent उसका प्रमाणन रिकॉर्ड देख सकता है: ग्रेड क्या है, किस तारीख को मापा गया, पाँच आयामों का परिणाम क्या रहा और कोई veto लगा या नहीं। तीन read-only टूल, एक अंतर्निहित स्नैपशॉट, stdio ट्रांसपोर्ट — कोई लेखन नहीं, कोई कोड निष्पादन नहीं, कोई क्रेडेंशियल नहीं।
+
+अंतिम सत्यापन: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
 
 [इंस्टॉल](#त्वरित-शुरुआत) · [टूल](#क्षमताएँ) · [रजिस्ट्री](#डेटा-और-कवरेज) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
@@ -49,7 +49,6 @@ dsh plugin --profile <name> add dsh-cert-mcp
 ![dsh-cert-mcp का असली टर्मिनल रन](docs/assets/dsh-cert-mcp-demo.gif)
 
 *इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
-
 
 ## त्वरित शुरुआत
 

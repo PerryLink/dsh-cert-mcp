@@ -1,5 +1,3 @@
-> Host compatibility: DeepSeek Harness `dsh-v0.2.2-rc.4` (verified 2026-11-18).
-
 <div align="center">
 
 <picture>
@@ -12,6 +10,8 @@
 **A read-only MCP endpoint that hands DSH plugin certification grades, snapshot dates and five-dimension evidence to an agent.**
 
 Before recommending or installing a plugin, an agent can look up its certification record: the letter grade, the date it was measured, the five dimension results and whether a veto fired. Three read-only tools, one embedded snapshot, stdio transport — no writes, no code execution, no credentials.
+
+Last verified on DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
 
 [Install](#quick-start) · [Tools](#capabilities) · [Registry](#data-and-coverage) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 

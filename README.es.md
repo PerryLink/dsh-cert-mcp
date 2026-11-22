@@ -1,5 +1,3 @@
-> Host compatibility: DeepSeek Harness `dsh-v0.2.2-rc.4` (verified 2026-11-18).
-
 <div align="center">
 
 <picture>
@@ -12,6 +10,8 @@
 **Un endpoint MCP de solo lectura que entrega al agente los grados de certificación, las fechas de instantánea y la evidencia en cinco dimensiones de los plugins de DSH.**
 
 Antes de recomendar o instalar un plugin, el agente puede consultar su registro de certificación: el grado, la fecha en que se midió, el resultado de las cinco dimensiones y si se activó un veto. Tres herramientas de solo lectura, una instantánea integrada, transporte stdio: sin escrituras, sin ejecución de código y sin credenciales.
+
+Última verificación: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
 
 [Instalación](#inicio-rápido) · [Herramientas](#capacidades) · [Registro](#datos-y-cobertura) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
@@ -49,7 +49,6 @@ Lo que deliberadamente no hace: no escribe, no ejecuta nada, no necesita credenc
 ![dsh-cert-mcp: ejecución real de terminal](docs/assets/dsh-cert-mcp-demo.gif)
 
 *Repetición animada de una ejecución real registrada en este repositorio.*
-
 
 ## Inicio rápido
 
