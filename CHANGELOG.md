@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.17] - 2026-11-22
+
+### Changed
+
+- Sync server.json version with the package version.
+
 ## [0.2.13] - 2026-11-05
 
 ### Changed
