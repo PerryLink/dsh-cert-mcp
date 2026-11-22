@@ -1,12 +1,13 @@
 {
   "name": "dsh-cert-mcp",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "description": "Read-only MCP server exposing the dsh-plugin-attestation registry: certification grades, snapshots and five-dimension evidence for DeepSeek Harness plugins.",
   "type": "module",
   "main": "./src/plugin.js",
   "exports": {
     ".": "./src/plugin.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
   },
   "license": "Apache-2.0",
   "bin": {
@@ -28,7 +29,8 @@
     "STANDARDS.md",
     "PRIVACY.md",
     "SECURITY.md",
-    "icon.svg"
+    "icon.svg",
+    "locale/*.json"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.9.0",
@@ -97,5 +99,9 @@
       }
     }
   },
-  "icon": "icon.svg"
+  "icon": "icon.svg",
+  "author": {
+    "name": "PerryLink",
+    "url": "https://github.com/PerryLink"
+  }
 }

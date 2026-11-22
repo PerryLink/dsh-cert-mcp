@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "认证 MCP",
+    "description": "一个只读 MCP 端点：把 DSH 插件的认证等级、快照日期与五维证据交给 agent。"
+  }
+}

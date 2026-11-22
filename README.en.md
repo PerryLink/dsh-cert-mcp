@@ -7,6 +7,8 @@
 
 # dsh-cert-mcp
 
+Current version `0.2.16`.
+
 **A read-only MCP endpoint that hands DSH plugin certification grades, snapshot dates and five-dimension evidence to an agent.**
 
 Before recommending or installing a plugin, an agent can look up its certification record: the letter grade, the date it was measured, the five dimension results and whether a veto fired. Three read-only tools, one embedded snapshot, stdio transport — no writes, no code execution, no credentials.

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Certification MCP",
+    "description": "A read-only MCP endpoint that hands DSH plugin certification grades, snapshot dates and five-dimension evidence to an agent."
+  }
+}
